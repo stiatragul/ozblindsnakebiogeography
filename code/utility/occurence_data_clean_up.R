@@ -12,6 +12,7 @@ library(raster)
 # check sampling bias
 library(sampbias)
 library(ape)
+library(ggplot2)
 
 # Read data ---------------------------------------------------------------
 
@@ -85,9 +86,21 @@ length(qgis_df$species)
 wwf_biome_records$species <- qgis_df$species
 
 ### Number of occurence in each eco region.
-wwf_biome_records |> 
-  group_by(species, ECO_NAME) |> 
-  summarise(number = n())
+top_3_ecoregions <- wwf_biome_records |> 
+  dplyr::group_by(species, ECO_NAME) |> 
+  dplyr::summarise(n = n()) %>% 
+  dplyr::mutate(prop = n / sum(n)) %>% 
+  dplyr::arrange(desc(prop)) %>% 
+  dplyr::group_by(species) %>% 
+  dplyr::slice(1:3)  # Choose top three eco regions for each group
+  
+  
+ggplot(data = top_3_ecoregions, aes(fill = ECO_NAME, y = prop, x = species)) +
+  geom_bar(position = 'stack', stat = 'identity')
+  
+
+
+
 
 
 # tree --------------------------------------------------------------------
@@ -128,8 +141,26 @@ sub_mt_tree$tip.label[which(sub_mt_tree$tip.label == 'Anilios acuticauduso')] <-
 sub_mt_tree$tip.label[which(sub_mt_tree$tip.label == 'Anilios suboculariso')] <- 'Acutotyphlops subocularis'
 
 
+# FILTER DATA TO MATCH TREE TIPS -------------------------------------------
+
+tree_tips_df <- as.data.frame(sub_mt_tree$tip.label)
+names(tree_tips_df) <- 'species'
+
+# tree_tips_df$species_in_tree <- sub('Anilios ', tree_tips_df$species, replacement = "", perl = TRUE)
+
+# subset only species in tree
+
+subset_samp <- samptest %>% 
+  dplyr::semi_join(tree_tips_df, by = 'species') %>% 
+  group_by(species) %>% 
+  count()
 
 
+# prune tree again for only tips that we have data for
+shape_data_tips <- as.vector()
 
+# PRUNED tree
+subset_mt_tree <- sub_mt_tree %>%
+  keep.tip(., subset_samp$species)
 
-write.nexus(sub_mt_tree, file = 'data/tree/tree.nwk')
+write.nexus(subset_mt_tree, file = 'data/tree/tree.nwk')
