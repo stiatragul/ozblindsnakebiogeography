@@ -6,13 +6,18 @@
 library(dplyr)
 library(tidyr)
 library(janitor)
+# Read shapefiles of biome
+library(sf)
+library(raster)
+# check sampling bias
+library(sampbias)
+
 
 # Read data ---------------------------------------------------------------
 
 df <- read.csv("data/2021_ALA_blindsnake_occurence_data/records-2021-10-08.csv", header = TRUE) |> 
   clean_names()
 
-df
 
 df |> tibble() |> 
   colnames()
@@ -28,11 +33,19 @@ qgis_df <- df |>
   filter(!is.na(decimal_latitude_wgs84)) |> 
   filter(species != "",
          catalogue_number != "") |> 
-  arrange(species) 
+  distinct(catalogue_number, .keep_all = TRUE) |> # remove duplicate catalogue number
+  arrange(species)  
+
+qgis_df 
+
+## SUPPLEMENTARY TABLE FOR OCCURENCE
 
 # Write to csv
-# write.csv(qgis_df, file = 'data/2021_ALA_blindsnake_occurence_data/2021_blindsnake_distribution.csv')
+# write.csv(qgis_df, file = 'data/2021_ALA_blindsnake_occurence_data/2021_blindsnake_distribution.csv', row.names = FALSE)
 
+
+
+# Check which region they fall into ---------------------------------------
 
 # Map
 qgis_df <- qgis_df |> 
@@ -41,12 +54,23 @@ qgis_df <- qgis_df |>
          catalogue_number != "") |> 
   arrange(species) 
 
-# Read shapefiles of biome
-library(sf)
-library(raster)
+# Sample bias
+## Prepare
+samptest <- qgis_df[, c('species', 'decimal_latitude_wgs84', 'decimal_longitude_wgs84')]
+names(samptest) <- c('species', 'decimalLatitude', 'decimalLongitude')
+
+samp.out[, 'species']
+
+# Running sampbias
+# samp.out <- sampbias::calculate_bias(x = samptest, res = 1)
+
+# summary(samp.out)
+# plot(samp.out)
+
+
 
 # Need to read this from directory where all the other files are... *.shp by itself won't work.
-wwf_biome <- raster::shapefile("C:/Users/ST/Documents/GIS DataBase/WWF_Australia/wwf_terr_ecos.shp")
+wwf_biome <- raster::shapefile("data/WWF_Australia/wwf_terr_ecos.shp")
 
 # Make Spatial Points
 rec_points <- SpatialPoints(qgis_df[, c(7, 6)], proj4string = crs(wwf_biome))
