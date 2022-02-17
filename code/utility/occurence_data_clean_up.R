@@ -11,7 +11,7 @@ library(sf)
 library(raster)
 # check sampling bias
 library(sampbias)
-
+library(ape)
 
 # Read data ---------------------------------------------------------------
 
@@ -56,18 +56,19 @@ qgis_df <- qgis_df |>
 
 # Sample bias
 ## Prepare
-samptest <- qgis_df[, c('species', 'decimal_latitude_wgs84', 'decimal_longitude_wgs84')]
-names(samptest) <- c('species', 'decimalLatitude', 'decimalLongitude')
+samptest <- qgis_df[, c('species', 'decimal_longitude_wgs84', 'decimal_latitude_wgs84')]
+names(samptest) <- c('species', 'decimalLongitude', 'decimalLatitude')
 
-samp.out[, 'species']
+# samptest$species <- gsub(pattern = ' ', replacement = '_', x = samptest$species)
+
+# Export for Infomap Bioregions 
+write.csv(x = samptest, file = 'data/20220218_occurence_ALA_cleaned.csv', row.names = FALSE)
 
 # Running sampbias
 # samp.out <- sampbias::calculate_bias(x = samptest, res = 1)
 
 # summary(samp.out)
 # plot(samp.out)
-
-
 
 # Need to read this from directory where all the other files are... *.shp by itself won't work.
 wwf_biome <- raster::shapefile("data/WWF_Australia/wwf_terr_ecos.shp")
@@ -76,7 +77,6 @@ wwf_biome <- raster::shapefile("data/WWF_Australia/wwf_terr_ecos.shp")
 rec_points <- SpatialPoints(qgis_df[, c(7, 6)], proj4string = crs(wwf_biome))
 
 wwf_biome_records <- extract(wwf_biome, rec_points, method='bilinear')
-
 
 length(wwf_biome_records)
 length(qgis_df$species)
@@ -90,3 +90,46 @@ wwf_biome_records |>
   summarise(number = n())
 
 
+# tree --------------------------------------------------------------------
+
+mt_tree <- ape::read.nexus('data/tree/MCC_10_meanh.tre')
+
+# MANIPULATE TREE ---------------------------------------------------------
+# Keep only tips of species
+
+tip_keep <- c(
+  'acuticauduso', 'suboculariso', 'affinis1',
+  'wiedii92', 'ganei36', 'ligatus70',
+  'kimberleyensis65', 'troglodytes85', 'polygrammicus81',
+  'nigrescens75', 'silvia84', 'guentheri51',
+  'howi62', 'unguirostris87', 'grypus43', 'leptosoma67',
+  'leptosoma68', 'longissimus73', 'bicolor14',
+  'pinguis80', 'bituberculatus19', 'proximus83',
+  'australis13', 'endoterus35', 'hamatus60',
+  'pilbarensis79', 'centralis21', 'waitii90',
+  'ammodytes11', 'diversus26')
+
+# sub tree gets rid of number and SH
+sub_mt_tree <- mt_tree %>%
+  keep.tip(., tip_keep)
+
+sub_mt_tree$tip.label[which(sub_mt_tree$tip.label == 'leptosoma67')] <- "systenos24"
+
+# Force ultrametric 
+sub_mt_tree <- phytools::force.ultrametric(sub_mt_tree,"extend")
+
+# Clean up tip label
+sub_mt_tree$tip.label <- gsub("[0-9]+", '', sub_mt_tree$tip.label) # rename so it so we have tips labels without numbers
+sub_mt_tree$tip.label <- gsub("^", 'Anilios ', sub_mt_tree$tip.label) # rename so it so we have tips labels without numbers
+
+
+## Rename the outgroups
+sub_mt_tree$tip.label[which(sub_mt_tree$tip.label == 'Anilios acuticauduso')] <- 'Ramphotyphlops acuticaudus'
+sub_mt_tree$tip.label[which(sub_mt_tree$tip.label == 'Anilios suboculariso')] <- 'Acutotyphlops subocularis'
+
+
+
+
+
+
+write.nexus(sub_mt_tree, file = 'data/tree/tree.nwk')
