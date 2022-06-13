@@ -4,7 +4,7 @@
 # Rename columns and filter data from Atlas of the Living Australia
 
 library(dplyr); library(tidyr)
-library(janitor)
+library(janitor); library(stringr)
 # check sampling bias (require install via github as of 20220614 so need devtools)
 library(sampbias)
 
@@ -27,6 +27,7 @@ qgis_df <- df %>%
   dplyr::filter(!is.na(decimal_latitude_wgs84)) %>% 
   dplyr::filter(species != "",
          catalogue_number != "") %>% 
+  dplyr::filter(species != stringr::str_detect(string = species, pattern = "Indotyphlops")) %>% 
   dplyr::distinct(catalogue_number, .keep_all = TRUE) %>% # remove duplicate catalogue number
   dplyr::arrange(species)  
 
