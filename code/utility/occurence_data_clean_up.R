@@ -3,12 +3,10 @@
 
 # Rename columns and filter data from Atlas of the Living Australia
 
-library(dplyr)
-library(tidyr)
+library(dplyr); library(tidyr)
 library(janitor)
 # Read shapefiles of biome
-library(sf)
-library(raster)
+library(sf); library(raster)
 # check sampling bias
 library(sampbias)
 library(ape)
