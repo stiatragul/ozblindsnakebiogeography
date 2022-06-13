@@ -7,33 +7,31 @@ library(dplyr); library(tidyr)
 library(janitor)
 # Read shapefiles of biome
 library(sf); library(raster)
-# check sampling bias
+# check sampling bias (require install via github as of 20220614 so need devtools)
 library(sampbias)
-library(ape)
+library(ape); library(phytools)
 library(ggplot2)
 
 # Read data ---------------------------------------------------------------
 
-df <- read.csv("data/2021_ALA_blindsnake_occurence_data/records-2021-10-08.csv", header = TRUE) |> 
+df <- read.csv("data/2021_ALA_blindsnake_occurence_data/records-2021-10-08.csv", header = TRUE) %>% 
   clean_names()
 
-
-df |> tibble() |> 
+df %>% tibble() %>% 
   colnames()
-
 
 # Columns to subset
 subset_cols <- c("genus", "species", "scientific_name_intepreted", "catalogue_number", "institution", 
                  "decimal_latitude_wgs84", "decimal_longitude_wgs84", 
                  "year", "month", "day", "record_id")
 
-qgis_df <- df |>
-  select(subset_cols) |> 
-  filter(!is.na(decimal_latitude_wgs84)) |> 
-  filter(species != "",
-         catalogue_number != "") |> 
-  distinct(catalogue_number, .keep_all = TRUE) |> # remove duplicate catalogue number
-  arrange(species)  
+qgis_df <- df %>%
+  dplyr::select(all_of(subset_cols)) %>% 
+  dplyr::filter(!is.na(decimal_latitude_wgs84)) %>% 
+  dplyr::filter(species != "",
+         catalogue_number != "") %>% 
+  dplyr::distinct(catalogue_number, .keep_all = TRUE) %>% # remove duplicate catalogue number
+  dplyr::arrange(species)  
 
 qgis_df 
 
@@ -47,10 +45,10 @@ qgis_df
 # Check which region they fall into ---------------------------------------
 
 # Map
-qgis_df <- qgis_df |> 
-  tibble() |> 
+qgis_df <- qgis_df %>% 
+  tibble() %>% 
   filter(species != "",
-         catalogue_number != "") |> 
+         catalogue_number != "") %>% 
   arrange(species) 
 
 # Sample bias
@@ -84,8 +82,8 @@ length(qgis_df$species)
 wwf_biome_records$species <- qgis_df$species
 
 ### Number of occurence in each eco region.
-top_3_ecoregions <- wwf_biome_records |> 
-  dplyr::group_by(species, ECO_NAME) |> 
+top_3_ecoregions <- wwf_biome_records %>% 
+  dplyr::group_by(species, ECO_NAME) %>% 
   dplyr::summarise(n = n()) %>% 
   dplyr::mutate(prop = n / sum(n)) %>% 
   dplyr::arrange(desc(prop)) %>% 
