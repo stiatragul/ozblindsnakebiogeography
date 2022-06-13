@@ -7,8 +7,6 @@ library(dplyr); library(tidyr)
 library(janitor)
 # check sampling bias (require install via github as of 20220614 so need devtools)
 library(sampbias)
-library(ape); library(phytools)
-library(ggplot2)
 
 
 # Read data ---------------------------------------------------------------
