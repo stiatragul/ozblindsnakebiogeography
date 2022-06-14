@@ -27,7 +27,7 @@ qgis_df <- df %>%
   dplyr::filter(!is.na(decimal_latitude_wgs84)) %>% 
   dplyr::filter(species != "",
          catalogue_number != "") %>% 
-  dplyr::filter(species != stringr::str_detect(string = species, pattern = "Indotyphlops")) %>% 
+  dplyr::filter(stringr::str_detect(string = genus, pattern = "Anilios|Ramphotyphlops|Sundatyphlops")) %>% 
   dplyr::distinct(catalogue_number, .keep_all = TRUE) %>% # remove duplicate catalogue number
   dplyr::arrange(species)  
 
