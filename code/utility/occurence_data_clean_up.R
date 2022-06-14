@@ -31,15 +31,43 @@ qgis_df <- df %>%
   dplyr::distinct(catalogue_number, .keep_all = TRUE) %>% # remove duplicate catalogue number
   dplyr::arrange(species)  
 
+# Write to csv and inspect the data when mapped to QGIS. 
+# write.csv(qgis_df, file = 'data/2021_ALA_blindsnake_occurence_data/2021_blindsnake_distribution.csv', row.names = FALSE)
+# write.csv(qgis_df, file = 'data/WWF_Australia/2021_blindsnake_distribution.csv', row.names = FALSE)
+
+# After inspecting data, I decided to omit the following samples
+
+## Omit all Anilios australis from Museums Victoria because probably mis-id as A. australis is from WA. MV records are from eastern Australia (longitude 135).
+mv_australis <- qgis_df %>% 
+  dplyr::filter(institution != "") %>%      # omit records without institution
+  dplyr::filter(species == "Anilios australis" & decimal_longitude_wgs84 > 135) 
+
+
+
+# omit records without institution
+no_museum <- qgis_df %>% 
+  dplyr::filter(institution == "")
+
+# A. affinis records that are 
+affinis_rec <-  c("R05278", "R804", "R22664")
+
+affinis_no <- qgis_df %>%  
+  dplyr::filter(catalogue_number %in% affinis_rec)
+
+delete_rec <- rbind(mv_australis, no_museum, affinis_no)
+
+qgis_df_refine <- qgis_df %>% dplyr::anti_join(delete_rec)
+
 ## SUPPLEMENTARY TABLE FOR OCCURENCE
 
-# Write to csv
-# write.csv(qgis_df, file = 'data/2021_ALA_blindsnake_occurence_data/2021_blindsnake_distribution.csv', row.names = FALSE)
+# Write to csv and inspect the data when mapped to QGIS. 
+# write.csv(qgis_df_refine, file = 'data/2021_ALA_blindsnake_occurence_data/2021_blindsnake_distribution.csv', row.names = FALSE)
+# write.csv(qgis_df_refine, file = 'data/WWF_Australia/2021_blindsnake_distribution.csv', row.names = FALSE)
 
 
 # Plot distribution to check ----------------------------------------------
 
-distro.map <- leaflet(qgis_df) %>%
+distro.map <- leaflet(qgis_df_refine) %>%
   addProviderTiles(providers$OpenTopoMap) %>%
   # addProviderTiles(providers$Esri.WorldPhysical) %>%
   addCircleMarkers(lng = ~decimal_longitude_wgs84, lat = ~decimal_latitude_wgs84,
@@ -52,7 +80,4 @@ distro.map <- leaflet(qgis_df) %>%
   addMiniMap(position = 'bottomleft') %>% 
   addScaleBar(position = "bottomright")
 
-distro.map
-
-# After this step, need to check locality records manually to make sure everything makes sense. 
-# There may be some odd locality or ones that fall in the water. 
+distro.maps
