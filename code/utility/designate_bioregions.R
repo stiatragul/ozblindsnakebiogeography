@@ -41,18 +41,16 @@ top_3_ecoregions <- wwf_biome_records %>%
 ggplot(data = top_3_ecoregions, aes(fill = ECO_NAME, y = prop, x = species)) +
   geom_bar(position = 'stack', stat = 'identity')
 
-top_3_biome <- wwf_biome_records %>% 
+top_2_biome <- wwf_biome_records %>% 
   dplyr::group_by(species, BIOME) %>% 
   dplyr::summarise(n = n()) %>% 
   dplyr::mutate(prop = n / sum(n)) %>% 
   dplyr::arrange(desc(prop)) %>% 
   dplyr::group_by(species) %>% 
-  dplyr::slice(1:3)  # Choose top three eco regions for each group
+  dplyr::slice(1:2)  # Choose top three eco regions for each group
 
-top_3_biome %>% 
+top_2_biome %>% 
   dplyr::distinct(BIOME, .keep_all = FALSE)
-
-unique(top_3_biome$BIOME)
 
 ggplot(data = top_3_biome, aes(fill = BIOME, y = prop, x = species)) +
   geom_bar(position = 'stack', stat = 'identity') +
