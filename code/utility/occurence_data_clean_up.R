@@ -11,6 +11,7 @@ library(sampbias)
 
 # Read data ---------------------------------------------------------------
 
+# Occurence records for Anilios blindsnakes 
 df <- read.csv("data/2021_ALA_blindsnake_occurence_data/records-2021-10-08.csv", header = TRUE) %>% 
   clean_names()
 
