@@ -61,6 +61,11 @@ fos_tree$tip.label <- stringr::str_replace(string = fos_tree$tip.label, pattern 
 plotTree(fos_tree)
 
 
+# write as newick for BioGeoBears -----------------------------------------
+
+ape::write.tree(fos_tree, file = 'data/tree/anilios_newick.tre')
+
+
 ###############################
 ##### MITOCHONDRIAL TREE ######
 ###############################
