@@ -58,7 +58,7 @@ fos_tree$tip.label[which(fos_tree$tip.label %in% c('Anilios_polygrammicus_R98715
 
 # Just keep the species name (without rego)
 fos_tree$tip.label <- stringr::str_replace(string = fos_tree$tip.label, pattern = regex("_([A-z][0-9]+)"), replacement = "")
-
+plotTree(fos_tree)
 
 
 ###############################
