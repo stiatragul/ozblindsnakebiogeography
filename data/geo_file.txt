@@ -1,0 +1,10 @@
+9	9	(A B C D E F G H I)
+komodoensis	100000000
+salvadorii	011000000
+varius	000111101
+panoptes	001111011
+gouldii	000111111
+rosenbergi	000001100
+spenceri	000010000
+mertensi	000010000
+giganteus	000010010
