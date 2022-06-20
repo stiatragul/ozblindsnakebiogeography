@@ -39,9 +39,9 @@ blindsnakes_samples <- c('Anilios_affinis_J93635','Anilios_ammodytes_R158097','A
                          'Anilios_silvia_J46128','Anilios_splendidus_R119900','Anilios_systenos_R114894', 
                          'Anilios_torresianus_J47640','Anilios_tovelli_R21063','Anilios_troglodytes_R146048', 
                          'Anilios_unguirostris_R21669','Anilios_waitii_R113302','Anilios_wiedii_J59020', 
-                         'Anilios_yirrikalae_J85695',
+                         # 'Anilios_ligatus_R19109', # eastern
+                         'Anilios_yirrikalae_J85695'
                          # 'Ramphotyphlops_cfwaitii_R51244', #omit
-                         'Anilios_ligatus_R19109' # eastern
 )
 
 outgroups <- c('Ramphotyphlops_multillineatus_ABTC148379', 'Acutotyphlops_subocularis_R64768', 'Anilios_polygrammicus_R98715')
@@ -51,7 +51,7 @@ fos_tree <- ape::keep.tip(phy = fos_tree_full, tip = c(blindsnakes_samples, outg
 
 plotTree(fos_tree)
 # Rename tips (for grypus we have three potential species and ligatus)
-fos_tree$tip.label[which(fos_tree$tip.label %in% c('Anilios_grypus_R108596','Anilios_grypus_R157297','Anilios_grypus_R55272', 'Anilios_ligatus_R31019'))] <- c('Anilios_grypusW_R108596', 'Anilios_grypusNW_R157297', 'Anilios_grypusET_R55272', 'Anilios_ligatusE_R31019')
+fos_tree$tip.label[which(fos_tree$tip.label %in% c('Anilios_grypus_R108596','Anilios_grypus_R157297','Anilios_grypus_R55272'))] <- c('Anilios_grypusW_R108596', 'Anilios_grypusNW_R157297', 'Anilios_grypusET_R55272')
 
 # Change Anilios polygrammicus to Sundatyphlops
 fos_tree$tip.label[which(fos_tree$tip.label %in% c('Anilios_polygrammicus_R98715', 'Ramphotyphlops_multillineatus_ABTC148379'))] <- c('Sundatyphlops_polygrammicus_R98715', 'Ramphotyphlops_multilineatus_R148379')
