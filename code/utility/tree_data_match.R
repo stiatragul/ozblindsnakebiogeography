@@ -11,25 +11,45 @@
 # libraries ---------------------------------------------------------------
 library(ape); library(phytools)
 library(stringr)
+library(ggplot2)
+library(dplyr)
 
 # Read tree ---------------------------------------------------------------
 
 # Time calibrated tree from SqCL probe and mcmctree analysis with fossils
 # Full tree with fossil calibrations
-fos_tree_full <- ape::read.nexus("data/tree/20220420mcmctree.tre")
+fos_tree_full <- ape::read.nexus("data/tree/anilios_v3_st.tre")
+fos_tree_full_b <- ape::read.nexus("data/tree/anilios_v3_b.tre")
 
 fos_tree_full <- phytools::force.ultrametric(fos_tree_full,"extend")
+fos_tree_full_b <- phytools::force.ultrametric(fos_tree_full_b,"extend")
 phytools::plotTree(fos_tree_full)
+phytools::plotTree(fos_tree_full_b)
 
-fos_tree_full$tip.label
+
+# Rename ------------------------------------------------------------------
+
+# Rename tips (for grypus we have three potential species and ligatus)
+fos_tree_full$tip.label[which(fos_tree_full$tip.label %in% c('Anilios_grypus_R108596','Anilios_grypus_R157297','Anilios_grypus_R55272'))] <- c('Anilios_grypusW_R108596', 'Anilios_grypusNW_R157297', 'Anilios_grypusET_R55272')
+fos_tree_full_b$tip.label[which(fos_tree_full_b$tip.label %in% c('Anilios_grypus_R108596','Anilios_grypus_R157297','Anilios_grypus_R55272'))] <- c('Anilios_grypusW_R108596', 'Anilios_grypusNW_R157297', 'Anilios_grypusET_R55272')
+
+# Change Anilios polygrammicus to Sundatyphlops
+fos_tree_full$tip.label[which(fos_tree_full$tip.label %in% c('Anilios_polygrammicus_R98715', 'Ramphotyphlops_multillineatus_ABTC148379'))] <- c('Sundatyphlops_polygrammicus_R98715', 'Ramphotyphlops_multilineatus_R148379')
+fos_tree_full_b$tip.label[which(fos_tree_full_b$tip.label %in% c('Anilios_polygrammicus_R98715', 'Ramphotyphlops_multillineatus_ABTC148379'))] <- c('Sundatyphlops_polygrammicus_R98715', 'Ramphotyphlops_multilineatus_R148379')
+
+
+# Tip to keep -------------------------------------------------------------
 
 # tips we want for blindsnakes (the best we can do since we do not have all described species)
 blindsnakes_samples <- c('Anilios_affinis_J93635','Anilios_ammodytes_R158097','Anilios_aspina_J91822','Anilios_australis_R115859',
                          'Anilios_bicolor_R55342','Anilios_bituberculatus_R63990','Anilios_broomi_J87805','Anilios_centralis_R14631',
                          'Anilios_diversus_R112027','Anilios_endoterus_R102725','Anilios_ganei_R165000', 
-                         'Anilios_grypus_R108596',   # Western Australia (W)
-                         'Anilios_grypus_R157297',   # Sister to leptosoma-complex (NW)
-                         'Anilios_grypus_R55272',    # Eastern (ET)
+                         'Anilios_grypusW_R108596',   # Western Australia (W)
+                         'Anilios_grypusNW_R157297',   # Sister to leptosoma-complex (NW)
+                         'Anilios_grypusET_R55272',    # Eastern (ET)
+                         # 'Anilios_grypus_R108596',   # Western Australia (W)
+                         # 'Anilios_grypus_R157297',   # Sister to leptosoma-complex (NW)
+                         # 'Anilios_grypus_R55272',    # Eastern (ET)
                          'Anilios_guentheri_R108431','Anilios_hamatus_R136277','Anilios_howi_R146381','Anilios_kimberleyensis_R164213', 
                          'Anilios_leptosoma_R119241','Anilios_leucoproctus_J87547', 
                          'Anilios_ligatus_R31019','Anilios_longissimus_R120049','Anilios_margaretae_R163269',
@@ -44,26 +64,40 @@ blindsnakes_samples <- c('Anilios_affinis_J93635','Anilios_ammodytes_R158097','A
                          # 'Ramphotyphlops_cfwaitii_R51244', #omit
 )
 
-outgroups <- c('Ramphotyphlops_multillineatus_ABTC148379', 'Acutotyphlops_subocularis_R64768', 'Anilios_polygrammicus_R98715')
+outgroups <- c('Sundatyphlops_polygrammicus_R98715', 'Acutotyphlops_subocularis_R64768', 'Ramphotyphlops_multilineatus_R148379')
+   # c('Ramphotyphlops_multillineatus_ABTC148379', 'Acutotyphlops_subocularis_R64768', 'Anilios_polygrammicus_R98715')
 
+# Subset ------------------------------------------------------------------
 # Subset the tree
 fos_tree <- ape::keep.tip(phy = fos_tree_full, tip = c(blindsnakes_samples, outgroups))
+fos_tree_b <- ape::keep.tip(phy = fos_tree_full_b, tip = c(blindsnakes_samples, outgroups))
 
-plotTree(fos_tree)
-# Rename tips (for grypus we have three potential species and ligatus)
-fos_tree$tip.label[which(fos_tree$tip.label %in% c('Anilios_grypus_R108596','Anilios_grypus_R157297','Anilios_grypus_R55272'))] <- c('Anilios_grypusW_R108596', 'Anilios_grypusNW_R157297', 'Anilios_grypusET_R55272')
+phytools::plotTree(fos_tree)
+phytools::plotTree(fos_tree_b)
 
-# Change Anilios polygrammicus to Sundatyphlops
-fos_tree$tip.label[which(fos_tree$tip.label %in% c('Anilios_polygrammicus_R98715', 'Ramphotyphlops_multillineatus_ABTC148379'))] <- c('Sundatyphlops_polygrammicus_R98715', 'Ramphotyphlops_multilineatus_R148379')
+# Clean up the names ------------------------------------------------------
 
 # Just keep the species name (without rego)
-fos_tree$tip.label <- stringr::str_replace(string = fos_tree$tip.label, pattern = regex("_([A-z][0-9]+)"), replacement = "")
-plotTree(fos_tree)
+fos_tree_full$tip.label <- stringr::str_replace(string = fos_tree_full$tip.label, pattern = regex("_([A-z][0-9]+)"), replacement = "")
+fos_tree_full_b$tip.label <- stringr::str_replace(string = fos_tree_full_b$tip.label, pattern = regex("_([A-z][0-9]+)"), replacement = "")
+fos_tree_full$tip.label <- stringr::str_replace(string = fos_tree_full$tip.label, pattern = regex("[A-z]+idae_"), replacement = "")
+fos_tree_full_b$tip.label <- stringr::str_replace(string = fos_tree_full_b$tip.label, pattern = regex("[A-z]+idae_"), replacement = "")
+
+fos_tree_full$tip.label <- stringr::str_replace(string = fos_tree_full$tip.label, pattern = regex("([A-z][0-9]+)"), replacement = "")
+fos_tree_full_b$tip.label <- stringr::str_replace(string = fos_tree_full_b$tip.label, pattern = regex("_([A-z][0-9]+)"), replacement = "")
+
+
+
+compare.chronograms(fos_tree_full, fos_tree_full_b)
+
 
 
 # write as newick for BioGeoBears -----------------------------------------
 
-ape::write.tree(fos_tree, file = 'data/tree/anilios_newick.tre')
+# ape::write.tree(fos_tree, file = 'data/tree/anilios_newick_st.tre')
+# ape::write.tree(fos_tree_b, file = 'data/tree/anilios_newick_b.tre')
+
+# Script to plot the tree is in 'tree_compare_chronogram_plot.R'
 
 
 ###############################
