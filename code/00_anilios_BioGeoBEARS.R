@@ -463,7 +463,7 @@ BAYES$speedup = TRUE          # shorcuts to speed ML search; use FALSE if worrie
 BAYES$use_optimx = "GenSA"    # if FALSE, use optim() instead of optimx()
 BAYES$num_cores_to_use = 4
 BAYES$force_sparse = FALSE    # force_sparse=TRUE causes pathology & isn't much faster at this scale
-BAYES$states_list = states_list # Need to define manually
+BAYES$states_list = states_list 
 
 # This function loads the dispersal multiplier matrix etc. from the text files into the model object. Required for these to work!
 # (It also runs some checks on these inputs for certain errors.)
@@ -515,3 +515,24 @@ if (runslow)
   resBAYAREALIKE = resbayes
 }
 
+#######################
+#####BAYAREALIKE+J#####
+#######################
+
+BAYESj = define_BioGeoBEARS_run()
+BAYESj$trfn = trfn
+BAYESj$geogfn = geogfn
+BAYESj$max_range_size = max_range_size
+BAYESj$min_branchlength = 0.000001    # Min to treat tip as a direct ancestor (no speciation event)
+BAYESj$include_null_range = TRUE    # set to FALSE for e.g. DEC* model, DEC*+J, etc.
+
+# BAYESj$areas_allowed_fn = area.all
+# BAYESj$timesfn = tiempos
+
+# Speed options and multicore processing if desired
+BAYESj$on_NaN_error = -1e50    # returns very low lnL if parameters produce NaN error (underflow check)
+BAYESj$speedup = TRUE          # shorcuts to speed ML search; use FALSE if worried (e.g. >3 params)
+BAYESj$use_optimx = "GenSA"    # if FALSE, use optim() instead of optimx()
+BAYESj$num_cores_to_use = 4
+BAYESj$force_sparse = FALSE    # force_sparse=TRUE causes pathology & isn't much faster at this scale
+BAYES$states_list = states_list # Need to define manually
