@@ -1,5 +1,6 @@
 # 00_anilios_BioGeoBEARS.R
 
+# base code from Octavio
 
 # Libraries ---------------------------------------------------------------
 
@@ -11,9 +12,9 @@ library(rexpokit)
 library(cladoRcpp)
 library(BioGeoBEARS)
 
-tree.c <- ape::read.tree('data/tree/anilios_newick.tre')
+tree.c <- ape::read.tree('data/tree/anilios_newick_st.tre')
 
-trfn <- "data/tree/anilios_newick.tre"
+trfn <- "data/tree/anilios_newick_st.tre"
 geogfn <- "data/bears_txt/geofile.txt"
 # adj <- "data/bears_txt/area_adj.txt"
 
@@ -44,10 +45,10 @@ adjacency <- matrix(c(1,	1,	1,	1,	1,	1,	1,	0,	1,  # A
 
 
 maxAreas = 6
-states_list = rcpp_areas_list_to_states_list(areas=coln, maxareas=maxAreas, include_null_range=TRUE)
+states_list <- rcpp_areas_list_to_states_list(areas=coln, maxareas=maxAreas, include_null_range=TRUE)
 
 # Set up list of TRUEs
-states_to_keep = rep(TRUE, times=length(states_list))
+states_to_keep <- rep(TRUE, times=length(states_list))
 
 # Delete states that are not adjacent in the adjacency matrix
 # Skip the first state, if it's null
@@ -72,10 +73,10 @@ for (i in start_i:length(states_list)){
 }
 
 # Modify the states_list
-states_list = states_list[states_to_keep]
+states_list <- states_list[states_to_keep]
 # https://groups.google.com/d/msg/biogeobears/zkHP_YpA9kY/8c3vR-gIqP0J
-statenames = areas_list_to_states_list_new(areas=coln, maxareas=maxAreas, include_null_range=TRUE, split_ABC=FALSE)
-statenames = statenames[states_to_keep]
+statenames <- areas_list_to_states_list_new(areas=coln, maxareas=maxAreas, include_null_range=TRUE, split_ABC=FALSE)
+statenames <- statenames[states_to_keep]
 unlist(statenames)
 
 
@@ -99,7 +100,7 @@ DEC = readfiles_BioGeoBEARS_run(DEC)
 DEC$return_condlikes_table = TRUE
 DEC$calc_TTL_loglike_from_condlikes_table = TRUE
 DEC$calc_ancprobs = TRUE    # get ancestral states from optim run
-DEC$states_list = states_list # Need to define manually
+DEC$states_list = states_list # Need to define manually (using code from Octavio)
 
 check_BioGeoBEARS_run(DEC)
 
@@ -124,6 +125,11 @@ if (runslow)
 ###############
 #####DEC+J#####
 ###############
+# D = dispersal
+# E = Extinction
+# C = cladogenesis
+# +
+# J is for 'jump'
 
 DECj = define_BioGeoBEARS_run()
 DECj$trfn = trfn
@@ -137,9 +143,11 @@ DECj$speedup = TRUE          # shorcuts to speed ML search; use FALSE if worried
 DECj$use_optimx = "GenSA"    # if FALSE, use optim() instead of optimx()
 DECj$num_cores_to_use = 4
 DECj$force_sparse = FALSE    # force_sparse=TRUE causes pathology & isn't much faster at this scale
+DECj$states_list = states_list # Need to define manually
+
+### For areas allowed and time periods ###
 # DECj$areas_allowed_fn = area.all
 # DECj$timesfn = tiempos
-DECj$states_list = states_list # Need to define manually
 
 DECj = readfiles_BioGeoBEARS_run(DECj)
 # DECj = section_the_tree(inputs=DECj, make_master_table=TRUE, plot_pieces=FALSE)
@@ -186,3 +194,124 @@ if (runslow)
   resDECj = resj
 }
 
+#######################################################
+# PDF plots
+#######################################################
+pdffn = "test.pdf"
+pdf(pdffn, width=6, height=6)
+
+#######################################################
+# Plot ancestral states - DEC
+#######################################################
+analysis_titletxt ="BioGeoBEARS DEC on Anilios"
+
+# Setup
+results_object = resDEC
+scriptdir = np(system.file("extdata/a_scripts", package="BioGeoBEARS"))
+
+# States
+res2 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="text", 
+                                label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE,
+                                cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tree.c, tipranges=tipranges)
+
+# Pie chart
+plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", 
+                         label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, 
+                         cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tree.c, tipranges=tipranges)
+
+#######################################################
+# Plot ancestral states - DECJ
+#######################################################
+analysis_titletxt ="BioGeoBEARS DEC+J on Anilios"
+
+# Setup
+results_object = resDECj
+scriptdir = np(system.file("extdata/a_scripts", package="BioGeoBEARS"))
+
+# States
+res1 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="text",
+                                label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, 
+                                cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tree.c, tipranges=tipranges)
+
+# Pie chart
+plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", 
+                         label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, 
+                         cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tree.c, tipranges=tipranges)
+
+dev.off()  # Turn off PDF
+cmdstr = paste("open ", pdffn, sep="")
+system(cmdstr) # Plot it
+
+
+
+######################################
+### DIVALIKE AND DIVALIKE+J ANALYSIS ##
+#######################################
+# NOTE: The BioGeoBEARS "DIVALIKE" model is not identical with 
+# Ronquist (1997)'s parsimony DIVA. It is a likelihood
+# interpretation of DIVA, constructed by modelling DIVA's
+# processes the way DEC does, but only allowing the 
+# processes DIVA allows (widespread vicariance: yes; subset
+# sympatry: no; see Ronquist & Sanmartin 2011, Figure 4).
+#
+# DIVALIKE is a likelihood interpretation of parsimony
+# DIVA, and it is "like DIVA" -- similar to, but not
+# identical to, parsimony DIVA.
+
+#######################################################
+# Run DIVALIKE
+#######################################################
+DIVA = define_BioGeoBEARS_run()
+DIVA$trfn = trfn
+DIVA$geogfn = geogfn
+DIVA$max_range_size = max_range_size
+DIVA$min_branchlength = 0.000001    # Min to treat tip as a direct ancestor (no speciation event)
+DIVA$include_null_range = TRUE    # set to FALSE for e.g. DEC* model, DEC*+J, etc.
+
+DIVA$on_NaN_error = -1e50    
+DIVA$speedup = TRUE         
+DIVA$use_optimx = TRUE    
+DIVA$num_cores_to_use = 1
+DIVA$force_sparse = FALSE   
+
+# This function loads the dispersal multiplier matrix etc. from the text files into the model object. Required for these to work!
+# (It also runs some checks on these inputs for certain errors.)
+DIVA = readfiles_BioGeoBEARS_run(DIVA)
+
+DIVA$return_condlikes_table = TRUE
+DIVA$calc_TTL_loglike_from_condlikes_table = TRUE
+DIVA$calc_ancprobs = TRUE    # get ancestral states from optim run
+
+
+# Set up DIVALIKE model
+# Remove subset-sympatry
+DIVA$BioGeoBEARS_model_object@params_table["s","type"] = "fixed"
+DIVA$BioGeoBEARS_model_object@params_table["s","init"] = 0.0
+DIVA$BioGeoBEARS_model_object@params_table["s","est"] = 0.0
+
+DIVA$BioGeoBEARS_model_object@params_table["ysv","type"] = "2-j"
+DIVA$BioGeoBEARS_model_object@params_table["ys","type"] = "ysv*1/2"
+DIVA$BioGeoBEARS_model_object@params_table["y","type"] = "ysv*1/2"
+DIVA$BioGeoBEARS_model_object@params_table["v","type"] = "ysv*1/2"
+
+# Allow classic, widespread vicariance; all events equiprobable
+DIVA$BioGeoBEARS_model_object@params_table["mx01v","type"] = "fixed"
+DIVA$BioGeoBEARS_model_object@params_table["mx01v","init"] = 0.5
+DIVA$BioGeoBEARS_model_object@params_table["mx01v","est"] = 0.5
+
+check_BioGeoBEARS_run(DIVA)
+
+runslow = TRUE
+resfn = "Anilios_DIVA.Rdata"
+if (runslow)
+{
+  res = bears_optim_run(BioGeoBEARS_run_object)
+  res    
+  
+  save(res, file=resfn)
+  resDIVALIKE = res
+} else {
+  # Loads to "res"
+  load(resfn)
+  resDIVALIKE = res
+}
