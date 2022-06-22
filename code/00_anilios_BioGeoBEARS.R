@@ -271,8 +271,9 @@ DIVA$include_null_range = TRUE    # set to FALSE for e.g. DEC* model, DEC*+J, et
 DIVA$on_NaN_error = -1e50    
 DIVA$speedup = TRUE         
 DIVA$use_optimx = TRUE    
-DIVA$num_cores_to_use = 1
+DIVA$num_cores_to_use = 4
 DIVA$force_sparse = FALSE   
+DIVA$states_list = states_list # Need to define manually
 
 # This function loads the dispersal multiplier matrix etc. from the text files into the model object. Required for these to work!
 # (It also runs some checks on these inputs for certain errors.)
@@ -302,10 +303,10 @@ DIVA$BioGeoBEARS_model_object@params_table["mx01v","est"] = 0.5
 check_BioGeoBEARS_run(DIVA)
 
 runslow = TRUE
-resfn = "Anilios_DIVA.Rdata"
+resfn = "AniliosDIVA.Rdata"
 if (runslow)
 {
-  res = bears_optim_run(BioGeoBEARS_run_object)
+  res = bears_optim_run(DIVA)
   res    
   
   save(res, file=resfn)
@@ -315,3 +316,202 @@ if (runslow)
   load(resfn)
   resDIVALIKE = res
 }
+
+
+#######################################################
+# Run DIVALIKE + J
+#######################################################
+DIVAj = define_BioGeoBEARS_run()
+DIVAj$trfn = trfn
+DIVAj$geogfn = geogfn
+DIVAj$max_range_size = max_range_size
+DIVAj$min_branchlength = 0.000001    # Min to treat tip as a direct ancestor (no speciation event)
+DIVAj$include_null_range = TRUE    # set to FALSE for e.g. DEC* model, DEC*+J, etc.
+
+DIVAj$on_NaN_error = -1e50    
+DIVAj$speedup = TRUE         
+DIVAj$use_optimx = TRUE    
+DIVAj$num_cores_to_use = 4
+DIVAj$force_sparse = FALSE   
+DIVAj$states_list = states_list # Need to define manually
+
+# This function loads the dispersal multiplier matrix etc. from the text files into the model object. Required for these to work!
+# (It also runs some checks on these inputs for certain errors.)
+DIVAj = readfiles_BioGeoBEARS_run(DIVAj)
+
+DIVAj$return_condlikes_table = TRUE
+DIVAj$calc_TTL_loglike_from_condlikes_table = TRUE
+DIVAj$calc_ancprobs = TRUE    # get ancestral states from optim run
+
+
+# Set up DIVALIKE+J model
+# Get the ML parameter values from the 2-parameter nested model
+# (this will ensure that the 3-parameter model always does at least as good)
+dstart = resDIVALIKE$outputs@params_table["d","est"]
+estart = resDIVALIKE$outputs@params_table["e","est"]
+jstart = 0.0001
+# Input starting values for d, e
+DIVAj$BioGeoBEARS_model_object@params_table["d","init"] = dstart
+DIVAj$BioGeoBEARS_model_object@params_table["d","est"] = dstart
+DIVAj$BioGeoBEARS_model_object@params_table["e","init"] = estart
+DIVAj$BioGeoBEARS_model_object@params_table["e","est"] = estart
+
+# Remove subset-sympatry
+DIVAj$BioGeoBEARS_model_object@params_table["s","type"] = "fixed"
+DIVAj$BioGeoBEARS_model_object@params_table["s","init"] = 0.0
+DIVAj$BioGeoBEARS_model_object@params_table["s","est"] = 0.0
+
+DIVAj$BioGeoBEARS_model_object@params_table["ysv","type"] = "2-j"
+DIVAj$BioGeoBEARS_model_object@params_table["ys","type"] = "ysv*1/2"
+DIVAj$BioGeoBEARS_model_object@params_table["y","type"] = "ysv*1/2"
+DIVAj$BioGeoBEARS_model_object@params_table["v","type"] = "ysv*1/2"
+
+# Allow classic, widespread vicariance; all events equiprobable
+DIVAj$BioGeoBEARS_model_object@params_table["mx01v","type"] = "fixed"
+DIVAj$BioGeoBEARS_model_object@params_table["mx01v","init"] = 0.5
+DIVAj$BioGeoBEARS_model_object@params_table["mx01v","est"] = 0.5
+
+# Add jump dispersal/founder-event speciation
+DIVAj$BioGeoBEARS_model_object@params_table["j","type"] = "free"
+DIVAj$BioGeoBEARS_model_object@params_table["j","init"] = jstart
+DIVAj$BioGeoBEARS_model_object@params_table["j","est"] = jstart
+
+# Under DIVALIKE+J, the max of "j" should be 2, not 3 (as is default in DEC+J)
+DIVAj$BioGeoBEARS_model_object@params_table["j","min"] = 0.00001
+DIVAj$BioGeoBEARS_model_object@params_table["j","max"] = 1.99999
+
+check_BioGeoBEARS_run(DIVAj)
+
+resfn = "AniliosDIVA_J.Rdata"
+runslow = TRUE
+if (runslow)
+{
+  #sourceall("/Dropbox/_njm/__packages/BioGeoBEARS_setup/")
+  
+  res = bears_optim_run(DIVAj)
+  res    
+  
+  save(res, file=resfn)
+  
+  resDIVALIKEj = res
+} else {
+  # Loads to "res"
+  load(resfn)
+  resDIVALIKEj = res
+}
+
+pdffn = "Anilios_DIVA_DIVAj.pdf"
+pdf(pdffn, width=6, height=6)
+
+#######################################################
+# Plot ancestral states - DIVALIKE
+#######################################################
+analysis_titletxt ="BioGeoBEARS DIVALIKE on Anilios"
+
+# Setup
+results_object = resDIVALIKE
+scriptdir = np(system.file("extdata/a_scripts", package="BioGeoBEARS"))
+
+# States
+res2 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="text", 
+                                label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, 
+                                cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tree.c, tipranges=tipranges)
+
+# Pie chart
+plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie",
+                         label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, 
+                         cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tree.c, tipranges=tipranges)
+
+#######################################################
+# Plot ancestral states - DIVALIKE+J
+#######################################################
+analysis_titletxt ="BioGeoBEARS DIVALIKE+J on Anilios"
+
+# Setup
+results_object = resDIVALIKEj
+scriptdir = np(system.file("extdata/a_scripts", package="BioGeoBEARS"))
+
+# States
+res1 = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="text", label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tree.c, tipranges=tipranges)
+
+# Pie chart
+plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j"), plotwhat="pie", label.offset=0.45, tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, include_null_range=TRUE, tr=tree.c, tipranges=tipranges)
+
+dev.off()
+cmdstr = paste("open ", pdffn, sep="")
+system(cmdstr)
+
+#####################
+#####BAYAREALIKE#####
+#####################
+
+# Likelihood interpretation of Bayesian BayArea. Test importance of cladogenesis.
+
+BAYES = define_BioGeoBEARS_run()
+BAYES$trfn = trfn
+BAYES$geogfn = geogfn
+BAYES$max_range_size = max_range_size
+BAYES$min_branchlength = 0.000001    # Min to treat tip as a direct ancestor (no speciation event)
+BAYES$include_null_range = TRUE    # set to FALSE for e.g. DEC* model, DEC*+J, etc.
+
+# BAYES$areas_allowed_fn = area.all
+# BAYES$timesfn = tiempos
+
+# Speed options and multicore processing if desired
+BAYES$on_NaN_error = -1e50    # returns very low lnL if parameters produce NaN error (underflow check)
+BAYES$speedup = TRUE          # shorcuts to speed ML search; use FALSE if worried (e.g. >3 params)
+BAYES$use_optimx = "GenSA"    # if FALSE, use optim() instead of optimx()
+BAYES$num_cores_to_use = 4
+BAYES$force_sparse = FALSE    # force_sparse=TRUE causes pathology & isn't much faster at this scale
+BAYES$states_list = states_list # Need to define manually
+
+# This function loads the dispersal multiplier matrix etc. from the text files into the model object. Required for these to work!
+# (It also runs some checks on these inputs for certain errors.)
+BAYES = readfiles_BioGeoBEARS_run(BAYES)
+# BAYES = section_the_tree(inputs=BAYES, make_master_table=TRUE, plot_pieces=FALSE)
+
+# Good default settings to get ancestral states
+BAYES$return_condlikes_table = TRUE
+BAYES$calc_TTL_loglike_from_condlikes_table = TRUE
+BAYES$calc_ancprobs = TRUE    # get ancestral states from optim run
+
+# Set up BAYAREALIKE model
+# No subset sympatry
+BAYES$BioGeoBEARS_model_object@params_table["s","type"] = "fixed"
+BAYES$BioGeoBEARS_model_object@params_table["s","init"] = 0.0
+BAYES$BioGeoBEARS_model_object@params_table["s","est"] = 0.0
+
+# No vicariance
+BAYES$BioGeoBEARS_model_object@params_table["v","type"] = "fixed"
+BAYES$BioGeoBEARS_model_object@params_table["v","init"] = 0.0
+BAYES$BioGeoBEARS_model_object@params_table["v","est"] = 0.0
+
+# Adjust linkage between parameters
+BAYES$BioGeoBEARS_model_object@params_table["ysv","type"] = "1-j"
+BAYES$BioGeoBEARS_model_object@params_table["ys","type"] = "ysv*1/1"
+BAYES$BioGeoBEARS_model_object@params_table["y","type"] = "1-j"
+
+# Only sympatric/range-copying (y) events allowed, and with 
+# exact copying (both descendants always the same size as the ancestor)
+BAYES$BioGeoBEARS_model_object@params_table["mx01y","type"] = "fixed"
+BAYES$BioGeoBEARS_model_object@params_table["mx01y","init"] = 0.9999
+BAYES$BioGeoBEARS_model_object@params_table["mx01y","est"] = 0.9999
+
+# Check the inputs
+check_BioGeoBEARS_run(BAYES)
+
+runslow = TRUE
+resfnbayes = "AniliosBAYES.Rdata"
+if (runslow)
+{
+  resbayes = bears_optim_run(BAYES)
+  resbayes    
+  
+  save(resbayes, file=resfnbayes)
+  resBAYAREALIKE = resbayes
+} else {
+  # Loads to "res"
+  load(resfnbayes)
+  resBAYAREALIKE = resbayes
+}
+
