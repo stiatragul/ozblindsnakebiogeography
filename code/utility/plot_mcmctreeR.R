@@ -6,7 +6,7 @@ library(phytools)
 
 
 phy_full_mcmc <- readMCMCtree(inputPhy = 'data/tree/v3_01_FigTree.tre', from.file = TRUE)
-MCMC.chain <- read.delim('data/tree/v3_01_combo.txt') 
+MCMC.chain <- read.delim('data/tree/v3_01_combo.txt') # This text is very large. Need to find it from local computer (not committed to github)
 
 phy_full <- phy_full_mcmc$apePhy 
 
