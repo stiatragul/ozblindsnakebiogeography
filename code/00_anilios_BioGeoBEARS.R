@@ -200,7 +200,7 @@ if (runslow)
 # PDF plots
 #######################################################
 pdffn = "Anilios_DEC.pdf"
-pdf(pdffn, width=6, height=6)
+pdf(pdffn, width=8, height=11)
 
 #######################################################
 # Plot ancestral states - DEC
