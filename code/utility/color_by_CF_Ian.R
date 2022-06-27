@@ -7,10 +7,14 @@
 ## value.check: check to see if the applied values match those from the .cf.stat file
 ## label.size: how big should the tip label size be?
 
+#  Add ability to subset and return two plots (full and subset)
+
 library(dplyr); library(phytools)
 
-color.by.CF <- function(phy, cf.file, terminal.color=NULL, col.palette="RdYlBu", legend=TRUE, value.check=FALSE, label.size=0.5,
-  CF=c("sCF", "gCF")){
+color.by.CF <- function(phy, cf.file, terminal.color=NULL, col.palette="RdYlBu", 
+                        legend=TRUE, value.check=FALSE, label.size=0.5,
+                        subset = FALSE, subset_tips,
+                        CF=c("sCF", "gCF")){
   require(RColorBrewer); require(dplyr); require(phytools)
   
   # set the plot layout
@@ -51,7 +55,7 @@ color.by.CF <- function(phy, cf.file, terminal.color=NULL, col.palette="RdYlBu",
   # create a color ramp of your choice
   clz <- colorRampPalette(brewer.pal(6, col.palette)); point.colors <- clz(100)
   # if(CF=="gCF"){edge.cols <- point.colors[combo.edges$gCF]} # match the CF values to colors
-  if(CF=="gCF"){edge.cols <- c(point.colors[combo.edges$gCF], "red")} 
+  if(CF=="gCF"){edge.cols <- c(point.colors[combo.edges$gCF])} 
   if(CF=="sCF"){edge.cols <- point.colors[combo.edges$sCF]} # match the CF values to colors
 
   combo.edges$CF_col <- edge.cols # add it to the data frame
@@ -87,7 +91,13 @@ color.by.CF <- function(phy, cf.file, terminal.color=NULL, col.palette="RdYlBu",
   }
   
   # finally, plot it all.
-  plot.phylo(phy, edge.color=combo.edges$CF_col, edge.width=3, cex=label.size); # can add 'edge.lty=combo.edges$gCF_lty' 
+  # make the branches we don't have CFs for black or colored
+  if (subset == T) {
+    phy_subset <- ape::keep.tip(phy = phy, tip = subset_tips)
+    plot.phylo(phy_subset, edge.color=combo.edges$CF_col, edge.width=3, cex=label.size); axis(1)} # can add 'edge.lty=combo.edges$gCF_lty'
+  else {plot.phylo(phy, edge.color=combo.edges$CF_col, edge.width=3, cex=label.size); axis(1)} # can add 'edge.lty=combo.edges$gCF_lty' 
+  
+  # plot.phylo(phy, edge.color=combo.edges$CF_col, edge.width=3, cex=label.size); # can add 'edge.lty=combo.edges$gCF_lty' 
 
   if(legend==T){color.bar(colorRampPalette(brewer.pal(6, col.palette))(100))}
   
