@@ -81,6 +81,8 @@ statenames <- areas_list_to_states_list_new(areas=coln, maxareas=maxAreas, inclu
 statenames <- statenames[states_to_keep]
 unlist(statenames)
 
+load('AniliosDEC_J.Rdata')
+load('AniliosDEC.Rdata')
 
 ############
 #####DEC####
@@ -196,11 +198,13 @@ if (runslow)
   resDECj = resj
 }
 
+
+
 #######################################################
 # PDF plots
 #######################################################
 pdffn = "Anilios_DEC.pdf"
-pdf(pdffn, width=8, height=11)
+pdf(pdffn, paper = "a4")
 
 #######################################################
 # Plot ancestral states - DEC
