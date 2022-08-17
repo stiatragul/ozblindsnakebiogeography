@@ -1,0 +1,12 @@
+Also, this is the portion of the text where I explain my reasoning, in case it's useful:
+
+For the ‘BioGeoBEARS 1.1.2’ (Matzke 2013) analyses we divided the study area into nine discrete regions. Given their isolation from other regions where members of the LAMc occur, we categorized the Lesser Sunda Islands as an independent area. We divided New Guinea into a southern and northern area on either side of the Central Range. This mountain range has been identified as an important biogeographic barrier, particularly for lowland taxa (Tallowin et al. 2014). Our Australian area divisions are based on the terrestrial biome division of Olson et al. (2001) and follow the nomenclature of Cardillo et al. (2017). There are only a few records of a single member of the LAMc (V. varius) from the “Montane Grasslands and Shrublands.” Thus, we followed Cardillo et al. (2017) and merged that biome with the surrounding Temperate Forest. We restricted the list of possible states to represent historically plausible scenarios by specifying an area adjacency matrix (Table S15). 
+
+El jue, 10 jun 2021 a las 11:26, Carlos Pavón (<cjpvunam@gmail.com>) escribió:
+I attached the code and files I used to do the simplest analysis in the Komodo paper, which should be pretty similar to the analysis you want to do. Perhaps I would only try more models and not just the DEC (such as the BAYAREA and DIVALIKE). There are instructions on the wiki page and I can send you code for that too if you want.
+
+These are the references I followed for choosing how to divide the regions:
+
+Cardillo M., Weston P.H., Reynolds Z.K.M., Olde P.M., Mast A.R., Lemmon E.M., Lemmon A.R., Bromham L. 2017. The phylogeny and biogeography of Hakea (Proteaceae) reveals the role of biome shifts in a continental plant radiation. Evolution 71:1928–1943. 
+
+Olson D.M., Dinerstein E., Wikramanayake E.D., Burgess N.D., Powell G.V.N., Underwood E.C., D'amico J.A., Itoua I., Strand H.E., Morrison J.C., Loucks C.J., Allnutt T.F., Ricketts T.H., Kura Y., Lamoreux J.F., Wettengel W.W., Hedao P., Kassem K.R. 2001. Terrestrial ecoregions of the world: a new map of life on earth: a new global map of terrestrial ecoregions provides an innovative tool for conserving biodiversity. BioScience 51:933–938. 
