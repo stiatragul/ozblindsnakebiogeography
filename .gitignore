@@ -1,3 +1,41 @@
 *.Rproj
 *.Rhistory
 /.Rproj.user
+.RData
+.Ruserdata
+
+
+# Ignore large data files that will probably not change very much. Instead, these files are backed up locally to at least an external harddrive 
+
+
+# Output and intermediate files that requires post-processing (e.g. PDF, .ai, .jpg, *.png) and excel spreadsheet files (*.xlsx, *.xls) files are synced to a corresponding
+# folder on OneDrive. ROBOCOPY BAT file on task scheduler handles this sync
+# ```
+# @ECHO OFF
+# ECHO Two way mirror between local_github folder and OneDrive for just PDF .ai .jpg .png
+# robocopy "C:\test_sync" "C:\Users\ST\OneDrive - Australian National University\repo_onedrive\test_sync\\" *.ai *.psd *.pdf *.png *.jpg *.png *.xlsx *.xls *v3_01_combo.txt *.docx /s /e /xo /R:1 /W:1 /NDL /XJD /v
+# robocopy "C:\Users\ST\OneDrive - Australian National University\repo_onedrive\test_sync\\" "C:\test_sync" *.ai *.psd *.pdf *.png *.jpg *.png *.xlsx *.xls *v3_01_combo.txt *.docx /s /e /xo /R:1 /W:1 /NDL /XJD /v
+# echo Sync Complete
+# ```
+
+*.pdf
+post_process/*.ai
+# post_output/*.pdf
+# post_process/*.ai
+**/*.ai
+**.jpg
+**.png
+**.xlsx
+**.xls
+*.docx
+
+data/tree/v3_01_combo.txt
+data/tree/v3_02_combo.txt
+manuscript_supplement_files/*
+*.html
+
+*.log
+
+# QGIS files
+*.qgz
+*.tmp
