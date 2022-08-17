@@ -1,6 +1,6 @@
 Before analysis
 
-1. Download occurence data from Atlas of the Living Australia or use 
+1. Download occurence data from Atlas of the Living Australia
 
 ```
 powershell pwsh_download_occurence.ps1
