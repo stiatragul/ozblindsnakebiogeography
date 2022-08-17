@@ -1,0 +1,64 @@
+---
+title: "Diversification of Australian blind snakes"
+date: "`r Sys.Date()`"
+author: 
+output: 
+  # bookdown::html_document2:
+  #   toc: true
+  #   number_sections: FALSE
+  bookdown::word_document2:
+    reference_docx: [C:/Users/ST/Documents/repo/AusARG_blindsnake/custom-reference-doc.docx]
+    number_sections: true
+    fig_caption: yes
+bibliography: [C:/Users/ST/Documents/repo/anu_thesis_texts/zotero_library.bib]
+# biblio-style: "apalike"
+csl: evolution.csl
+link-citations: true
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE)
+# knitr::opts_knit$set(root.dir = normalizePath("..")) #use grandparent folder working directory
+# for including graphics we need full path with knitr
+WD <- getwd()
+```
+
+```{r packages}
+library(dplyr); library(readr); library(janitor); 
+library(ape); library(phytools);
+library(kableExtra); library(RPANDA)
+```
+
+**Abstract**
+
+**Keywords**
+scolecophidia, Diversification, paleoclimate, RPANDA, BioGeoBEARS
+
+\newpage
+
+# Introduction
+<!-- COMMUNITY words - Reported, accepted, widely  -->
+<!-- TRANSITION / FLOW words - Nonetheless, however, although, unless, because, and, but/ -->
+<!-- 1. Why phylogeny is important to readers of the target journals? -->
+
+
+
+#  Materials and methods
+
+# Results
+
+\newpage
+
+# Discussion
+
+# Conclusion
+
+
+\newpage 
+
+**References**
+<!-- # References -->
