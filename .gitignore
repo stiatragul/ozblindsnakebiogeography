@@ -29,6 +29,8 @@ post_process/*.ai
 **.xls
 *.docx
 
+data/WWF_Australia/*
+
 data/tree/v3_01_combo.txt
 data/tree/v3_02_combo.txt
 manuscript_supplement_files/*
