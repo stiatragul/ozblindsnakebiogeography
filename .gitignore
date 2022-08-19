@@ -4,6 +4,9 @@
 **.RData
 .Ruserdata
 
+exclude-file.txt
+include-file.txt
+rsync*
 
 # Ignore large data files that will probably not change very much. Instead, these files are backed up locally to at least an external harddrive 
 
@@ -37,3 +40,4 @@ manuscript_supplement_files/*
 # QGIS files
 *.qgz
 *.tmp
+key_sync.txt
