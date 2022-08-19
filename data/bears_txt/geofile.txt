@@ -8,7 +8,6 @@ Anilios_margaretae	001000000
 Anilios_obtusifrons	000100000
 Anilios_pilbarensis	001000000
 Anilios_pinguis	000100000
-Anilios_splendidus	001000000
 Anilios_systenos	000100000
 Anilios_yirrikalae	100000000
 Anilios_endoterus	001000000
@@ -17,9 +16,9 @@ Anilios_unguirostris	100000000
 Anilios_australis	000100000
 Anilios_nigrescens	010101000
 Anilios_tovelli	100000000
-Anilios_grypusNW	101100000
+Anilios_grypusNW	101000000
 Anilios_grypusW	101000000
-Anilios_grypusET	101000000
+Anilios_grypusET	101001000
 Anilios_affinis	110011000
 Anilios_silvia	010000000
 Anilios_leptosoma	001100000
@@ -30,7 +29,8 @@ Anilios_diversus	101000000
 Anilios_bicolor	001100000
 Anilios_kimberleyensis	100000000
 Anilios_leucoproctus	100000000
-Anilios_ligatus	110011000
+Anilios_ligatusE	110011000
+Anilios_ligatus	100000000
 Anilios_waitii	001100000
 Anilios_proximus	110011000
 Anilios_torresianus	100010000
