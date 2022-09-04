@@ -19,7 +19,6 @@ library(RPANDA); library(tidyverse)
 library(phytools); library(gridExtra)
 library(parallel) # can do this on WSL2 (if using Windows)
 
-
 # Load --------------------------------------------------------------------
 
 load(file = "data/intermediate_data/diversification_analyses/env_data_list.RData")
@@ -126,7 +125,7 @@ cst.lamb=F; cst.mu=T; expo.lamb=F; expo.mu=F; fix.mu=T
 
 # Parallel on 4 cores
 # nclust <- parallel::detectCores()
-ncores <- 4
+num_cores <- detectCores()
 
 system.time(
   tree_BEnvVar_EXPO_res <- mclapply(env_data_list, 
@@ -214,10 +213,13 @@ system.time(
 rbind(tab_func(tree_BCSTDenvVar_EXPO_res, .mu = TRUE, gen_name = "BCSTDenvVar_expo"),
       tab_func(tree_BEnvVarDCST_EXPO_res, .mu = TRUE, gen_name = "BEnvVarDCST_expo"),
       tab_func(tree_BEnvVarDEnvVar_EXPO_res, .mu = TRUE, gen_name = "BEnvVarDEnvVar_expo"),
-      tab_func(tree_BEnvVar_EXPO_res, .mu = FALSE, gen_name = "BEnvVar_expo"))
+      tab_func(tree_BEnvVar_EXPO_res, .mu = FALSE, gen_name = "BEnvVar_expo")) %>% 
+  arrange(desc(aicc))
 
+plot_fit_env(tree_BEnvVar_EXPO_res$arid_val, env_data_list$arid_val, tot_time)
 
-save.image(file='output/fit_env_output.RData')
+# save.image(file='output/fit_env_output.RData')
+# load("output/fit_env_output.RData")
 
 
 # Plot results ------------------------------------------------------------
