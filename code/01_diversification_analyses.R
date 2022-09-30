@@ -11,7 +11,7 @@
 ## IMPORTANT ## 
 # These analyses can be slow, especially when running multiple models. 
 # From initial testing, using R on WSL2 is faster than R on Windows even when using the same source files on Windows. 
-# So when running analyses, I'm using Rstudio server launched from WSL2. 
+# So when running analyses, I'm using R (WSL2 console) or Rstudio server launched from WSL2 via browser. 
 
 # Library -----------------------------------------------------------------
 
