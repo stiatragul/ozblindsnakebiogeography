@@ -13,21 +13,12 @@ library(phytools); library(gridExtra)
 
 load("output/20220818_model_output_env.RData")
 
+source("code/02_table_fit_env_results.R")
 
-# Sort result table -------------------------------------------------------
-
-result_table <- rbind(tab_func(tree_BCSTDenvVar_EXPO_res, .mu = TRUE, gen_name = "BCSTDenvVar_expo"),
-      tab_func(tree_BEnvVarDCST_EXPO_res, .mu = TRUE, gen_name = "BEnvVarDCST_expo"),
-      tab_func(tree_BEnvVarDEnvVar_EXPO_res, .mu = TRUE, gen_name = "BEnvVarDEnvVar_expo"),
-      tab_func(tree_BEnvVar_EXPO_res, .mu = FALSE, gen_name = "BEnvVar_expo")) %>% 
-  arrange(aicc)
-
-head(result_table)
-
-result_table %>% 
-  dplyr::mutate_if(is.numeric, round, digits =2)
+# Best fitting model
+result_fit$arid_sco[[1]]$BEnvVarDCST_EXPO
+result_fit$min_sco[[1]]$BCSTDEnvVar_EXPO
 
 
-tree_BEnvVar_EXPO_res$arid_sco
-
-RPANDA::plot_fit_env(tree_BEnvVar_EXPO_res$arid_str, env_data = env_data_list$arid_str, tot_time = tot_time)
+RPANDA::plot_fit_env(result_fit$arid_sco[[1]]$BEnvVar_EXPO, env_data = env_data_list$arid_sco, tot_time = tot_time)
+RPANDA::plot_fit_env(result_fit$min_sco[[1]]$BCSTDEnvVar_EXPO, env_data = env_data_list$min_sco, tot_time = tot_time)
