@@ -56,7 +56,9 @@ blindsnakes_samples <- c('Anilios_affinis_J93635','Anilios_ammodytes_R158097','A
                          'Anilios_nigrescens_R31022','Anilios_obtusifrons_R146400','Anilios_pilbarensis_R108813',
                          'Anilios_pinguis_R146995',
                          'Anilios_proximus_R132486', 
-                         'Anilios_silvia_J46128','Anilios_splendidus_R119900','Anilios_systenos_R114894', 
+                         'Anilios_silvia_J46128',
+                         # 'Anilios_splendidus_R119900',
+                         'Anilios_systenos_R114894', 
                          'Anilios_torresianus_J47640','Anilios_tovelli_R21063','Anilios_troglodytes_R146048', 
                          'Anilios_unguirostris_R21669','Anilios_waitii_R113302','Anilios_wiedii_J59020', 
                          # 'Anilios_ligatus_R19109', # eastern
@@ -86,16 +88,12 @@ fos_tree_full_b$tip.label <- stringr::str_replace(string = fos_tree_full_b$tip.l
 fos_tree_full$tip.label <- stringr::str_replace(string = fos_tree_full$tip.label, pattern = regex("([A-z][0-9]+)"), replacement = "")
 fos_tree_full_b$tip.label <- stringr::str_replace(string = fos_tree_full_b$tip.label, pattern = regex("_([A-z][0-9]+)"), replacement = "")
 
-
-
-compare.chronograms(fos_tree_full, fos_tree_full_b)
-
-
+# compare.chronograms(fos_tree, fos_tree_b)
 
 # write as newick for BioGeoBears -----------------------------------------
 
-# ape::write.tree(fos_tree, file = 'data/tree/anilios_newick_st.tre')
-# ape::write.tree(fos_tree_b, file = 'data/tree/anilios_newick_b.tre')
+ape::write.tree(fos_tree, file = 'data/intermediate_data/bears/anilios_newick_st.tre')
+ape::write.tree(fos_tree_b, file = 'data/intermediate_data/bears/anilios_newick_b.tre')
 
 # Script to plot the tree is in 'tree_compare_chronogram_plot.R'
 

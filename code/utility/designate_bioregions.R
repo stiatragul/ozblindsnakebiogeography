@@ -45,6 +45,7 @@ ggplot(data = top_3_ecoregions, aes(fill = ECO_NAME, y = prop, x = species)) +
 
 sp_biomes <- wwf_biome_records %>% 
   dplyr::group_by(species, BIOME) %>% 
+  dplyr::filter(species != "Anilios splendidus") %>% 
   dplyr::summarise(n = n()) %>% 
   dplyr::mutate(prop = n / sum(n)) %>% 
   dplyr::arrange(desc(prop)) %>% 
@@ -54,9 +55,11 @@ sp_biomes <- wwf_biome_records %>%
 
 # Pivot long for BioGeoBears format
 output_sp_biomes <- sp_biomes %>% 
-  select(-BIOME, -prop, -full_name) %>% 
+  dplyr::select(-BIOME, -prop, -full_name) %>% 
   tidyr::pivot_wider(names_from = short_name, values_from = n, values_fill = 0) %>% 
   janitor::clean_names() %>% 
   dplyr::mutate(species = stringr::str_replace(species, pattern = ' ', replacement = '_'))
+
+# Writing this out helps decide where to designate the species.
 
 write.csv(output_sp_biomes, file = 'data/intermediate_data/geo_file_precursor.csv', quote = FALSE, row.names = FALSE)
