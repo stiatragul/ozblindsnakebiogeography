@@ -6,23 +6,24 @@
 
 library(GenSA)    # GenSA is better than optimx (although somewhat slower)
 library(FD)       # for FD::maxent() (make sure this is up-to-date)
-# library(parallel)
+library(parallel)
 library(snow)
 library(rexpokit)
 library(cladoRcpp)
 library(BioGeoBEARS)
 
-tree.c <- ape::read.tree('data/tree/anilios_newick_st.tre')
-
+# Check tree
+tree.c <- ape::read.tree('data/intermediate_data/bears/blindsnake_b.tre')
 plot(tree.c)
 
-trfn <- "data/tree/anilios_newick_st.tre"
+trfn <- "data/intermediate_data/bears/blindsnake_b.tre"
+dist.mat <- "data/bears_txt/biome_distance.txt"
 geogfn <- "data/bears_txt/geofile.txt"
 # adj <- "data/bears_txt/area_adj.txt"
 
 # Set the maximum number of areas any species may occupy; this cannot be larger 
 # than the number of areas you set up, but it can be smaller.
-max_range_size = 6
+max_range_size = 5
 
 # Look at your geographic range data:
 tipranges = getranges_from_LagrangePHYLIP(lgdata_fn=geogfn)
@@ -33,8 +34,9 @@ max(rowSums(dfnums_to_numeric(tipranges@df)))
 
 coln <- c("A", "B", "C", "D", "E", "F", "G", "H", "I")
 
+# Manually setting up area-adjacency using Octavio's code
 #                     A   B   C   D   E   F   G   H   I
-adjacency <- matrix(c(1,	1,	1,	1,	1,	1,	1,	0,	1,  # A
+adjacency <- matrix(c(1,	1,	1,	1,	1,	1,	1,	1,	1,  # A
                       1,	1,	1,	1,	1,	1,	0,	0,	0,  # B
                       1,	1,	1,	1,	1,	1,	0,	0,	0,  # C
                       1,	1,	1,	1,	0,	1,	0,	0,	0,  # D
@@ -45,8 +47,7 @@ adjacency <- matrix(c(1,	1,	1,	1,	1,	1,	1,	0,	1,  # A
                       0,	0,	0,	0,	0,	0,	1,	1,	1), # I
                       ncol=9, nrow=9, byrow=T)
 
-
-maxAreas = 6
+maxAreas = 5
 states_list <- rcpp_areas_list_to_states_list(areas=coln, maxareas=maxAreas, include_null_range=TRUE)
 
 # Set up list of TRUEs
@@ -81,8 +82,8 @@ statenames <- areas_list_to_states_list_new(areas=coln, maxareas=maxAreas, inclu
 statenames <- statenames[states_to_keep]
 unlist(statenames)
 
-load('AniliosDEC_J.Rdata')
-load('AniliosDEC.Rdata')
+# ?load('AniliosDEC_J.Rdata')
+# load('AniliosDEC.Rdata')
 
 ############
 #####DEC####
