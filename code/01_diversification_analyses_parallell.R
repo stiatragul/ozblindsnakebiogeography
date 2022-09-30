@@ -42,8 +42,11 @@ library(parallel) # can do this on WSL2 (if using Windows)
 load(file = "data/intermediate_data/diversification_analyses/env_data_list.RData")
 trees <- ape::read.tree(file = "data/intermediate_data/diversification_analyses/blindsnake.trees", tree.names = c("st", "b"))
 
-is.ultrametric(trees[[1]])
-fos_tree <- phytools::force.ultrametric(trees[[1]],"extend")
+names(env_data_list)
+sub_env_data_list <- env_data_list[c("min_sco", "arid_sco", "mean_str", "min_str", "arid_str", "min_val", "max_val", "arid_val")]
+
+
+fos_tree <- phytools::force.ultrametric(trees[[2]],"extend")
 fos_tree$edge.length <- fos_tree$edge.length * 100
 plot(fos_tree); axisPhylo()
 is.ultrametric(fos_tree)
@@ -60,6 +63,7 @@ subset_env_age <- function(df) {
 }
 
 env_data_list <- lapply(env_data_list, subset_env_age)
+sub_env_data_list <- lapply(sub_env_data_list, subset_env_age)
 
 ## Fraction of diversity represented. In our tree we have 
 ## 48 Described species of Anilios + 2 more grypus undescribed + 1 more ligatus - A. splendidus
@@ -315,12 +319,9 @@ env_fitter <- function(env_data_list){
   return(final_Anilios, Anilios_res)
 }
 
-result_fit <- mclapply(X = env_data_list, FUN=function(i)env_fitter(i), mc.cores = 6)
+result_fit <- mclapply(X = sub_env_data_list, FUN=function(i)env_fitter(i), mc.cores = 6)
 
 # save.image(file = 'output/20220823_multiRPANDA_fit.Rdata')
-
-write.table(final_Anilios,file="/YOUR_PATH/Results_Anilios_EnvDep.txt", quote=FALSE,sep="\t",row.names=FALSE)
-save(final_Anilios,file="/YOUR_PATH/final_AniliosTrees_EnvDep.RData")
-save(Anilios_res,file="/YOUR_PATH/Anilios_EnvDep.RData")
+# save.image(file = 'output/20220823_multiRPANDA_fit_b.Rdata')
 
 

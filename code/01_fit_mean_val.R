@@ -1,12 +1,8 @@
-# Individual_env_fit.R
+# mean_val.R
 
-library(picante)
-library(pspline)
-library(RPANDA)
-library(dplyr)
+library(RPANDA); library(dplyr)
 library(phytools); library(gridExtra)
 library(parallel) # can do this on WSL2 (if using Windows)
-
 
 # Load --------------------------------------------------------------------
 
@@ -15,8 +11,6 @@ trees <- ape::read.tree(file = "data/intermediate_data/diversification_analyses/
 
 fos_tree <- phytools::force.ultrametric(trees[[2]],"extend")
 fos_tree$edge.length <- fos_tree$edge.length * 100
-plot(fos_tree); axisPhylo()
-is.ultrametric(fos_tree)
 Anilios <- fos_tree
 
 # Fit models ---------------------------------------------------------------
@@ -41,8 +35,7 @@ tot_time<-max(node.age(phylo)$ages)
 f<-Ntip(phylo)/50 # As I found in Reptile Database
 cond="crown"
 
-env_data <- env_data_list$mean_sco
-
+env_data <- env_data_list$mean_val
 #################
 ## Fit the models ##
 #################
@@ -61,7 +54,7 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
 {
   print(i)
   phylo<-Anilios # If a posterior trees distribution is used, then it would be "posteriors[[i]]"
-
+  
   # BCST DCST (constant Birth-death)
   print("BCST DCST")
   f.lamb<-function(x,y){y[1]}
@@ -105,8 +98,7 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BEnvVar DCST EXPO")
   f.lamb<-function(t,x,y){y[1]*exp(y[2]*x)}
   f.mu<-function(t,x,y){y[1]}
-  # lamb_par<-c(abs(treei_BEnvVar_EXPO$lamb_par[1]),treei_BEnvVar_EXPO$lamb_par[2]) # difference 
-  lamb_par<-c(0.1,0)
+  lamb_par<-c(abs(treei_BEnvVar_EXPO$lamb_par[1]),treei_BEnvVar_EXPO$lamb_par[2])
   mu_par<-c(0.01)
   cst.lamb=F; cst.mu=T; expo.lamb=F; expo.mu=F; fix.mu=F
   
@@ -118,7 +110,6 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BCST DEnvVar EXPO")
   f.lamb<-function(t,x,y){y[1]}
   f.mu<-function(t,x,y){y[1]*exp(y[2]*x)}
-  # lamb_par<-c(treei_BCSTDCST$lamb_par[1])
   lamb_par<-c(0.1)
   mu_par<-c(0.01,0)
   cst.lamb=T; cst.mu=F; expo.lamb=F; expo.mu=F; fix.mu=F
@@ -149,8 +140,7 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BEnvVar LIN")
   f.lamb<-function(t,x,y){y[1]+y[2]*x}
   f.mu<-function(t,x,y){0}
-  # lamb_par<-c(abs(treei_BEnvVar_EXPO$lamb_par[1]),0)
-  lamb_par<-c(0.1,0)
+  lamb_par<-c(0.1,0) # change initial lamb par
   mu_par<-c()
   cst.lamb=F; cst.mu=T; expo.lamb=F; expo.mu=F; fix.mu=T
   
@@ -162,7 +152,6 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BEnvVar DCST LIN")
   f.lamb<-function(t,x,y){y[1]+y[2]*x}
   f.mu<-function(t,x,y){y[1]}
-  # lamb_par<-c(abs(treei_BEnvVar_LIN$lamb_par[1]),treei_BEnvVar_LIN$lamb_par[2])
   lamb_par<-c(0.1,0)
   mu_par<-c(0.01)
   cst.lamb=F; cst.mu=T; expo.lamb=F; expo.mu=F; fix.mu=F
@@ -175,7 +164,6 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BCST DEnvVar LIN")
   f.lamb<-function(t,x,y){y[1]}
   f.mu<-function(t,x,y){y[1]+y[2]*x}
-  # lamb_par<-c(treei_BCSTDCST$lamb_par[1])
   lamb_par<-c(0.1)
   mu_par<-c(0.02,0)
   cst.lamb=T; cst.mu=F; expo.lamb=F; expo.mu=F; fix.mu=F
@@ -188,7 +176,6 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BEnvVar DEnvVar LIN")
   f.lamb<-function(t,x,y){y[1]+y[2]*x}
   f.mu<-function(t,x,y){y[1]+y[2]*x}
-  # lamb_par<-c(abs(treei_BEnvVarDCST_LIN$lamb_par[1]),treei_BEnvVarDCST_LIN$lamb_par[2])
   lamb_par<-c(0.1,0)
   mu_par<-c(0.02,0)
   cst.lamb=F; cst.mu=F; expo.lamb=F; expo.mu=F; fix.mu=F
@@ -303,10 +290,10 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   Anilios_res<-c(Anilios_res,list(resi))
 }
 
-# write.table(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_sco.txt", quote=FALSE,sep="\t",row.names=FALSE)
-# save(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_sco.Rdata")
-# save(Anilios_res,file="data/intermediate_data/diversification_analyses/Anilios_EnvDep_mean_sco.Rdata")
-write.table(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_sco_b.txt", quote=FALSE,sep="\t",row.names=FALSE)
-save(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_sco_b.Rdata")
-save(Anilios_res,file="data/intermediate_data/diversification_analyses/Anilios_EnvDep_mean_sco_b.Rdata")
+# write.table(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_val.txt", quote=FALSE,sep="\t",row.names=FALSE)
+# save(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_val.Rdata")
+# save(Anilios_res,file="data/intermediate_data/diversification_analyses/Anilios_EnvDep_mean_val.Rdata")
+write.table(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_val_b.txt", quote=FALSE,sep="\t",row.names=FALSE)
+save(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_val_b.Rdata")
+save(Anilios_res,file="data/intermediate_data/diversification_analyses/Anilios_EnvDep_mean_val2.Rdata")
 

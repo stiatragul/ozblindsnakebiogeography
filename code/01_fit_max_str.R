@@ -9,8 +9,8 @@ library(parallel) # can do this on WSL2 (if using Windows)
 load(file = "data/intermediate_data/diversification_analyses/env_data_list.RData")
 trees <- ape::read.tree(file = "data/intermediate_data/diversification_analyses/blindsnake.trees", tree.names = c("st", "b"))
 
-is.ultrametric(trees[[1]])
-fos_tree <- phytools::force.ultrametric(trees[[1]],"extend")
+is.ultrametric(trees[[2]])
+fos_tree <- phytools::force.ultrametric(trees[[2]],"extend")
 fos_tree$edge.length <- fos_tree$edge.length * 100
 plot(fos_tree); axisPhylo()
 is.ultrametric(fos_tree)
@@ -293,7 +293,10 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   Anilios_res<-c(Anilios_res,list(resi))
 }
 
-write.table(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_max_str.txt", quote=FALSE,sep="\t",row.names=FALSE)
-save(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_max_str.Rdata")
-save(Anilios_res,file="data/intermediate_data/diversification_analyses/Anilios_EnvDep_max_str.Rdata")
+# write.table(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_max_str.txt", quote=FALSE,sep="\t",row.names=FALSE)
+# save(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_max_str.Rdata")
+# save(Anilios_res,file="data/intermediate_data/diversification_analyses/Anilios_EnvDep_max_str.Rdata")
+write.table(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_max_str_b.txt", quote=FALSE,sep="\t",row.names=FALSE)
+save(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_max_str_b.Rdata")
+save(Anilios_res,file="data/intermediate_data/diversification_analyses/Anilios_EnvDep_max_str_b.Rdata")
 
