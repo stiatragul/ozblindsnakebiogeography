@@ -16,7 +16,7 @@ library(stringr)
 # Load results ------------------------------------------------------------
 
 # Get full path to load data the txt files with the results
-file_n <- list.files(path = "data/intermediate_data/diversification_analyses/", pattern = ".txt", full.names = T)
+file_n <- list.files(path = "data/intermediate_data/diversification_analyses/", pattern = "_b.txt", full.names = T)
 
 # get the names of the model
 file_n_m <- stringr::str_remove(list.files(path = "data/intermediate_data/diversification_analyses/", pattern = ".txt"), pattern = "Results_Anilios_")
@@ -29,21 +29,31 @@ names(filelist) <- mod_names
 # Environmental data in list form
 load('data/intermediate_data/diversification_analyses/env_data_list.RData')
 
-# Organise table
-
 # Put environment information in the table
 for(i in 1:length(filelist)){
   filelist[[i]]$env <- names(filelist)[i]
 }
 
-
-
-
-# plot_fit_env the models to check 
-
+# Plot_fit_env the models to check 
 RPANDA::plot_fit_env(global_res[[1]]$BEnvVar_EXPO, env_data = env_data_list$global_temp, tot_time = tot_time)
 
-arid_sco_res <- 
+
+
+# Combine tables into one big table ----------------------------------------
+
+res_table <- do.call(rbind, filelist)
+
+options("scipen"=2, "digits"=3)
+res_table[3:4] <- lapply(res_table[3:4], round, 2)
+
+res_table %>% arrange(desc(Lambda))
+
+final_Anilios[, 2:4] <- lapply(final_Anilios[, 2:4], round, 2)
+final_Anilios$AICcWt <- round(final_Anilios$AICcWt, 2)
+final_Anilios[5:8] <- lapply(final_Anilios[5:8], formatC, format = "e", digits = 2)
+
+
+
 
 
 load('data/intermediate_data/diversification_analyses/Anilios_EnvDep_max_str.Rdata'); max_str_res <- Anilios_res
