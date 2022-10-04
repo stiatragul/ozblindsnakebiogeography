@@ -1,12 +1,11 @@
 # Individual_env_fit.R
 
-library(picante)
-library(pspline)
-library(RPANDA)
-library(dplyr)
+## SAME Initial lamb par fixed at 0 or 0.1. Fitting other values cause extreme values.
+
+library(picante); library(pspline)
+library(RPANDA); library(dplyr)
 library(phytools); library(gridExtra)
 library(parallel) # can do this on WSL2 (if using Windows)
-
 
 # Load --------------------------------------------------------------------
 
@@ -61,7 +60,7 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
 {
   print(i)
   phylo<-Anilios # If a posterior trees distribution is used, then it would be "posteriors[[i]]"
-
+  
   # BCST DCST (constant Birth-death)
   print("BCST DCST")
   f.lamb<-function(x,y){y[1]}
@@ -309,4 +308,3 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
 write.table(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_sco_b.txt", quote=FALSE,sep="\t",row.names=FALSE)
 save(final_Anilios,file="data/intermediate_data/diversification_analyses/Results_Anilios_mean_sco_b.Rdata")
 save(Anilios_res,file="data/intermediate_data/diversification_analyses/Anilios_EnvDep_mean_sco_b.Rdata")
-

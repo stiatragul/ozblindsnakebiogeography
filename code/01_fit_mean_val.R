@@ -36,6 +36,7 @@ f<-Ntip(phylo)/50 # As I found in Reptile Database
 cond="crown"
 
 env_data <- env_data_list$mean_val
+
 #################
 ## Fit the models ##
 #################
@@ -98,7 +99,8 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BEnvVar DCST EXPO")
   f.lamb<-function(t,x,y){y[1]*exp(y[2]*x)}
   f.mu<-function(t,x,y){y[1]}
-  lamb_par<-c(abs(treei_BEnvVar_EXPO$lamb_par[1]),treei_BEnvVar_EXPO$lamb_par[2])
+  # lamb_par<-c(abs(treei_BEnvVar_EXPO$lamb_par[1]),treei_BEnvVar_EXPO$lamb_par[2]) # difference 
+  lamb_par<-c(0.1,0)
   mu_par<-c(0.01)
   cst.lamb=F; cst.mu=T; expo.lamb=F; expo.mu=F; fix.mu=F
   
@@ -110,6 +112,7 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BCST DEnvVar EXPO")
   f.lamb<-function(t,x,y){y[1]}
   f.mu<-function(t,x,y){y[1]*exp(y[2]*x)}
+  # lamb_par<-c(treei_BCSTDCST$lamb_par[1])
   lamb_par<-c(0.1)
   mu_par<-c(0.01,0)
   cst.lamb=T; cst.mu=F; expo.lamb=F; expo.mu=F; fix.mu=F
@@ -140,7 +143,8 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BEnvVar LIN")
   f.lamb<-function(t,x,y){y[1]+y[2]*x}
   f.mu<-function(t,x,y){0}
-  lamb_par<-c(0.1,0) # change initial lamb par
+  # lamb_par<-c(abs(treei_BEnvVar_EXPO$lamb_par[1]),0)
+  lamb_par<-c(0.1,0)
   mu_par<-c()
   cst.lamb=F; cst.mu=T; expo.lamb=F; expo.mu=F; fix.mu=T
   
@@ -152,6 +156,7 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BEnvVar DCST LIN")
   f.lamb<-function(t,x,y){y[1]+y[2]*x}
   f.mu<-function(t,x,y){y[1]}
+  # lamb_par<-c(abs(treei_BEnvVar_LIN$lamb_par[1]),treei_BEnvVar_LIN$lamb_par[2])
   lamb_par<-c(0.1,0)
   mu_par<-c(0.01)
   cst.lamb=F; cst.mu=T; expo.lamb=F; expo.mu=F; fix.mu=F
@@ -164,6 +169,7 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BCST DEnvVar LIN")
   f.lamb<-function(t,x,y){y[1]}
   f.mu<-function(t,x,y){y[1]+y[2]*x}
+  # lamb_par<-c(treei_BCSTDCST$lamb_par[1])
   lamb_par<-c(0.1)
   mu_par<-c(0.02,0)
   cst.lamb=T; cst.mu=F; expo.lamb=F; expo.mu=F; fix.mu=F
@@ -176,6 +182,7 @@ for (i in 1: nb.trees) # This can be useful to run over a posterior trees distri
   print("BEnvVar DEnvVar LIN")
   f.lamb<-function(t,x,y){y[1]+y[2]*x}
   f.mu<-function(t,x,y){y[1]+y[2]*x}
+  # lamb_par<-c(abs(treei_BEnvVarDCST_LIN$lamb_par[1]),treei_BEnvVarDCST_LIN$lamb_par[2])
   lamb_par<-c(0.1,0)
   mu_par<-c(0.02,0)
   cst.lamb=F; cst.mu=F; expo.lamb=F; expo.mu=F; fix.mu=F
