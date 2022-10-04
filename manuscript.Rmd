@@ -67,7 +67,7 @@ We (1) evaluated the model fit performance of localised versus globalised temper
 
 ## Reconstruction of Australian paleo climate 
 <!-- Consult Alex Skeels -->
-Two paleographic digital elevation models (DEMs) providing paleotopography at resolution of 1&deg; x 1&deg; and 5 myr resolution  were obtained from Scotese (2021) [@scoteseAtlas2021] and Straume et al (2020) [@straumeGlobal2020]. We projected the paleoenvironmental reconstructions into an equal-area Behrmann projection of 110km x 110km following methods described in Hagen et al (2021) @hagenGen3sis2021. From the projected data we extracted temperature and aridity values across all grid cells that fall within Sahul by manually drawing a polygon that encompassed the continent from 40 mya to the present-day (\@ref(fig:fig-aus-region).
+Two paleographic digital elevation models (DEMs) providing paleotopography at resolution of 1&deg; x 1&deg; and 5 myr resolution  were obtained from @scoteseAtlas2021 and @straumeGlobal2020. We projected the paleoenvironmental reconstructions into an equal-area Behrmann projection of 110km x 110km following methods described in @hagenGen3sis2021. From the projected data we extracted temperature and aridity values across all grid cells that fall within Sahul by manually drawing a polygon that encompassed the continent from 40 mya to the present-day (\@ref(fig:fig-aus-region).
 
 ## Phylogenetic hypothesis and taxon sampling
 <!-- Based on our phylogenetic tree -->
@@ -111,9 +111,7 @@ After arriving to Australia in the late Oligocene – early Miocene (~25 MYA), t
 - Subsequent splits show transitions the arid zone coinciding with with the onset of aridification between 20 – 10 MYA. 
 - Most species are still found in tropical grasslands, but also in arid zone. 
 - Greatest number of species can be found in ...
-
 - Range expansion was important for diversification ...
-
 - Topography dyanmics [@brazModelling2021]
 
 Recent biogeographic reconstruction recovered India as the origin for superfamily Typhlopoidea (Gerrhopilidae, Xenotyphlopidae and Typhlopidae) [@kleinEvolution2021]. 
@@ -125,6 +123,8 @@ This model indicate that X associate with speciation (alpha = ) and .....
 Fit with Australia specific mean temperature receives better support than model with global temperature and exponential dependency of speciation rate with time. 
 
 - Solomon Island 40 MYA [@hallCenozoic2002]
+
+## Arid vs. non-arid speciation
 
 \newpage
 
