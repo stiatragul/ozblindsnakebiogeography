@@ -13,6 +13,21 @@
 # libraries ---------------------------------------------------------------
 library(tidyverse); library(RPANDA); library(stringr)
 
+
+# tree --------------------------------------------------------------------
+
+trees <- ape::read.tree(file = "data/intermediate_data/diversification_analyses/blindsnake.trees", tree.names = c("st", "b"))
+
+is.ultrametric(trees[[1]])
+fos_tree <- phytools::force.ultrametric(trees[[1]],"extend")
+fos_tree_b <- phytools::force.ultrametric(trees[[2]],"extend")
+plotTree(fos_tree)
+
+tot_time <- max(node.age(fos_tree)$ages)
+tot_time <- max(node.age(fos_tree_b)$ages)
+
+
+
 # Climate data ------------------------------------------------------------
 
 # Global temp from RPANDA (isotopes)
@@ -38,7 +53,7 @@ climate_data_sco$time_mya[2]; climate_data_sco$time_mya[3]
 
 #  get timesteps from RPANDA's dataset that already match Alex's
 panda_true <- InfTemp %>% 
-  dplyr::filter(Age < 46) %>% 
+  dplyr::filter(Age < 26) %>% 
   dplyr::mutate(choose = ifelse(Age %in% c(climate_data_sco$time_mya), "TRUE", "FALSE")) %>% 
   dplyr::filter(choose == "TRUE") %>% dplyr::distinct(Age, .keep_all = TRUE)
 
@@ -89,5 +104,9 @@ env_data_list <- list(mean_sco = climate_data_sco[, c("time_mya", "t_mean")],
                       # arid_prop_val = climate_data_val[, c("time_mya", "prop_arid")],
                       global_temp = subset_InfTemp
 )
+
+dev.off()
+plot(climate_data_sco$t_max ~ climate_data_sco$time_mya)
+plot(subset_InfTemp$t_mean ~ subset_InfTemp$time_mya)
 
 save(env_data_list, file = "data/intermediate_data/diversification_analyses/env_data_list.RData")

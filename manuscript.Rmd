@@ -84,14 +84,19 @@ The phylogeny and distribution information were then applied to widely used hist
 
 ## Diversification analyses
 
-To test whether and how diversification rates correlated with climate and aridity through time, we fitted several time-variable likelihood diversification models using `RPANDA` [@morlonRPANDA2016] to the _Anilios_ phylogeny. These models will be a combination of pure-birth and birth-death models with different speciation/extinction rates specified as constant, linearly, or exponentially correlated with paleoenvironment. We fitted different combinations of pure-birth and birth-death models with speciation and/or extinction rates being constant or otherwise varying linearly or exponentially with the following environment variables: 1 global paleo temperature, 3 Australian paleo temperature, 3 Australian paleo aridity, and 3 Australian paleo proportion arid area. Missing taxa is accounted for by fractioning function in RPANDA. We assessed model fit with corrected AICc scores. 
+To test whether and how diversification rates correlated with climate and aridity through time, we fitted several time-variable likelihood diversification models using the R package `RPANDA` [@morlonRPANDA2016] to the _Anilios_ phylogeny. These models will be a combination of pure-birth and birth-death models with different speciation/extinction rates specified as constant, linearly, or exponentially correlated with paleoenvironment. We fitted different combinations of pure-birth and birth-death models with speciation and/or extinction rates being constant or otherwise varying linearly or exponentially with the following environment variables: 1 global paleo temperature, 3 Australian paleo temperature, 3 Australian paleo aridity, and 3 Australian paleo proportion arid area. Missing taxa is accounted for by fractioning function in RPANDA. We assessed model fit with corrected AICc scores. 
 
 - Initial lamba parameters were changed for mean_sco
 
-## Biogeographic-dependent 
-To test whether diversification rates differs between arid and non-arid zones test for biogeographic-depdendent diversification using geographic state and hidden state speciation-extinction model (GeoHiSSE) analysis with different parameters [@goldbergPhylogenetic2011]. 
+## Biogeographic-dependent diversification analyses
 
-MiSSE https://www.biorxiv.org/content/10.1101/2021.11.02.466977v1
+To test whether diversification rates differs between arid and non-arid zones we used the R package GeoHiSSE [@caetanoHidden2018]. 
+
+
+ for biogeographic-depdendent diversification using geographic state and hidden state speciation-extinction model (GeoHiSSE) analysis with different parameters [@goldbergPhylogenetic2011]. 
+
+## Statistical analyses
+All statistical analyses were run in R version 4.2 (CITE R). 
 
 # Results
 
@@ -101,16 +106,18 @@ Paleoclimate reconstructions of aridity differed slightly between the two method
 
 ## Biogeographic history
 We reconstructed the tropical grassland as the ancestral biome of Australian _Anilios_ (\@ref(fig:fig-biogeobears). The preferred biogeographic model is the constrained-dispersal matrix, DEC+j+x. 
-Likelihood ratio test (LRT) indicates that founder event (parameter j) and distance matrix (free parameter _x_) in the more complex model provides statistically significant improvement over the simpler DEC, DEC+ *j*, and DEC+*x* models (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001). 
+Likelihood ratio test (LRT) indicates that founder event (parameter j) and distance matrix (free parameter _x_) in the more complex model provides statistically significant improvement over the simpler DEC, DEC+*j*, and DEC+*x* models (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001). 
 Our result also supports the hypothesis that ancestor of the Australian clade invaded the continent, but exactly where they lived prior to this invasion is equivocal between the Solomon Islands and New Guinea. 
 After arriving to Australia in the late Oligocene – early Miocene (~25 MYA), the ancestral _Anilios_ initially diversified rapidly within less than 1 million years. 
 - Our analysis is consistent with @marinTracing2013 conclusion that Australian blindsnakes, like several other Australian squamates, originated from tropical-mesic origins and expanded into the arid zone since the mid-Miocene [@chappleParallel2004;@melvilleEvolutionary2011]. 
 
 ## Biome transitions and current distributions
-- The earliest biome transition was from tropical grassland into XXX by XX MYA (95% HPD: XX – XX). 
-- Subsequent splits show transitions the arid zone coinciding with with the onset of aridification between 20 – 10 MYA. 
-- Most species are still found in tropical grasslands, but also in arid zone. 
-- Greatest number of species can be found in ...
+Following the hypothesized colonisation event from a single common ancestor, the diversifcation of _Anilios_ occured very rapidly. Descendents of the earliest split remained in the Tropical Grassland biome but within a million years later another split occured. 
+The earliest biome transition was from tropical grassland into Temperate Forest around 25 MYA (95% HPD: 28 – 22 MYA) and the Arid zone 24 MYA (95% HPD: 28 – 21 MYA). 
+Subsequent splits show transitions from the arid zone into the Mediterranean biome starting after 15 MYA. 
+Current distributions of _Anilios_ are mostly concentrated in the tropical grassland biome closely followed by the arid zone and Mediterranean biome. 
+Closely related species tend to share the same biome and occur around the same geographical areas. 
+
 - Range expansion was important for diversification ...
 - Topography dyanmics [@brazModelling2021]
 

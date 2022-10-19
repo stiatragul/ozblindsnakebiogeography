@@ -39,7 +39,6 @@ env_plottr <- function(.df){
     scale_x_reverse("Age (Ma)", limits = c(45, 0), breaks = seq(45, 0, by = -5)) + theme_bw() 
 }
 
-
 # pdf(file = "output/paleo_env_data_plots.pdf", height = 10, width = 10)
 
 env_df[which(env_df$source %in% c("mean_sco", "max_sco", "min_sco", "global_temp")),] %>% env_plottr()

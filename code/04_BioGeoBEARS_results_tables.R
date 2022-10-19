@@ -15,7 +15,7 @@ library(dplyr)
 # Tree --------------------------------------------------------------------
 tree.c <- ape::read.tree('data/intermediate_data/bears/blindsnake_b.tre')
 tree.c$edge.length <- tree.c$edge.length * 100
-
+tr <- tree.c
 # Saved results -----------------------------------------------------------
 load("data/intermediate_data/bears/bears_model_fit.Rdata")
 
@@ -86,48 +86,54 @@ write.csv(sorted_resttable, file="output/supp_biogeobears_table_weights.csv")
 # Top five
 
 # Is DEC+j+x significantly better than DECj
-lrt.fin_base <- BioGeoBEARS::lrttest(LnL_1= restable$LnL[which(rownames(restable)=="fin.decjx")],
-                                LnL_2= restable$LnL[which(rownames(restable)=="fin.dec")],
-                                numparams1= restable$numparams[which(rownames(restable)=="fin.decjx")],
-                                numparams2= restable$numparams[which(rownames(restable)=="fin.dec")],
+lrt.fin_base <- BioGeoBEARS::lrttest(LnL_1= restable$LnL[which(rownames(restable)=="DEC+J+X")],
+                                LnL_2= restable$LnL[which(rownames(restable)=="DEC")],
+                                numparams1=restable$numparams[which(rownames(restable)=="DEC+J+X")],
+                                numparams2=restable$numparams[which(rownames(restable)=="DEC")],
+                                returnwhat = "all")
+lrt.fin_base$alt <- "DEC+J+X"; lrt.fin_base$null <- "DEC"
+
+
+lrt.fin_j <- BioGeoBEARS::lrttest(LnL_1= restable$LnL[which(rownames(restable)=="DEC+J+X")],
+                                LnL_2= restable$LnL[which(rownames(restable)=="DEC+J")],
+                                numparams1=restable$numparams[which(rownames(restable)=="DEC+J+X")],
+                                numparams2=restable$numparams[which(rownames(restable)=="DEC")],
                                 returnwhat = "all")
 
-lrt.fin_j <- BioGeoBEARS::lrttest(LnL_1= restable$LnL[which(rownames(restable)=="fin.decjx")],
-                                LnL_2= restable$LnL[which(rownames(restable)=="fin.decj")],
-                                numparams1= restable$numparams[which(rownames(restable)=="fin.decjx")],
-                                numparams2= restable$numparams[which(rownames(restable)=="fin.dec")],
-                                returnwhat = "all")
-
-lrt.fin_x <- BioGeoBEARS::lrttest(LnL_1= restable$LnL[which(rownames(restable)=="fin.decjx")],
-                                LnL_2= restable$LnL[which(rownames(restable)=="fin.decx")],
-                                numparams1= restable$numparams[which(rownames(restable)=="fin.decjx")],
-                                numparams2= restable$numparams[which(rownames(restable)=="fin.dec")],
+lrt.fin_x <- BioGeoBEARS::lrttest(LnL_1= restable$LnL[which(rownames(restable)=="DEC+J+X")],
+                                LnL_2= restable$LnL[which(rownames(restable)=="DEC+X")],
+                                numparams1=restable$numparams[which(rownames(restable)=="DEC+J+X")],
+                                numparams2=restable$numparams[which(rownames(restable)=="DEC+X")],
                                 returnwhat = "all")
 
 
 
 # Is DEC+j+x significantly better than DIVALIKE+j+x
-lrt.fin2 <- BioGeoBEARS::lrttest(LnL_1= restable$LnL[which(rownames(restable)=="fin.decjx")],
-                                 LnL_2= restable$LnL[which(rownames(restable)=="fin.divajx")],
-                                 numparams1= restable$numparams[which(rownames(restable)=="fin.decjx")],
-                                 numparams2= restable$numparams[which(rownames(restable)=="fin.divajx")],
+lrt.fin2 <- BioGeoBEARS::lrttest(LnL_1=restable$LnL[which(rownames(restable)=="DEC+J+X")],
+                                 LnL_2=restable$LnL[which(rownames(restable)=="DIVALIKE+J+X")],
+                                 numparams1= restable$numparams[which(rownames(restable)=="DEC+J+X")],
+                                 numparams2= restable$numparams[which(rownames(restable)=="DIVALIKE+J+X")],
                                  returnwhat = "all")
 
 # Is DEC+j+x significantly better than BAYAREALIKE+j+x
-lrt.fin3 <- BioGeoBEARS::lrttest(LnL_1= restable$LnL[which(rownames(restable)=="fin.decjx")],
-                                 LnL_2= restable$LnL[which(rownames(restable)=="fin.bayesjx")],
-                                 numparams1= restable$numparams[which(rownames(restable)=="fin.decjx")],
-                                 numparams2= restable$numparams[which(rownames(restable)=="fin.bayesjx")],
+lrt.fin3 <- BioGeoBEARS::lrttest(LnL_1=restable$LnL[which(rownames(restable)=="DEC+J+X")],
+                                 LnL_2=restable$LnL[which(rownames(restable)=="BAYAREALIKE+J+X")],
+                                 numparams1= restable$numparams[which(rownames(restable)=="DEC+J+X")],
+                                 numparams2= restable$numparams[which(rownames(restable)=="BAYAREALIKE+J+X")],
                                  returnwhat = "all")
 
 # Fit in the DEC+j+x is a statistically significant improvement over DIVALIKE+j+x and BAYAREALIKE+j+x.
-lrt.fin
+str(lrt.fin_base)
+
+
+lrt.fin_j
+lrt.fin_x
 lrt.fin2
 lrt.fin3
 
-save(lrt.fin,file="data/intermediate_data/bears/LRT_res1.Rdata")
-save(lrt.fin2,file="data/intermediate_data/bears/LRT_res2.Rdata")
-save(lrt.fin3,file="data/intermediate_data/bears/LRT_res3.Rdata")
+# save(lrt.fin,file="data/intermediate_data/bears/LRT_res1.Rdata")
+# save(lrt.fin2,file="data/intermediate_data/bears/LRT_res2.Rdata")
+# save(lrt.fin3,file="data/intermediate_data/bears/LRT_res3.Rdata")
 # load("LRT_res1.Rdata")
 # load("LRT_res2.Rdata")
 # load("LRT_res3.Rdata")
