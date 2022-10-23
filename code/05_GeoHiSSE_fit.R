@@ -13,8 +13,9 @@
 
 library(hisse); library(ape)
 library(diversitree)
-library(ape)
-
+library(ape); library(RColorBrewer)
+library(dplyr); library(tidyr)
+library(ggplot2)
 
 # Data --------------------------------------------------------------------
 
@@ -49,8 +50,9 @@ taxon_list <- sort(taxon_list)
 
 # write.csv(taxon_list, file = "data/intermediate_data/geohisse/taxon_list.csv", row.names = FALSE)
 
+
 # State data --------------------------------------------------------------
-# State data indicates whether the species is classified as (state 1) arid, (state 2) non-arid (1), (state 0) widespread between both regions.
+# State data indicates whether the species is classified as (state 1) arid, (state 2) non-arid, (state 0) widespread between both regions.
 # Classification is based on distribution of 'species'. I plotted ALA distribution on biome map of Australia in QGIS. 
 
 # Test whether arid habitation influences rates of diversification 
@@ -60,7 +62,34 @@ state <- read.csv("data/intermediate_data/geohisse/arid_nonarid_both_states.csv"
 state <- data.frame(taxon=state$taxon, ranges=as.numeric(state$state))
 head(state)
 
+state$new_tip_names <- paste(state$taxon, state$ranges, sep = "_")
 
+# Rename tips
+
+state_temp <- data.frame(tip.labels = phy$tip.label)
+
+new_tip_names <- state_temp %>% 
+  dplyr::left_join(state, by = c("tip.labels" = "taxon")) %>% 
+  select(new_tip_names)
+
+phy$tip.label <- new_tip_names$new_tip_names
+plot(phy)
+
+state <- data.frame(taxon = state$new_tip_names, ranges = state$ranges)
+head(state)
+
+## Proportion of species for input in `f` argument, estimated proportion of extant species in states
+prop_df <- read.csv("data/intermediate_data/geohisse/2022_species_list_arid_nonarid_widespread.csv", header = T)
+
+prop_df$state <- as.character(prop_df$state)
+
+proportion_f <- prop_df %>% 
+  dplyr::group_by(state, in_tree) %>% 
+  dplyr::summarise(n = n()) %>% 
+  dplyr::mutate(freq = n / sum(n)) %>% 
+  dplyr::filter(in_tree == "yes")
+  
+proportion_f
 
 # Model fitting -----------------------------------------------------------
 
@@ -69,14 +98,16 @@ head(state)
 # process and two other models in which the range have an effect on the diversification rate 
 # of the lineages (each with either one or two rate classes).
 
-
-
 ### ASSUMPTIONS and PARAMETERS ###
 
 #turnover - turnover parameter tau00, tau11, tau01 
-#f = proportion of extant species in the different state (areas). ASSUME FULLY SAMPLED 
+#f = proportion of extant species in the different state (areas). 
 #eps = extinct fraction parameters. 
 
+#porportion of extant species probably not fully sampled
+fraction <- c(0.88, # arid
+              0.71, # non-arid
+              0.83) # widespread
 
 ## Model 1 - Dispersal parameters vary only, no range-dependent diversification.
 #### Assume equal rates regardless of biogeographic region ###
@@ -85,7 +116,7 @@ turnover <- c(1,1,0) # widespread range is removed from the model. Diversificati
 eps <- c(1,1) 
 trans.rate <- TransMatMakerGeoHiSSE(hidden.traits=0)
 trans.rate.mod <- ParEqual(trans.rate, c(1,2))
-mod1 <- GeoHiSSE(phy = phy, data = state, f=c(1,1,1),
+mod1 <- GeoHiSSE(phy = phy, data = state, f=fraction,
                  turnover=turnover, eps=eps,
                  hidden.states=FALSE, trans.rate=trans.rate.mod, 
                  turnover.upper=100, trans.upper=10)
@@ -97,7 +128,7 @@ turnover <- c(1,2,3)
 eps <- c(1,1)
 trans.rate <- TransMatMakerGeoHiSSE(hidden.traits=0)
 trans.rate.mod <- ParEqual(trans.rate, c(1,2))
-mod2 <- GeoHiSSE(phy = phy, data = state, f=c(1,1,1),
+mod2 <- GeoHiSSE(phy = phy, data = state, f=fraction,
                  turnover=turnover, eps=eps,
                  hidden.states=FALSE, trans.rate=trans.rate.mod,
                  turnover.upper=100, trans.upper=10)
@@ -112,7 +143,7 @@ turnover <- c(1,1,0,2,2,0)
 eps <- c(1,1,1,1)
 trans.rate <- TransMatMakerGeoHiSSE(hidden.traits=1, make.null=TRUE)
 trans.rate.mod <- ParEqual(trans.rate, c(1,2))
-mod3 <- GeoHiSSE(phy = phy, data = state, f=c(1,1,1),
+mod3 <- GeoHiSSE(phy = phy, data = state, f=fraction,
                  turnover=turnover, eps=eps,
                  hidden.states=TRUE, trans.rate=trans.rate.mod,
                  turnover.upper=100, trans.upper=10)
@@ -123,12 +154,10 @@ turnover <- c(1,2,3,4,5,6)
 eps <- c(1,1,1,1)
 trans.rate <- TransMatMakerGeoHiSSE(hidden.traits=1)
 trans.rate.mod <- ParEqual(trans.rate, c(1,2))
-mod4 <- GeoHiSSE(phy = phy, data = state, f=c(1,1,1),
+mod4 <- GeoHiSSE(phy = phy, data = state, f=fraction,
                  turnover=turnover, eps=eps,
                  hidden.states=TRUE, trans.rate=trans.rate.mod,
                  turnover.upper=100, trans.upper=10)
-
-
 
 
 ## Model 5. MuSSE-like model with no hidden trait, no cladogenetic effects.
@@ -140,18 +169,30 @@ trans.rate <- TransMatMakerGeoHiSSE(hidden.traits=0, make.null=FALSE,
                                     separate.extirpation = TRUE)
 trans.rate.mod <- ParEqual(trans.rate, c(1,2))
 trans.rate.mod <- ParEqual(trans.rate.mod, c(2,3))
-mod5 <- GeoHiSSE(phy = phy, data = state, f=c(1,1,1),
+mod5 <- GeoHiSSE(phy = phy, data = state, f=fraction,
                  turnover=turnover, eps=eps,
                  hidden.states=FALSE, trans.rate=trans.rate.mod,
-                 turnover.upper=100, trans.upper=10, sann=FALSE, 
+                 turnover.upper=100, trans.upper=11, # need to change trans.upper to 11 instead of 10 for model to run. 
+                 sann=FALSE, 
                  assume.cladogenetic = FALSE)
 
 
+# Get AIC -----------------------------------------------------------------
+# Akaike weights are important to evaluate the relative importance of each of
+# the models to explain the variation observed in the data. 
+# Accounts for penalties associated to the number of free parameters.
+# Models with higher weight show better fit to the data and, as a result, 
+# have more weight when performing model averaging.
 
-load( "geohisse_new_vignette.Rsave" )
-GetAICWeights(list(model1 = mod1, model2 = mod2, model3 = mod3, model4 = mod4), criterion="AIC")
+hisse::GetAICWeights(list(model1 = mod1, model2 = mod2, model3 = mod3,
+                          model4 = mod4, model5 = mod5), criterion="AIC")
 
 ### Model averaging and plotting
+
+# Model average the results. Reflects Akaike model weights.
+
+# Marginal reconstruction for each models
+# Reconstructs hidden states at the nodes of the phylogeny. 
 
 recon.mod1 <- MarginReconGeoSSE(phy = mod1$phy, data = mod1$data, f = mod1$f,
                                 pars = mod1$solution, hidden.states = 1,
@@ -169,18 +210,85 @@ recon.mod4 <- MarginReconGeoSSE(phy = mod4$phy, data = mod4$data, f = mod4$f,
                                 pars = mod4$solution, hidden.states = 2,
                                 root.type = mod4$root.type, root.p = mod4$root.p,
                                 AIC = mod4$AIC, n.cores = 1)
+recon.mod5 <- MarginReconGeoSSE(phy = mod5$phy, data = mod5$data, f = mod5$f,
+                                pars = mod5$solution, hidden.states = 2,
+                                root.type = mod5$root.type, root.p = mod5$root.p,
+                                AIC = mod5$AIC, n.cores = 1)
 
-
-
+# Marginal reconstruction computed above is used to compute the model average.
 
 recon.models <- list(recon.mod1, recon.mod2, recon.mod3, recon.mod4)
-#model.ave.rates <- GetModelAveRates(x = recon.models, type = "tips")
 
-#head( model.ave.rates )
 
-#plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "fan",
-#                    show.tip.label = FALSE, legend = FALSE)
+# See matrix with parameter estimates for each species averaged over all models.
+# For each tip (as indicated)
+# model.ave.rates <- hisse::GetModelAveRates(recon.models, type = "both", 
+#                                     bound.par.matrix=cbind(c(0,0,0,0,0),
+#                                                            c(10000000,10000000,10000000,10000000,10000000)) )
+model.ave.rates <- hisse::GetModelAveRates(recon.models, type = "both")
+head( model.ave.rates )
 
+
+# add new column for range and change species name
+rates_df <- model.ave.rates$tips %>% 
+  tidyr::separate(col = taxon, into = c("genus", "species", "range"), sep = "_")
+
+rates_df$species <- paste("A.", rates_df$species, sep = "_")
+rates_df$range[which(rates_df$range == 0)] <- "widespread"
+rates_df$range[which(rates_df$range == 1)] <- "arid"
+rates_df$range[which(rates_df$range == 2)] <- "non-arid"
+
+statecolours <- c("#f03b20", "#ffeda0", "#feb24c")
+
+boxplot(rates_df$net.div ~ rates_df$range, 
+        rates_df,
+        las = 1, ylab="Net Diversification", col=statecolours)
+
+boxplot(rates_df$speciation ~ rates_df$range, 
+        rates_df,
+        las = 1, ylab="Speciation", col=statecolours)
+
+boxplot(rates_df$extinction ~ rates_df$range, 
+        rates_df, notch=FALSE , las = 1, ylab="Extinction",
+        col=statecolours)
+
+boxplot(rates_df$turnover ~ rates_df$range,
+        rates_df, notch=FALSE , las = 1, ylab="Turnover", 
+        col=statecolours)
+
+# rates -------------------------------------------------------------------
+
+# (state 1) arid, (state 2) non-arid (1), (state 0) widespread
+# statecolours <- c("#EEA47FFF", "#00539CFF", "black")
+statecolours <- c("#f03b20", "#ffeda0", "#feb24c")
+ratecolours <- colorRampPalette(brewer.pal(6, 'RdYlBu'))(100)
+
+# plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "phylogram",
+#                      show.tip.label = TRUE, legend = TRUE,
+#                      rate.colors = ratecolours,
+#                      # state.colors = statecolours,
+#                      fsize = 0.8)
+
+plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "fan",
+                     show.tip.label = F, legend = FALSE,
+                     # rate.colors = ratecolours,
+                     state.colors = statecolours,
+                     fsize = 0.8)
+
+
+# Net diversification based on range
+rates_df %>% 
+  ggplot(., aes(x = range, y = net.div)) +
+  geom_boxplot() +
+  theme_classic()
+
+rates_df %>% 
+  ggplot(., aes(x = range, y = speciation)) +
+  geom_boxplot() +
+  theme_classic()
+
+
+# AIC ---------------------------------------------------------------------
 
 recon.mod1$AIC
 recon.mod2$AIC
