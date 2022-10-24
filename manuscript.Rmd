@@ -133,6 +133,18 @@ Fit with Australia specific mean temperature receives better support than model 
 
 ## Arid vs. non-arid speciation
 
+- The emergence aridification has been hypothesised as a driver of diversification of many groups of reptiles and amphibians (CITE). 
+- XX species today occupy arid zones exclusively and part of the range of YY species includes the arid zone as defined by WWF Bioregions. 
+To evaluate whether diversification rates are associated with geographic ranges, we used a series of geographic range-dependent speciation and extinction models including GeoSSE [@goldbergPhylogenetic2011] and GeoHiSSE [@caetanoHidden2018] implemented in the R package `hisse` v. 2.1.9 [@beaulieuDetecting2016]. 
+- Both GeoSSE and GeoHiSSE allow only two geographic states, as such we categorised species that primarily occur in the arid zone as arid, and species that occur primarily outside of the arid zone as non-arid. 
+
+Anilios_bituberculatus - distributed in the arid zone but also many many occurence in coastal areas in southern Australia. Classified as non-arid.
+Anilios_diversus - mostly in Top End with some distribution in the interior. Classified as non-arid
+Anilios_grypusET - occur in eastern edge of the arid biome. Also occur in tropical savannah. Classified as non-arid.
+Anilios_grypusNW - closest to the range of A. grypus in the tropical grassland but also occur in Pilbara. Classified as arid. 
+Anilios_hamatus - species description says widespread through 'southern arid and semi arid regions'. Classified as Arid. 
+
+
 \newpage
 
 # Discussion

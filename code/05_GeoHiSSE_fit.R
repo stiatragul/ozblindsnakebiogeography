@@ -228,6 +228,7 @@ recon.models <- list(recon.mod1, recon.mod2, recon.mod3, recon.mod4)
 model.ave.rates <- hisse::GetModelAveRates(recon.models, type = "both")
 head( model.ave.rates )
 
+model.ave.rates$tips
 
 # add new column for range and change species name
 rates_df <- model.ave.rates$tips %>% 
@@ -269,23 +270,28 @@ ratecolours <- colorRampPalette(brewer.pal(6, 'RdYlBu'))(100)
 #                      # state.colors = statecolours,
 #                      fsize = 0.8)
 
-plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "fan",
-                     show.tip.label = F, legend = FALSE,
+
+head( model.ave.rates$nodes )
+
+plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "phylogram",
+                     show.tip.label = T, legend = FALSE,
                      # rate.colors = ratecolours,
                      state.colors = statecolours,
                      fsize = 0.8)
 
+plot(phy)
+nodelabels()
 
-# Net diversification based on range
-rates_df %>% 
-  ggplot(., aes(x = range, y = net.div)) +
-  geom_boxplot() +
-  theme_classic()
-
-rates_df %>% 
-  ggplot(., aes(x = range, y = speciation)) +
-  geom_boxplot() +
-  theme_classic()
+# # Net diversification based on range
+# rates_df %>% 
+#   ggplot(., aes(x = range, y = net.div)) +
+#   geom_boxplot() +
+#   theme_classic()
+# 
+# rates_df %>% 
+#   ggplot(., aes(x = range, y = speciation)) +
+#   geom_boxplot() +
+#   theme_classic()
 
 
 # AIC ---------------------------------------------------------------------
