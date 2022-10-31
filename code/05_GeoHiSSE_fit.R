@@ -105,7 +105,7 @@ proportion_f
 #eps = extinct fraction parameters. 
 
 #porportion of extant species probably not fully sampled
-fraction <- c(0.88, # arid
+fraction <- c(0.89, # arid
               0.71, # non-arid
               0.83) # widespread
 
@@ -119,7 +119,8 @@ trans.rate.mod <- ParEqual(trans.rate, c(1,2))
 mod1 <- GeoHiSSE(phy = phy, data = state, f=fraction,
                  turnover=turnover, eps=eps,
                  hidden.states=FALSE, trans.rate=trans.rate.mod, 
-                 turnover.upper=100, trans.upper=10)
+                 turnover.upper=100, trans.upper=10,
+                 assume.cladogenetic = TRUE)
 
 ## Model 2. Canonical GeoSSE model, range effect on diversification
 #### Range evolution affects diversification by adding turnover rate for widespread range. 
@@ -148,6 +149,7 @@ mod3 <- GeoHiSSE(phy = phy, data = state, f=fraction,
                  hidden.states=TRUE, trans.rate=trans.rate.mod,
                  turnover.upper=100, trans.upper=10)
 
+mod3$index.par
 
 ## Model 4. GeoHiSSE model with 1 hidden trait, range-dependent diversification.
 turnover <- c(1,2,3,4,5,6)
@@ -172,7 +174,7 @@ trans.rate.mod <- ParEqual(trans.rate.mod, c(2,3))
 mod5 <- GeoHiSSE(phy = phy, data = state, f=fraction,
                  turnover=turnover, eps=eps,
                  hidden.states=FALSE, trans.rate=trans.rate.mod,
-                 turnover.upper=100, trans.upper=11, # need to change trans.upper to 11 instead of 10 for model to run. 
+                 turnover.upper=100, trans.upper=10, # need to change trans.upper to 11 instead of 10 for model to run. 
                  sann=FALSE, 
                  assume.cladogenetic = FALSE)
 
@@ -186,6 +188,8 @@ mod5 <- GeoHiSSE(phy = phy, data = state, f=fraction,
 
 hisse::GetAICWeights(list(model1 = mod1, model2 = mod2, model3 = mod3,
                           model4 = mod4, model5 = mod5), criterion="AIC")
+
+
 
 ### Model averaging and plotting
 
@@ -211,14 +215,16 @@ recon.mod4 <- MarginReconGeoSSE(phy = mod4$phy, data = mod4$data, f = mod4$f,
                                 root.type = mod4$root.type, root.p = mod4$root.p,
                                 AIC = mod4$AIC, n.cores = 1)
 recon.mod5 <- MarginReconGeoSSE(phy = mod5$phy, data = mod5$data, f = mod5$f,
-                                pars = mod5$solution, hidden.states = 2,
+                                pars = mod5$solution, hidden.states = 1,
                                 root.type = mod5$root.type, root.p = mod5$root.p,
                                 AIC = mod5$AIC, n.cores = 1)
 
 # Marginal reconstruction computed above is used to compute the model average.
 
-recon.models <- list(recon.mod1, recon.mod2, recon.mod3, recon.mod4)
+recon.models <- list(recon.mod1, recon.mod2, recon.mod3, recon.mod4, recon.mod5)
 
+# save.image(file = 'data/intermediate_data/geohisse/geohisse_three_states.Rdata')
+# load('data/intermediate_data/geohisse/geohisse_three_states.Rdata')
 
 # See matrix with parameter estimates for each species averaged over all models.
 # For each tip (as indicated)
@@ -241,6 +247,7 @@ rates_df$range[which(rates_df$range == 2)] <- "non-arid"
 
 statecolours <- c("#f03b20", "#ffeda0", "#feb24c")
 
+pdf(file = 'output/three_states.pdf')
 boxplot(rates_df$net.div ~ rates_df$range, 
         rates_df,
         las = 1, ylab="Net Diversification", col=statecolours)
@@ -256,6 +263,7 @@ boxplot(rates_df$extinction ~ rates_df$range,
 boxplot(rates_df$turnover ~ rates_df$range,
         rates_df, notch=FALSE , las = 1, ylab="Turnover", 
         col=statecolours)
+dev.off()
 
 # rates -------------------------------------------------------------------
 
@@ -273,14 +281,15 @@ ratecolours <- colorRampPalette(brewer.pal(6, 'RdYlBu'))(100)
 
 head( model.ave.rates$nodes )
 
-plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "phylogram",
-                     show.tip.label = T, legend = FALSE,
+## Plot tree and label clades
+# phytools::plotTree(phy, type = "fan", ftype = "off")
+plot.geohisse.states(x = recon.models, rate.param = "turnover", type = "fan",
+                     show.tip.label = T, legend = F,
                      # rate.colors = ratecolours,
                      state.colors = statecolours,
                      fsize = 0.8)
-
-plot(phy)
-nodelabels()
+# phytools::arc.cladelabels(text="clade A", node=phytools::findMRCA(phy, c("Anilios_pilbarensis_1", "Anilios_endoterus_1")),
+                          # ln.offset=1.1, lab.offset=1.16, lwd = 6)
 
 # # Net diversification based on range
 # rates_df %>% 
@@ -296,10 +305,9 @@ nodelabels()
 
 # AIC ---------------------------------------------------------------------
 
-recon.mod1$AIC
-recon.mod2$AIC
-recon.mod3$AIC
-recon.mod4$AIC
+recon.mod1$AIC; recon.mod2$AIC; recon.mod3$AIC; recon.mod4$AIC; recon.mod5$AIC
+mod1$AIC; mod2$AIC; mod3$AIC; mod4$AIC; mod5$AIC
+mod1$AICc; mod2$AICc; mod3$AICc; mod4$AICc; mod5$AICc
 
 recon.mod1$rates.mat
 recon.mod2$rates.mat
