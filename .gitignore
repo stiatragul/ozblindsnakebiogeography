@@ -4,6 +4,8 @@
 **.RData
 .Ruserdata
 
+*pamhLocal*
+
 exclude-file.txt
 include-file.txt
 rsync*
