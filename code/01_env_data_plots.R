@@ -33,6 +33,7 @@ env_plottr <- function(.df){
   .df %>% 
   ggplot(data = ., aes(x = age, colour = source)) +
     geom_line(aes(y = vals), size = 1) +
+    geom_point(aes(y = vals)) + 
     deeptime::coord_geo(xlim = c(46, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
     # scale_colour_manual(values = viridis(4), name = "Data source", labels = c("RPANDA Global", "Scotese Australia", "Straume Australia", "Valdes Australia")) +
     scale_y_continuous(limits = c(-5, 40), breaks = seq(-5, 40, 5)) + labs(y = "Mean temperature (°C)") +
@@ -55,3 +56,6 @@ env_df[which(env_df$source %in% c("arid_sco", "arid_str", "arid_val")),] %>%
   labs(y = "Aridity index")
 
 dev.off()  
+
+
+
