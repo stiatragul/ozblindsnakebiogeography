@@ -12,7 +12,7 @@ output:
     fig_caption: yes
 bibliography: [C:/Users/ST/Documents/repo/anu_thesis_texts/zotero_library.bib]
 # biblio-style: "apalike"
-csl: evolution.csl
+csl: jbiogeography.csl
 link-citations: true
 editor_options:
   chunk_output_type: console
@@ -35,15 +35,24 @@ library(kableExtra); library(RPANDA)
 
 **Abstract**
 
+**Taxon**: Blind snakes
+
+**Location**: Australasia
+
+**Methods**:
+
+**Results**:
+
+**Main conclusions**:
+
 **Keywords**
-scolecophidia, Diversification, paleoclimate, RPANDA, BioGeoBEARS
+scolecophidia, Diversification, paleoclimate, BioGeoBEARS
 
 \newpage
 
 # Introduction
 
 <!-- Aridification  -->
-
 The aridification on continental Australia over the past 20 million years resulted in a diversity of habitats and spurred multiple radiations of flora and fauna across the continent, many of which are endemic [@byrneBirth2008; @melvilleEvolutionary2011]. The arid zone makes up the majority of the Australian landscape and provides habitat to ~43% of all Australia’s terrestrial reptiles. Squamate reptiles (lizards and snakes) represent the largest vertebrate diversity in Australia with over 1000 species (~800 lizards and ~200 snakes), many of which have undergone rapid diversification in the last 10 – 6 myr [@brennanMass2017;@oliverPhylogenetic2017]. For example, some Australian squamate clades like dragons [@melvilleIntegrating2019], sphenomorphine skinks [@raboskyAnalysis2014], geckos [@ashmanDiversification2018;@brennanMass2017] and elapid snakes [@leeDiversification2016;@grundlerTrophic2014] show increased rates of diversification coincidentally with the onset of aridification. However, these studies did not account for heterogeneity of the arid zone [@pepperLife2021].
 
 Roughly a quarter of the snake species diversity in Australia is represented by blindsnakes of the genus _Anilios_, which comprises **47** described species [@uetzQuarter2021]. All _Anilios_ species are found in Australia except for _A. eryncinus_, which is only found in Papua New Guinea. While morphologically conserved and difficult to distinguished, extensive phylogenetic studies and several efforts to revisit specimens revealed the true species diversity is underestimated [@marinHidden2013;@pyronSystematics2014;@ellisTyphlopid2019]. The diversification is reported to have originated from a single colonisation event by a non-arid adapted ancestor from Asia between 19-39 mya [@vidalBlindsnake2010;@marinTracing2013], before the onset of aridification over the past 20 million years [@byrneBirth2008]. 
@@ -57,20 +66,17 @@ There are several links between temperature and diversification rates of reptile
 
 The influence of temperature on diversification rates has been empirically tested with birth-death models [@condamineMacroevolutionary2013;@kergoatOpposite2018;@condamineClimate2019;@rollandContribution2019], these temperature data are reconstructed (interpolated) based on conversion of concentration of oxygen isotopes [@condamineMacroevolutionary2013]. However, the relationship between diversification rates and aridity are attributed to some proxy such as the the timing of aridification or global temperature rather than quantifying the extent of aridity itself [@dornStrange2014;@deepakAridification2018;@catulloAridification2014;@fujitaDiversification2010;@pepperGenetic2011;@pepperPalaeoclimate2011;@oliverIndependent2014;@oliverContrasting2014;@owenHow2017;@crispHow2013;@toussaintUnveiling2015]. As such, no study has been able to quantitatively assess aridity as a continuous variable in environment-dependent models and compare it to other ecological processes. Recent development in geographic-based methods such as `gen3sis` modeling engine [@hagenGen3sis2021] enables us to simulate climatic, geological, and ecological factors that are spatially and temporally specific to certain areas. In practice, these outputs from `gen3sis` provide paleotemperature and aridity data specific to Australia in the time span of interest, between the 45 MYA to present. These datasets will allow us to empirically test the influence of localised ecological processes on diversification rates over time. 
 
-
 In this study, we use the Australian radiation of blindsnakes as a system to investigate the diversification of morphologically conserved squamates by testing hypotheses about the processes that promote speciation.
 
 <!--Why people should care-->
 - Applying the cutting edge localised geographic-based paleoenvironment reconstruction, 
 
-
 We 
 (1) evaluated the model fit performance of localised versus globalised temperature on the diversification of Australian blindsnake radiation, 
 (2) compared the model fit between different ecological processes on diversification rates, and 
 (3) reconstructed the ancestral biome of Australian blindsnakes? 
-(4) Are there differences in the rates of speciation between arid and non-arid zones?
-
-
+(4) reconstructed ancestral niche and model niche evolution of the radiation
+(5) Are there differences in the rates of speciation between arid and non-arid zones?
 
 #  Materials and methods
 
@@ -109,6 +115,9 @@ including GeoSSE [@goldbergPhylogenetic2011] and GeoHiSSE [@caetanoHidden2018] i
 - These models only allow three states including two geographic states and one widespread state. As such we categorised species that primarily occur in the arid zone as arid, species that occur primarily outside of the arid zone as non-arid, and those that occupy both the arid and non-arid zone as widespread. We assumed uniform taxon sampling for 89% in arid areas, 71 in non-arid areas, and 83% in widespread areas. 
 - 
 
+## Niche evolution
+
+We reconstructed ancestral niche from present-only data using NEMo package. 
 
 
 Anilios_bituberculatus - distributed in the arid zone but also many many occurence in coastal areas in southern Australia. Classified as non-arid.
@@ -117,9 +126,6 @@ Anilios_grypusET - occur in eastern edge of the arid biome. Also occur in tropic
 Anilios_grypusNW - closest to the range of A. grypus in the tropical grassland but also occur in Pilbara. Classified as arid. 
 Anilios_hamatus - species description says widespread through 'southern arid and semi arid regions'. Classified as Arid. 
 
-
-
-
  for biogeographic-depdendent diversification using geographic state and hidden state speciation-extinction model (GeoHiSSE) analysis with different parameters [@goldbergPhylogenetic2011]. 
 
 ## Statistical analyses
@@ -127,7 +133,7 @@ All statistical analyses were run in R version 4.2 (CITE R).
 
 # Results
 
-## Paleoclimate conditions
+## Paleoclimate estimates
 
 Paleoclimate reconstructions of aridity differed slightly between the two methods \@ref(fig:fig-paleoclimate-compare)a. Both aridity index shows increase in aridity post 10 mya, consistent with the onset of aridification of the continent [@byrneBirth2008;@pepperLife2021]. Temperature for Australia differed between the three methods \@ref(fig:fig-paleoclimate-compare)b. Reconstructed temperature values from Australia were higher than global temperature and stayed relatively constant compared to global temperature that shows slight decrease. 
 
@@ -147,6 +153,7 @@ Closely related species tend to share the same biome and occur around the same g
 
 - Range expansion was important for diversification ...
 - Topography dyanmics [@brazModelling2021]
+- Solomon Island 40 MYA [@hallCenozoic2002]
 
 Recent biogeographic reconstruction recovered India as the origin for superfamily Typhlopoidea (Gerrhopilidae, Xenotyphlopidae and Typhlopidae) [@kleinEvolution2021]. 
 
@@ -156,9 +163,11 @@ This model indicate that X associate with speciation (alpha = ) and .....
  
 Fit with Australia specific mean temperature receives better support than model with global temperature and exponential dependency of speciation rate with time. 
 
-- Solomon Island 40 MYA [@hallCenozoic2002]
+Rates of diversification between arid and non-arid, and widespread. 
 
-## Arid vs. non-arid speciation
+## Niche evolution
+
+
 
 
 
@@ -184,6 +193,7 @@ Discuss species that are far apart...
 - High rates of diversification observed in concert with changing climate may be explained by allopatric speciation. 
 - Speciation could even be sympatric but no evidence to support this. 
 
+## Niche evolution
 
 # Conclusion
 
