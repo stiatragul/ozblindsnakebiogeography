@@ -5,110 +5,89 @@
 # Accounts for diverse sources of variation in diversification rates that occur
 # during the evolutionary history of clades. 
 
-# Plot the MCMC chains obtained with fit_ClaDS.
 
+
+# libraries ---------------------------------------------------------------
 library(ape); library(phytools); library(RPANDA)
+library(phyloch); data(strat2012); library(treeio)
+library(patchwork)
 
 # Load data ---------------------------------------------------------------
-s_tree <- ape::read.tree("data/tree/subset_anilios_newick_b.tre")
+# Load ClaDS output from julia script code/06_ClaDS2.jl
+load('data/intermediate_data/ClaDS/clads_output.Rdata')
+geohisse_df <- read.csv('data/intermediate_data/geohisse/arid_nonarid_both_states.csv')
 
-# load data from 06_ClaDS_Anilios.R
 
 
-# ClaDS0 ------------------------------------------------------------------
+# Plotting ----------------------------------------------------------------
+# Tree
+s_tree <- CladsOutput$tree
 
-plot_ClaDS0_chains(clads.out, burn = 1/2, thin = 1, 
-                   param = c("sigma", "alpha", "l_0", "LP"))
+# Shorten tip labels
+s_tree$tip.label <- gsub(pattern = "Anilios", replacement = "A.", s_tree$tip.label)
 
-clads0_rates <- getMAPS_ClaDS0(s_tree, clads.out, burn=0.5, thin=1)
-clads0_rates
+source('code/utility/plot_ClaDS_phylo_colour.R') # custom plot function
+dev.off()
+pdf(file = 'output/supp_ClaDS_magma.pdf', width = 8.5, height = 11.33)
+plot_ClaDS_phylo_colour(s_tree, rates = CladsOutput$lambdai_map, 
+                 show.tip.label = T, log = T)
+axisGeo(GTS = strat2012, unit = "epoch"); axisPhylo()
+dev.off()
 
-# 
-pdf(file = 'output/ClaDS0_plot.pdf', width = 30, height = 40)
-plot_ClaDS_phylo(s_tree, clads0_rates[-(1:3)], rates2 = NULL,
-                 same.scale = T, main = NULL, 
-                 lwd = 2, log = T, show.tip.label = F)
+pdf(file = 'output/fig_ClaDS_colour.pdf', width = 11.33, height = 8.5)
+plot_ClaDS_phylo(s_tree, rates = CladsOutput$lambdai_map, 
+                 show.tip.label = T, log = T)
+axisGeo(GTS = strat2012, unit = "epoch"); axisPhylo()
 dev.off()
 
 
-# ClaDS1 ------------------------------------------------------------------
+
+# Get tip rates -----------------------------------------------------------
+
+# Make new phylo object
+s_tree_rates <-  CladsOutput$tree
+
+# add vector of speciation rates onto edge lengths of phylo (according to RPANDA doc, they are in the same order)
+s_tree_rates$edge.length <- CladsOutput$lambdai_map
+
+plot(s_tree_rates, show.tip.label = T, use.edge.length = F)
+nodelabels()
+# Write tree with ClaDS rates as edge lengths
+# write.tree(s_tree_rates, file = "data/intermediate_data/ClaDS/final_tree_with_CLaDs_rates_as_edge_lengths.tree")
 
 
+# Correlate with biome ----------------------------------------------------
+ 
+s_tree_df <- s_tree_rates %>% 
+  treeio::as_tibble() %>% 
+  dplyr::filter(!is.na(label)) 
 
-plot_ClaDS_chains(clads1.out)
-# Extract the maxima A posteriori for each parameter
+tip_rates <- geohisse_df %>% left_join(s_tree_df, by = c("taxon" = "label"))
 
-maps = getMAPS_ClaDS(clads1.out, thin = 1)
-print(paste0("sigma = ", maps[1], " ; alpha = ", 
-             maps[2], " ; epsilon = ", maps[3], " ; l_0 = ", maps[4] ))
+tip_rates$state <- as.character(tip_rates$state)
 
-# Plot 
-plot_ClaDS_phylo(phylo = s_tree, rates = maps[-(1:4)], 
-                 main = "ClaDS1",
-                 same.scale = T, lwd = 2, log = T, show.tip.label = F)
-axisPhylo() # plots timescale
-
-source('code/utility/plot_ClaDS_phylo_colour.R')
-plot_ClaDS_phylo_colour(phylo = s_tree, rates = maps[-(1:4)], 
-                        main = "ClaDS1",
-                        same.scale = T, lwd = 2, log = T, show.tip.label = F)
+# Non-arid species
+# rates2 <- tip_rates %>% dplyr::filter(state == 2)
 
 
+p1 <- tip_rates %>% 
+  dplyr::filter(state != 2) %>% 
+ggplot(aes(x = branch.length, group = state, fill = state)) +
+  geom_density(adjust = 1, alpha = 0.4) +
+  scale_x_continuous(limits = c(0, 0.2)) +
+  scale_fill_manual(labels = c("Widespread", "Arid", "Non-arid"), 
+                    values = c("blue", "red")) +
+  theme_classic()
 
+p2 <- tip_rates %>% 
+  dplyr::filter(state == 2) %>% 
+  ggplot(aes(x = branch.length, group = state, fill = state)) +
+  geom_density(adjust = 1, alpha = 0.4) +
+  scale_fill_manual(labels = c("Non-arid"), 
+                    values = c("purple")) +
+  theme_classic()
 
-
-
-
-rates <- getMAPS_ClaDS0(subset.tree.noout, clads.out, burn=0.5, thin=1)
-rates
-
-plot_ClaDS0_chains(clads.out, burn = 1/2, thin = 1, 
-                   param = c("sigma", "alpha", "l_0", "LP"))
-
-
-plot_ClaDS_phylo(subset.tree.noout, rates[-(1:3)], rates2 = NULL,same.scale = T, main = NULL, lwd = 2, log = T, show.tip.label = F)
-
-plot_ClaDS_phylo(subset.tree, rates[-(1:3)], rates2 = NULL,same.scale = T, main = NULL, lwd = 2, log = T, show.tip.label = F)
-
-
-#plot with magma palette
-source("plot_ClaDS_phylo_colours.R")
-
-plot_ClaDS_phylo_col(subset.tree.noout, rates[-(1:3)], rates2 = NULL,same.scale = T, main = NULL, lwd = 2, log = T, show.tip.label = F)
-axisPhylo() # plots timescale
-
-
-pdffn = "CLaDs_Sahul_magma1.pdf"
-
-pdf(pdffn, width=30, height=40)
-
-plot_ClaDS_phylo_col(subset.tree.noout, rates[-(1:3)], rates2 = NULL,same.scale = T, main = NULL, lwd = 10, log = T, show.tip.label = F)
-axisPhylo() # plots timescale
-
-
-dev.off()  # Turn off PDF
-cmdstr = paste("open ", pdffn, sep="")
-system(cmdstr) # Plot it
-
-
-#make scale bar
-Colors = colorRampPalette(c("#ffffff","#ffffe0","#FEFCD7","#FCFFB2","#FBC17D","#FA8657","#ED504A","#C92D59","#981D69","#6B116F","#43006A","#1E0848","#080616")) 
-Colors
-
-color.bar <- function(lut, min, max=-min, nticks=11, ticks=seq(min, max, len=nticks), title='') {
-  scale = (length(lut)-1)/(max-min)
-  
-  dev.new(width=1.75, height=5)
-  plot(c(0,10), c(min,max), type='n', bty='n', xaxt='n', xlab='', yaxt='n', ylab='', main=title)
-  axis(2, ticks, las=1)
-  for (i in 1:(length(lut)-1)) {
-    y = (i-1)/scale + min
-    rect(0,y,10,y+1/scale, col=lut[i], border=NA)
-  }
-}
-
-
-color.bar(colorRampPalette(c("#ffffff","#ffffe0","#FEFCD7","#FCFFB2","#FBC17D",
-                             "#FA8657","#ED504A","#C92D59","#981D69","#6B116F",
-                             "#43006A","#1E0848","#080616"))(100), -1)
-
+pdf(file = 'output/supp_ClaDS_rates.pdf', height = 9, width = 8.5)
+p1 /
+  p2
+dev.off()
