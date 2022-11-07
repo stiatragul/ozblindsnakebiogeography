@@ -1,10 +1,11 @@
 # plot_ClaDS_phylo_colour.R
 
 library(fields)
+library(viridis)
 
 plot_ClaDS_phylo_colour <- function (phylo, rates, rates2 = NULL, same.scale = T, main = NULL,
     lwd = 2, log = T, show.tip.label = F, 
-    colour = colorRampPalette(c("steelblue2", "red4"))(100), ...) 
+    colour = magma(n = 100, begin = 1, end = 0), ...) 
 {
     Colors = colour
     if (is.null(rates2)) {
