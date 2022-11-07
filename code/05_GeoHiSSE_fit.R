@@ -19,7 +19,12 @@ library(ggplot2)
 
 # Data --------------------------------------------------------------------
 
-phy <- ape::read.tree("data/tree/anilios_newick_b.tre")
+trees <- ape::read.tree(file = "data/intermediate_data/diversification_analyses/blindsnake.trees", tree.names = c("st", "b"))
+
+fos_tree <- phytools::force.ultrametric(trees[[2]],"extend")
+fos_tree$edge.length <- fos_tree$edge.length * 100
+phy <- fos_tree
+
 
 # Plot to check dates
 plot(phy); axisPhylo()
@@ -45,8 +50,7 @@ write.tree(pruned.tree, file = "data/tree/subset_anilios_newick_b.tre")
 # Re read in the subset tree
 phy <- read.tree("data/tree/subset_anilios_newick_b.tre")
 
-taxon_list <- data.frame(taxon = phy$tip.label)
-taxon_list <- sort(taxon_list)
+taxon_list <- data.frame(taxon = sort(phy$tip.label))
 
 # write.csv(taxon_list, file = "data/intermediate_data/geohisse/taxon_list.csv", row.names = FALSE)
 
@@ -187,8 +191,7 @@ mod5 <- GeoHiSSE(phy = phy, data = state, f=fraction,
 # have more weight when performing model averaging.
 
 hisse::GetAICWeights(list(model1 = mod1, model2 = mod2, model3 = mod3,
-                          model4 = mod4, model5 = mod5), criterion="AIC")
-
+                          model4 = mod4, model5 = mod5), criterion="AICc")
 
 
 ### Model averaging and plotting
@@ -224,7 +227,8 @@ recon.mod5 <- MarginReconGeoSSE(phy = mod5$phy, data = mod5$data, f = mod5$f,
 recon.models <- list(recon.mod1, recon.mod2, recon.mod3, recon.mod4, recon.mod5)
 
 # save.image(file = 'data/intermediate_data/geohisse/geohisse_three_states.Rdata')
-# load('data/intermediate_data/geohisse/geohisse_three_states.Rdata')
+load('data/intermediate_data/geohisse/geohisse_three_states.Rdata')
+
 
 # See matrix with parameter estimates for each species averaged over all models.
 # For each tip (as indicated)
@@ -246,6 +250,9 @@ rates_df$range[which(rates_df$range == 1)] <- "arid"
 rates_df$range[which(rates_df$range == 2)] <- "non-arid"
 
 statecolours <- c("#f03b20", "#ffeda0", "#feb24c")
+# statecolours <- c("#e7564d",
+                  # "#5ec284",
+                  # "#fef6ff")
 
 pdf(file = 'output/three_states.pdf')
 boxplot(rates_df$net.div ~ rates_df$range, 
@@ -269,22 +276,25 @@ dev.off()
 
 # (state 1) arid, (state 2) non-arid (1), (state 0) widespread
 # statecolours <- c("#EEA47FFF", "#00539CFF", "black")
-statecolours <- c("#f03b20", "#ffeda0", "#feb24c")
+# statecolours <- c("#f03b20", "#ffeda0", "#feb24c")
+statecolours <- c("#e7564d",
+                  "#5ec284",
+                  "#fef6ff")
 ratecolours <- colorRampPalette(brewer.pal(6, 'RdYlBu'))(100)
 
-# plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "phylogram",
-#                      show.tip.label = TRUE, legend = TRUE,
-#                      rate.colors = ratecolours,
-#                      # state.colors = statecolours,
-#                      fsize = 0.8)
+plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "phylogram",
+                     show.tip.label = TRUE, legend = T,
+                     legend.cex = 1,
+                     # rate.colors = ratecolours,
+                     # state.colors = statecolours, fsize = 0.8, 
+                     outline.color = 'black')
 
-
-head( model.ave.rates$nodes )
+model.ave.rates
 
 ## Plot tree and label clades
 # phytools::plotTree(phy, type = "fan", ftype = "off")
 plot.geohisse.states(x = recon.models, rate.param = "turnover", type = "fan",
-                     show.tip.label = T, legend = F,
+                     show.tip.label = T, legend = T,
                      # rate.colors = ratecolours,
                      state.colors = statecolours,
                      fsize = 0.8)
@@ -307,6 +317,7 @@ plot.geohisse.states(x = recon.models, rate.param = "turnover", type = "fan",
 
 recon.mod1$AIC; recon.mod2$AIC; recon.mod3$AIC; recon.mod4$AIC; recon.mod5$AIC
 mod1$AIC; mod2$AIC; mod3$AIC; mod4$AIC; mod5$AIC
+
 mod1$AICc; mod2$AICc; mod3$AICc; mod4$AICc; mod5$AICc
 
 recon.mod1$rates.mat

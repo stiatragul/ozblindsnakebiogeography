@@ -19,7 +19,12 @@ library(ggplot2)
 
 # Data --------------------------------------------------------------------
 
-phy <- ape::read.tree("data/tree/anilios_newick_b.tre")
+trees <- ape::read.tree(file = "data/intermediate_data/diversification_analyses/blindsnake.trees", tree.names = c("st", "b"))
+
+fos_tree <- phytools::force.ultrametric(trees[[2]],"extend")
+fos_tree$edge.length <- fos_tree$edge.length * 100
+phy <- fos_tree
+
 
 # Plot to check dates
 plot(phy); axisPhylo()
@@ -45,8 +50,7 @@ write.tree(pruned.tree, file = "data/tree/subset_anilios_newick_b.tre")
 # Re read in the subset tree
 phy <- read.tree("data/tree/subset_anilios_newick_b.tre")
 
-taxon_list <- data.frame(taxon = phy$tip.label)
-taxon_list <- sort(taxon_list)
+taxon_list <- data.frame(taxon = sort(phy$tip.label))
 
 # write.csv(taxon_list, file = "data/intermediate_data/geohisse/taxon_list.csv", row.names = FALSE)
 
@@ -112,8 +116,8 @@ proportion_f
 #eps = extinct fraction parameters. 
 
 #porportion of extant species probably not fully sampled
-fraction <- c(0.73, # arid
-              0.83, # non-arid
+fraction <- c(0.83, # arid
+              0.74, # non-arid
               1) # widespread
 
 ## Model 1 - Dispersal parameters vary only, no range-dependent diversification.
