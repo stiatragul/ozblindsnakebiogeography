@@ -8,11 +8,12 @@ using PANDA
 
 # Subset tree that includes ligatus and grypus OTUs
 my_tree = load_tree("./data/tree/subset_anilios_newick_b.tre")
+my_tree_st = load_tree("./data/tree/subset_anilios_newick_st.tre")
 
-my_tree
 
 # Run ClaDS2 
 output = infer_ClaDS(my_tree, f = 0.76, print_state = 100)
+output_st = infer_ClaDS(my_tree_st, f = 0.76, print_state = 100)
 
 # Save ClaDS run to disk.
 using JLD2, FileIO
@@ -23,15 +24,18 @@ using JLD2, FileIO
 
 # Save as R object
 save_ClaDS_in_R(output, "./data/intermediate_data/ClaDS/clads_output.Rdata")
+save_ClaDS_in_R(output_st, "./data/intermediate_data/ClaDS/clads_output_st.Rdata")
 
 # Results from the output
 
 # Can check tip specific diversification rate
-tip_rate(output, "Anilios_torresianus")
+tip_rate(output, "Anilios_affinis")
+tip_rate(output_st, "Anilios_silvia")
 
 
 # Plotting
-plot_CladsOutput(output, options = "lwd = 2, type = 'fan'")
+plot_CladsOutput(output, options = "lwd = 2")
+plot_CladsOutput(output_st, options = "lwd = 2")
 
 # Diversity through time
 plot_CladsOutput(output, method = "DTT")
