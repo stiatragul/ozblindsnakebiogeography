@@ -6,6 +6,8 @@
 *.zip
 *.jld2
 
+*.json
+
 myEnvironment/
 
 *pamhLocal*
@@ -37,6 +39,7 @@ post_process/*.ai
 **.xlsx
 **.xls
 *.docx
+*.svg
 
 data/WWF_Australia/*
 
