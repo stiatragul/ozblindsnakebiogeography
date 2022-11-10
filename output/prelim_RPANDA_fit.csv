@@ -1,0 +1,107 @@
+Models,Parameters,logL,AICc,Speciation (lambda),Alpha,Extinction (mu),Beta,Paleoenvironent
+BCST_DCST,2,-138.55,281.44,0.0656,0.00, , ,
+BCST_Yule,1,-138.55,279.21,0.0656, , , ,
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0655, ,0.00,0.04,Arid Scotese
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.04,Arid Straume
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.03,Arid Valdes
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.03,Max temp Scotese
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.03,Max temp Straume
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.03,Max temp Valdes
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.03,Mean Temp Scotese
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.03,Mean Temp Straume
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.03,Mean Temp Valdes
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0658, ,0.00,0.04,Min Temp Sco
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0658, ,0.00,0.03,Min Temp Straume
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0655, ,0.00,0.04,Min Temp Valdes
+BCSTDEnvVar_EXPO,3,-138.55,283.81,0.0656, ,0.00,0.03,RPANDA Global Temp
+BCSTDEnvVar_LIN,3,-128.78,264.27,0.34, ,0.15,-0.02,Arid Scotese
+BCSTDEnvVar_LIN,3,-129.19,265.08,0.376, ,0.69,-0.06,Arid Straume
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0655, ,0.00,0.00,Arid Valdes
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0656, ,0.00,0.00,Max temp Scotese
+BCSTDEnvVar_LIN,3,-138.64,283.98,0.0666, ,0.05,0.00,Max temp Straume
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0656, ,0.00,0.00,Max temp Valdes
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0657, ,0.00,0.00,Mean Temp Scotese
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0656, ,0.00,0.00,Mean Temp Straume
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0656, ,0.00,0.00,Mean Temp Valdes
+BCSTDEnvVar_LIN,3,-138.56,283.84,0.0683, ,0.06,-0.01,Min Temp Sco
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0656, ,0.00,0.00,Min Temp Straume
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0656, ,0.00,0.00,Min Temp Valdes
+BCSTDEnvVar_LIN,3,-138.55,283.81,0.0656, ,0.00,0.00,RPANDA Global Temp
+BEnvVar_EXPO,2,-117.97,240.27,0.599,-0.20, , ,Arid Scotese
+BEnvVar_EXPO,2,-117.87,240.08,11,-0.34, , ,Arid Straume
+BEnvVar_EXPO,2,-134.28,272.9,0.244,-0.08, , ,Arid Valdes
+BEnvVar_EXPO,2,-125.13,254.61,243000,-0.65, , ,Max temp Scotese
+BEnvVar_EXPO,2,-132.97,270.29,8580,-0.43, , ,Max temp Straume
+BEnvVar_EXPO,2,-133.58,271.51,16.5,-0.16, , ,Max temp Valdes
+BEnvVar_EXPO,2,-120.08,244.5,27700,-0.83, , ,Mean Temp Scotese
+BEnvVar_EXPO,2,-136.36,277.07,113,-0.36, , ,Mean Temp Straume
+BEnvVar_EXPO,2,-124.89,254.12,4040,-0.47, , ,Mean Temp Valdes
+BEnvVar_EXPO,2,-133.08,270.5,0.0000129,0.81, , ,Min Temp Sco
+BEnvVar_EXPO,2,-127.37,259.07,0.000401,0.37, , ,Min Temp Straume
+BEnvVar_EXPO,2,-129.39,263.12,0.283,-0.13, , ,Min Temp Valdes
+BEnvVar_EXPO,2,-125.46,255.26,0.00262,0.46, , ,RPANDA Global Temp
+BEnvVar_LIN,2,-127.63,259.59,0.112,0.00, , ,Arid Scotese
+BEnvVar_LIN,2,-126.88,258.09,0.17,-0.01, , ,Arid Straume
+BEnvVar_LIN,2,-135.64,275.63,0.14,0.00, , ,Arid Valdes
+BEnvVar_LIN,2,-121.25,246.85,3.21,-0.13, , ,Max temp Scotese
+BEnvVar_LIN,2,-131.68,267.71,1.07,-0.04, , ,Max temp Straume
+BEnvVar_LIN,2,-133.56,271.46,0.494,-0.01, , ,Max temp Valdes
+BEnvVar_LIN,2,-122.05,248.43,0.889,-0.05, , ,Mean Temp Scotese
+BEnvVar_LIN,2,-135.99,276.31,0.684,-0.03, , ,Mean Temp Straume
+BEnvVar_LIN,2,-127.41,259.17,0.611,-0.02, , ,Mean Temp Valdes
+BEnvVar_LIN,2,-133.17,270.69,0.225,0.03, , ,Min Temp Sco
+BEnvVar_LIN,2,-126.35,257.05,0.258,0.03, , ,Min Temp Straume
+BEnvVar_LIN,2,-128.38,261.1,0.225,-0.01, , ,Min Temp Valdes
+BEnvVar_LIN,2,-126.41,257.15,0.0598,0.02, , ,RPANDA Global Temp
+BEnvVarDCST_EXPO,3,-115.86,238.43,1.32,-0.14,0.23, ,Arid Scotese
+BEnvVarDCST_EXPO,3,-116.95,240.61,11.5,-0.24,0.28, ,Arid Straume
+BEnvVarDCST_EXPO,3,-134.27,275.24,0.269,-0.09,0.00, ,Arid Valdes
+BEnvVarDCST_EXPO,3,-130.08,266.87,437,-0.38,0.00, ,Max temp Scotese
+BEnvVarDCST_EXPO,3,-134.33,275.36,75.6,-0.26,0.00, ,Max temp Straume
+BEnvVarDCST_EXPO,3,-135.16,277.02,0.78,-0.07,0.00, ,Max temp Valdes
+BEnvVarDCST_EXPO,3,-126.15,259,150,-0.48,0.02, ,Mean Temp Scotese
+BEnvVarDCST_EXPO,3,-138.25,283.2,0.122,-0.03,0.00, ,Mean Temp Straume
+BEnvVarDCST_EXPO,3,-125.17,257.06,2020,-0.44,0.01, ,Mean Temp Valdes
+BEnvVarDCST_EXPO,3,-133.11,272.92,0.00000591,0.89,0.00, ,Min Temp Sco
+BEnvVarDCST_EXPO,3,-127.02,260.74,0.000395,0.44,0.14, ,Min Temp Straume
+BEnvVarDCST_EXPO,3,-129.39,265.49,0.283,-0.13,0.00, ,Min Temp Valdes
+BEnvVarDCST_EXPO,3,-125.45,257.61,0.00262,0.47,0.01, ,RPANDA Global Temp
+BEnvVarDCST_LIN,3,-127.63,261.96,0.113,0.00,0.00, ,Arid Scotese
+BEnvVarDCST_LIN,3,-126.88,260.46,0.17,-0.01,0.00, ,Arid Straume
+BEnvVarDCST_LIN,3,-135.64,277.99,0.14,0.00,0.00, ,Arid Valdes
+BEnvVarDCST_LIN,3,-121.25,249.22,3.21,-0.13,0.00, ,Max temp Scotese
+BEnvVarDCST_LIN,3,-132.23,271.17,1.1,-0.04,0.01, ,Max temp Straume
+BEnvVarDCST_LIN,3,-133.56,273.82,0.494,-0.01,0.00, ,Max temp Valdes
+BEnvVarDCST_LIN,3,-120.72,248.14,1.1,-0.06,0.01, ,Mean Temp Scotese
+BEnvVarDCST_LIN,3,-135.99,278.68,0.685,-0.03,0.00, ,Mean Temp Straume
+BEnvVarDCST_LIN,3,-127.41,261.53,0.611,-0.02,0.00, ,Mean Temp Valdes
+BEnvVarDCST_LIN,3,-133.18,273.06,0.23,0.03,0.00, ,Min Temp Sco
+BEnvVarDCST_LIN,3,-126.41,259.52,0.635,0.06,0.12, ,Min Temp Straume
+BEnvVarDCST_LIN,3,-128.38,263.46,0.226,-0.01,0.00, ,Min Temp Valdes
+BEnvVarDCST_LIN,3,-126.41,259.52,0.0596,0.02,0.00, ,RPANDA Global Temp
+BEnvVarDEnvVar_EXPO,4,-117.97,245.14,0.598,-0.20,0.00,-0.11,Arid Scotese
+BEnvVarDEnvVar_EXPO,4,-116.19,241.6,3.8,-0.22,0.00,0.20,Arid Straume
+BEnvVarDEnvVar_EXPO,4,-134.27,277.75,0.269,-0.09,0.00,-0.09,Arid Valdes
+BEnvVarDEnvVar_EXPO,4,-136.08,281.38,0.722,-0.11,0.00,0.28,Max temp Scotese
+BEnvVarDEnvVar_EXPO,4,-136.46,282.13,1.5,-0.12,0.00,-0.06,Max temp Straume
+BEnvVarDEnvVar_EXPO,4,-133.58,276.38,16.6,-0.16,0.03,-19.70,Max temp Valdes
+BEnvVarDEnvVar_EXPO,4,-119.53,248.27,66800,-0.88,1480.00,-39500.00,Mean Temp Scotese
+BEnvVarDEnvVar_EXPO,4,-136.38,281.97,95.6,-0.35,0.54,-8.78,Mean Temp Straume
+BEnvVarDEnvVar_EXPO,4,-133.92,277.05,0.566,-0.09,0.00,0.44,Mean Temp Valdes
+BEnvVarDEnvVar_EXPO,4,-133.12,275.44,0.0000295,0.74,0.00,-0.30,Min Temp Sco
+BEnvVarDEnvVar_EXPO,4,-127.37,263.94,0.000402,0.37,0.00,0.40,Min Temp Straume
+BEnvVarDEnvVar_EXPO,4,-129.39,267.99,0.282,-0.13,0.00,0.32,Min Temp Valdes
+BEnvVarDEnvVar_EXPO,4,-124.56,258.32,0.00374,0.44,0.32,-0.60,RPANDA Global Temp
+BEnvVarDEnvVar_LIN,4,-118.96,247.13,0.554,-0.01,0.07,-0.01,Arid Scotese
+BEnvVarDEnvVar_LIN,4,-120.42,250.04,0.496,-0.02,0.52,0.04,Arid Straume
+BEnvVarDEnvVar_LIN,4,-135.9,281,0.114,0.00,0.00,0.00,Arid Valdes
+BEnvVarDEnvVar_LIN,4,-122.52,254.25,3.84,-0.16,1.87,0.08,Max temp Scotese
+BEnvVarDEnvVar_LIN,4,-138.15,285.52,0.102,0.00,0.02,0.00,Max temp Straume
+BEnvVarDEnvVar_LIN,4,-133.56,276.33,0.494,-0.01,0.00,0.00,Max temp Valdes
+BEnvVarDEnvVar_LIN,4,-122.64,254.49,2.13,-0.12,3.02,0.19,Mean Temp Scotese
+BEnvVarDEnvVar_LIN,4,-136.81,282.83,0.619,-0.03,0.25,0.01,Mean Temp Straume
+BEnvVarDEnvVar_LIN,4,-130.59,270.4,0.761,-0.03,0.66,0.03,Mean Temp Valdes
+BEnvVarDEnvVar_LIN,4,-133.16,275.53,0.223,0.03,0.01,0.00,Min Temp Sco
+BEnvVarDEnvVar_LIN,4,-124.26,257.74,0.448,0.05,0.63,-0.04,Min Temp Straume
+BEnvVarDEnvVar_LIN,4,-128.38,265.97,0.225,-0.01,0.00,0.00,Min Temp Valdes
+BEnvVarDEnvVar_LIN,4,-120.16,249.53,0.204,0.10,0.73,-0.05,RPANDA Global Temp
