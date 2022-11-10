@@ -3,6 +3,10 @@
 /.Rproj.user
 **.RData
 .Ruserdata
+*.zip
+*.jld2
+
+myEnvironment/
 
 *pamhLocal*
 
@@ -19,11 +23,15 @@ rsync*
 
 # ```
 
+
+
+
 *.pdf
 post_process/*.ai
 # post_output/*.pdf
 # post_process/*.ai
 **/*.ai
+*.ait
 **.jpg
 **.png
 **.xlsx
@@ -40,6 +48,13 @@ manuscript_supplement_files/*
 *.log
 
 # QGIS files
+*.cpg
 *.qgz
 *.tmp
 key_sync.txt
+data/WWF_Australia/*
+*.dbf 
+*.prj 
+*.shp 
+*.shx 
+*.qpj
