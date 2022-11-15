@@ -52,13 +52,14 @@ scolecophidia, Diversification, paleoclimate, BioGeoBEARS
 
 # Introduction
 
-<!-- Aridification  -->
-The aridification on continental Australia over the past 20 million years resulted in a diversity of habitats and spurred multiple radiations of flora and fauna across the continent, many of which are endemic [@byrneBirth2008; @melvilleEvolutionary2011]. The arid zone makes up the majority of the Australian landscape and provides habitat to ~43% of all Australia’s terrestrial reptiles. Squamate reptiles (lizards and snakes) represent the largest vertebrate diversity in Australia with over 1000 species (~800 lizards and ~200 snakes), many of which have undergone rapid diversification in the last 10 – 6 myr [@brennanMass2017;@oliverPhylogenetic2017]. 
-- Aridification has been hypothesised as a driver of diversification of many groups of reptiles and amphibians (CITE). 
-For example, some Australian squamate clades like dragons [@melvilleIntegrating2019], sphenomorphine skinks [@raboskyAnalysis2014], geckos [@ashmanDiversification2018;@brennanMass2017] and elapid snakes [@leeDiversification2016;@grundlerTrophic2014] show increased rates of diversification coincidentally with the onset of aridification. 
-However, these studies did not account for heterogeneity of the arid zone [@pepperLife2021].
+<!-- General background  -->
+
+Present-day distrubtion of extant species offers clues about their biogeographic history and how the lineages may have diversified. 
+
+The aridification on continental Australia over the past 20 million years resulted in a diversity of habitats and spurred multiple radiations of flora and fauna across the continent, many of which are endemic [@byrneBirth2008;@melvilleEvolutionary2011]. The arid zone makes up the majority of the Australian landscape and provides habitat to ~43% of all Australia’s terrestrial squamate reptiles (lizards and snakes). Reptiles represent the largest vertebrate diversity in Australia with over 1000 species (~800 lizards and ~200 snakes), many of which diversified throughout the Miocene (starting ~25 MYA) to the present [@oliverPhylogenetic2017]. For example, agamid dragons [@chenSexual2012], monitor lizards [@brennanPhylogenomics2021], _Sphenomorphus_ and _Eugongylus_ skinks [@skinnerLygosomine2011], _Gehyra_ geckos [@ashmanDiversification2018], elapid snakes [@leeDiversification2016], pythons [@esquerrePhylogenomics2020], and blind snakes [@marinTracing2013] are reptiles that colonised Australia from elsewhere and have diversified remarkably from the beginning of the Miocene. 
 
 Roughly a quarter of the snake species diversity in Australia is represented by blindsnakes of the genus _Anilios_, which comprises **47** described species [@uetzQuarter2021]. All _Anilios_ species are found in Australia except for _A. eryncinus_, which is only found in Papua New Guinea. While morphologically conserved and difficult to distinguished, extensive phylogenetic studies and several efforts to revisit specimens revealed the true species diversity is underestimated [@marinHidden2013;@pyronSystematics2014;@ellisTyphlopid2019]. The diversification is reported to have originated from a single colonisation event by a non-arid adapted ancestor from Asia between 19-39 mya [@vidalBlindsnake2010;@marinTracing2013], before the onset of aridification over the past 20 million years [@byrneBirth2008]. 
+
 However, the study did not account for alternative biogeographic areas (e.g. WWF Ecoregions) and models, or uncertainty in phylogenetic relationships and divergence times. Despite representing a substantial portion of snake biodiversity, there has been few investigations into the macroevolutionary dynamics of blind snakes. The monophyly of the genus makes _Anilios_ well suited to test hypotheses about how lineages diversified with dramatic ecological changes because they are geographically restricted to the continent and can be found in almost every biome. 
 
 <!-- Environmental correlates of diversification -->
@@ -78,7 +79,6 @@ We
 - Estimate the ancestral biome of Australian blindsnakes based on extant taxa.
 - Compare fit_env models between localised versus globalised temperature on the diversification of Australian blindsnake radiation, 
 - Assess model fit between paleo-aridity and paleo-climate on diversification rates, and 
-- Estimate ancestral niche and model niche evolution of the blind snake radiation
 - Are there differences in the rates of speciation between arid and non-arid zones?
 
 #  Materials and methods
@@ -111,6 +111,7 @@ Since SSE models only allow three states, we restricted our geographic states to
 Consistent with our BioGeoBEARS anaylsis, we classified species that primarily occur in the arid zone as arid (n = 8), species that occur primarily outside of the arid zone as non-arid (n = 24), and those that occupy both the arid and non-arid zone as widespread (n = 5). We assumed uniform taxon sampling for 89% in arid areas, 71% in non-arid areas, and 83% in widespread areas based on number of species in the phylogeny and all currently described species of _Anilios_.
 The five SSE models vary by whether they allow diversification rates to be associated with geographic range and/or with unobserved 'hidden states'. Model 1 assumes equal diversification rates regardless of geographic range, model 2 allows geographic range to affect diversification rates (canonical GeoSSE model). Model 3 and 4 are derivation of models 1 and 2 but with unobserved hidden states (see Table GeoHiSSE table). The last model is a complementary model that removes cladogenetic effect entirely. We compared the AIC scores to select the best models. Following the approach in @caetanoHidden2018, we averaged the estimates of diversification parameters and ancestral geographic range estimate across all models according to their AIC weights.  
 
+
 <!-- ## Niche evolution and spatial data -->
 <!-- We reconstructed ancestral niche from present-only data using NEMo package.  -->
 <!-- from the online database [Atlas of the Living Australia](doi.ala.org.au/doi/10.26197/ala.d92678b1-ad2d-437b-9457-9f52737ba003) (see Appendix-method-occurence).  -->
@@ -133,6 +134,7 @@ Following the hypothesized colonisation event from a single common ancestor, the
 
 ## Paleoclimate estimates
 
+
 Paleoclimate reconstructions of aridity differed slightly between the two methods \@ref(fig:fig-paleoclimate-compare)a. Both aridity index shows increase in aridity post 10 MYA, consistent with the onset of aridification of the continent [@byrneBirth2008;@pepperLife2021]. Paleoclimate estimates for Australia differed between the three methods \@ref(fig:fig-paleoclimate-compare)b. However, all three paleo temperature models indicates that Australia was hotter than the average global temperature. Paleoclimate in Australia were also relatively constant compared to global temperature that shows greater fluctuation then slight decrease towards the present. 
 
 ## Environment-dependent diversification 
@@ -142,6 +144,7 @@ We found that the exponential environment-dependent speciation and constant exti
 ## Rates of diversification 
 
 Rates of diversification between arid and non-arid, and widespread. 
+
 
 
 
@@ -178,6 +181,8 @@ Discuss species that are far apart...
 
 # Conclusion
 
+
+Account for heterogeneity of the arid zone [@pepperLife2021].
 
 # Tables
 

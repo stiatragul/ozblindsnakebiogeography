@@ -108,7 +108,8 @@ proportion_f
 #f = proportion of extant species in the different state (areas). 
 #eps = extinct fraction parameters. 
 
-#porportion of extant species probably not fully sampled
+#proportion of extant species probably not fully sampled. 
+# Input is state 1, state 2, and then widespread (in that order).
 fraction <- c(0.89, # arid
               0.71, # non-arid
               0.83) # widespread
@@ -277,17 +278,44 @@ dev.off()
 # (state 1) arid, (state 2) non-arid (1), (state 0) widespread
 # statecolours <- c("#EEA47FFF", "#00539CFF", "black")
 # statecolours <- c("#f03b20", "#ffeda0", "#feb24c")
-statecolours <- c("#e7564d",
-                  "#5ec284",
-                  "#fef6ff")
+statecolours <- c("#F26B6D", # salmon red
+                  "#009444", # green
+                  "#662D91") # Purple
 ratecolours <- colorRampPalette(brewer.pal(6, 'RdYlBu'))(100)
 
-plot.geohisse.states(x = recon.models, rate.param = "net.div", type = "phylogram",
+base::rev(ratecolours)
+
+tmp <- plot.geohisse.states(x = recon.models, rate.param = "speciation", type = "phylogram",
                      show.tip.label = TRUE, legend = T,
                      legend.cex = 1,
-                     # rate.colors = ratecolours,
-                     # state.colors = statecolours, fsize = 0.8, 
-                     outline.color = 'black')
+                     rate.colors = rev(ratecolours),
+                     state.colors = statecolours, fsize = 0.8,
+                     outline.color = 'black', direction = "leftwards")
+
+dev.off()
+
+rate_tree <- plot(tmp$rate.tree) 
+state_tree <- plot(tmp$state.tree, direction = "leftwards")
+
+# print speciation rate and state from GeoHiSSE together as co-phylo
+dev.off()
+pdf(file = "output/GeoHiSSE_rates.pdf", width = 11.33, height = 8.5)
+# Plot together
+layout(matrix(1:3,1,3),widths=c(0.4,0.2,0.4))
+par(cex=1) ## make sure the correct font size is used in subplots
+## plot "contMap" object
+plot(tmp$rate.tree,fsize=c(0,0.8),ftype=c("off"),sig=1,legend=5,
+     mar=c(1.1,0.1,4.1,0.1))
+## plot labels
+plot.new()
+ylim<-c(1-0.12*(length(tmp$rate.tree$tree$tip.label)-1),length(tmp$rate.tree$tree$tip.label))
+plot.window(xlim=c(-0.1,0.1),ylim=ylim)
+text(rep(0,length(tmp$rate.tree$tree$tip.label)), 1:length(tmp$rate.tree$tree$tip.label),
+     tmp$rate.tree$tree$tip.label, font=3)
+plot(tmp$state.tree,fsize=c(0,0.8),ftype="off",
+     direction="leftwards", sig=1,legend=5,mar=c(1.1,0.1,4.1,0.1))
+dev.off()
+
 
 model.ave.rates
 
