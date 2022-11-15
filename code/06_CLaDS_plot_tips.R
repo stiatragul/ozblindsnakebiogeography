@@ -5,8 +5,6 @@
 # Accounts for diverse sources of variation in diversification rates that occur
 # during the evolutionary history of clades. 
 
-
-
 # libraries ---------------------------------------------------------------
 library(ape); library(phytools); library(RPANDA)
 library(phyloch); data(strat2012); library(treeio)
@@ -31,7 +29,7 @@ source('code/utility/squish_trans.R') # squish continuous axis
 dev.off()
 pdf(file = 'output/supp_ClaDS_magma.pdf', width = 8.5, height = 11.33)
 plot_ClaDS_phylo_colour(s_tree, rates = CladsOutput$lambdai_map, 
-                 show.tip.label = T, log = T)
+                 show.tip.label = T, log = T, direction = "leftwards")
 axisGeo(GTS = strat2012, unit = "epoch"); axisPhylo()
 dev.off()
 
@@ -47,6 +45,11 @@ plot_ClaDS_phylo_colour(s_tree, rates = CladsOutput$lambdatip_map,
                                         show.tip.label = T, log = T)
 axisGeo(GTS = strat2012, unit = "epoch"); axisPhylo()
 dev.off()
+
+plot_ClaDS_phylo_colour(s_tree, rates = CladsOutput$RTT_map, 
+                        show.tip.label = T, log = T)
+
+lapply(CladsOutput$rtt_chains[[1]], max)
 
 # Get tip rates -----------------------------------------------------------
 
