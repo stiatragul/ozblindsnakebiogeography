@@ -6,7 +6,6 @@
 
 # load results from analysis script
 
-
 # Libraries ---------------------------------------------------------------
 
 library(GenSA);library(FD)      
@@ -31,7 +30,7 @@ load("data/intermediate_data/bears/bears_model_fit.Rdata")
 
 load("data/intermediate_data/bears/AniliosDEC_JX_full.Rdata")
 resjx
-
+tr <- tree.c
 # BSM = Biogeographic Stochastic Mapping for the best fitting model
 
 model_name = "DECjx"
@@ -80,7 +79,7 @@ lnum = 0
 # Update: 2015-09-23 -- now, if you used multicore functionality for the ML analysis,
 # the same settings will be used for get_inputs_for_stochastic_mapping().
 #######################################################
-BSM_inputs_fn = "BSM_inputs_file.Rdata"
+BSM_inputs_fn = "data/intermediate_data/bears/BSM_inputs_file.Rdata"
 runInputsSlow = FALSE
 if (runInputsSlow)
 {
@@ -243,7 +242,8 @@ clado_events_tables = BSMs_w_sourceAreas$clado_events_tables
 ana_events_tables = BSMs_w_sourceAreas$ana_events_tables
 
 # Count all anagenetic and cladogenetic events
-counts_list = count_ana_clado_events(clado_events_tables, ana_events_tables, areanames, actual_names)
+counts_list = count_ana_clado_events(clado_events_tables, ana_events_tables,
+                                     areanames, actual_names)
 
 summary_counts_BSMs = counts_list$summary_counts_BSMs
 print(conditional_format_table(summary_counts_BSMs))
@@ -252,12 +252,77 @@ print(conditional_format_table(summary_counts_BSMs))
 hist_event_counts(counts_list, pdffn=paste0("output/", model_name, "_histograms_of_event_counts.pdf"))
 
 
+# Count individual stuff --------------------------------------------------
+
+### Sum up dispersal event to different locations ###
+
+# Name each column by letter of each biome LETTERS[1:length(number_of_areas))]
+colnames(counts_list$anagenetic_dispersals_counts_cube) <- LETTERS[1:9]
+
+# Find sum of each column (to get gross number of dispersal TO each biome per stochastic map)
+sum_disp_area <- rowSums(counts_list$anagenetic_dispersals_counts_cube, dims = 2)
+
+counts_list$anagenetic_dispersals_counts_cube
+
+rownames(sum_disp_area) <- LETTERS[1:9]
+sum_disp_area_df <- data.frame(sum_disp_area)
+sum_disp_area_df$from <- rownames(sum_disp_area_df)
+
+ana_disp_area_df <- sum_disp_area_df %>% 
+  tidyr::pivot_longer(!from, names_to = "to", values_to = "count") %>% 
+  dplyr::mutate(state_from = ifelse(from == "C", "arid", "non_arid")) %>% 
+  dplyr::mutate(state_to = ifelse(to == "C", "arid", "non_arid")) %>% 
+  dplyr::mutate(subset_from = ifelse(from %in% c("G", "H", "I"), "island", from)) %>% 
+  dplyr::mutate(subset_to = ifelse(to %in% c("G", "H", "I"), "island", to))
+
+
+# plot outward dispersal from - > to
+outward_dispersal <- ggplot(data = ana_disp_area_df, aes(fill= to, y = count, x = from)) + 
+  geom_bar(position="stack", stat="identity") +
+  labs(x = "Outward dispersal", y = "frequency") + 
+  guides(fill = guide_legend(title = "Destination"))
+
+outward_dispersal
+
+# Outward dispersal by geographic state
+ggplot(data = ana_disp_area_df, aes(fill= state_to, y = count, x = state_from)) + 
+  geom_bar(position="stack", stat="identity") +
+  labs(x = "Outward dispersal from", y = "frequency") + 
+  guides(fill = guide_legend(title = "Destination"))
+
+
+ggplot(data = ana_disp_area_df, aes(fill= subset_to, y = count, x = subset_from)) + 
+  geom_bar(position="stack", stat="identity") +
+  labs(x = "Outward dispersal from", y = "frequency") + 
+  guides(fill = guide_legend(title = "Destination"))
+
+
+# Inward dispersal
+inward_disp_area <- colSums(counts_list$anagenetic_dispersals_counts_cube, dims = 2)
+
+
+
+sum_disp_area <- colSums(counts_list$anagenetic_dispersals_counts_cube, dims = 1)
+rowSums(sum_disp_area)
+
+colMeans(counts_list$anagenetic_dispersals_counts_cube, dims = 1)
+
+counts_list$ana_dispersals_counts_fromto_means
+
+dim(counts_list$anagenetic_dispersals_counts_cube)
+
+
+
+
+
 ## STATs ##
+library(dplyr)
+library(stringr)
 
 # Check individual data
 clado_events_tables[2][[1]] %>% 
-  dplyr::filter(str_detect(clado_event_type, pattern = regex("[A-z]+"))) %>% 
-  dplyr::select(clado_event_type, node, ord_ndname, clado_event_txt, clado_dispersal_to, stochastic_no, everything()) %>% 
+  dplyr::filter(stringr::str_detect(clado_event_type, pattern = regex("[A-z]+"))) %>% 
+  dplyr::select(clado_event_type, node, ord_ndname, clado_event_txt, clado_dispersal_to, everything()) %>% 
   tibble()
 
 # Dataframes for each stochastic map labeled
@@ -314,6 +379,7 @@ pie_matrix
 
 dim(pie_matrix)[2]
 
+library(viridis)
 cols<-setNames(viridis(dim(pie_matrix)[2]), colnames(pie_matrix))
 
 dev.off()
@@ -329,6 +395,8 @@ pie_df <- founder_events_df %>%
   mutate(ypos = cumsum(value)- 0.5*value)
 
 pie_df
+
+library(ggplot2)
 
 pie_charts_order_proportion <- ggplot(data=pie_df, aes(x=" ", y=value, group=node, colour=props, fill=props)) +
   geom_bar(width = 1, stat = "identity", colour = "white") +
@@ -356,7 +424,7 @@ for (i in 1:length(tmpnames))
     next()
   }
   
-  outfn = paste0(tmpnames[i], ".txt")
+  outfn = paste0('data/intermediate_data/bears/',tmpnames[i], ".txt")
   if (length(item) == 0)
   {
     cat(outfn, " -- NOT written, *NO* events recorded of this type", sep="")
