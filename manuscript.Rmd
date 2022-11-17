@@ -138,17 +138,16 @@ Base data visualisations were performed in run in R version 4.2 (CITE R) using b
 
 ## Biogeographic history
 
-Based on our best fitting biogeographic model, the constrained-dispersal matrix DEC+_j_+_x_ model, we inferred tropical grassland biome to be ancestral biome of Australian _Anilios_ (\@ref(fig:fig-biogeobears). 
-Likelihood ratio test (LRT) indicates that founder event (parameter *j*) and distance matrix (free parameter *x*) in the more complex model provides statistically significant improvement over the simpler DEC, DEC+*j*, and DEC+*x* models (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001). 
-Our result also supports the hypothesis that the ancestor of the Australian clade first invaded the mesic part of the continent [@marinTracing2013], but exactly where they lived prior to this invasion is equivocal between the Bismarck Archipelago and New Guinea. 
-After arriving to Australia in the late Oligocene - early Miocene (~25 MYA), the ancestral _Anilios_ initially diversified rapidly within less than 1 million years. Our analysis is consistent with the conclusion that Australian blindsnakes, like several other Australian squamates, originated from tropical-mesic origins and expanded into the arid zone since the mid-Miocene [@chappleParallel2004;@melvilleEvolutionary2011].
+We identified the DEC+_j_+_x_ model as the most preferred biogeographical history model (delta AICc = -4.47, see Table-supp-BioGeoBEARS). 
+Likelihood ratio test (LRT) indicates that both founder events (+*j* parameter) and distance between biome (+x parameter) together provides statistically significant improvement over the simpler DEC model, DEC+x  and DEC+j (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001). 
+We inferred tropical grassland biome to be the ancestral biome of Australian _Anilios_ (\@ref(fig:fig-biogeobears), but the origin of crown *Anilios* is ambiguous. 
+
 
 ## Biome transitions and current distributions
 
 Following the hypothesized colonisation event from a single common ancestor, the diversifcation of _Anilios_ occurred very rapidly. Descendents of the earliest split remained in the Tropical grassland biome but within a million years later another split occured. The earliest biome transition was from tropical grassland into Temperate Forest around 25 MYA (95% HPD: 28 – 22 MYA) and the Arid zone 24 MYA (95% HPD: 28 – 21 MYA). Subsequent splits show transitions from the Arid zone into the Mediterranean biome starting after 15 MYA (\@ref(fig:fig-biogeobears). Current distributions of _Anilios_ are mostly concentrated in the tropical grassland biome closely followed by the Arid zone and Mediterranean biome. We observed that closely related species tend to share the same biome and occur around the same geographical areas. 
 
 ## Paleoclimate estimates
-
 
 Paleoclimate reconstructions of aridity differed slightly between the two methods \@ref(fig:fig-paleoclimate-compare)a. Both aridity index shows increase in aridity post 10 MYA, consistent with the onset of aridification of the continent [@byrneBirth2008;@pepperLife2021]. Paleoclimate estimates for Australia differed between the three methods \@ref(fig:fig-paleoclimate-compare)b. However, all three paleo temperature models indicates that Australia was hotter than the average global temperature. Paleoclimate in Australia were also relatively constant compared to global temperature that shows greater fluctuation then slight decrease towards the present. 
 
@@ -171,6 +170,12 @@ Rates of diversification between arid and non-arid, and widespread.
 
 ## Ancestral biome reconstruction
 - Our result — that the ancestor of Anilios occupied tropical grasslands – is consistent with the result presented in @marinTracing2013. 
+
+- Our result also supports the hypothesis that the ancestor of the Australian clade first invaded the mesic part of the continent [@marinTracing2013], but exactly where they lived prior to this invasion is equivocal between the Bismarck Archipelago and New Guinea. 
+
+After arriving to Australia in the late Oligocene - early Miocene (~25 MYA), the ancestral _Anilios_ initially diversified rapidly within less than 1 million years. Our analysis is consistent with the conclusion that Australian blindsnakes, like several other Australian squamates, originated from tropical-mesic origins and expanded into the arid zone since the mid-Miocene [@chappleParallel2004;@melvilleEvolutionary2011].
+
+
 - We found transitions from XXX to XXX to be common as have been shown / as opposed to other Australian squamates (CITATIONS)
 - Arid zone was not arid until ~20 Million Years ago. Ancestors in deeper time probably occupied temperate or tropical areas that subsequently became the arid zone we know see today. 
 - The Australo-Papuan clade seems to have stayed in Australia for the most part but we were not able to include New Guinean endemic _Anilios erycinus_, the only recognised species of _Anilios_ not found in Australia. Therefore, we cannot make any conclusions about transitions between Australia and New Guinea even though at least three species (_A. torresianus_, _A. leucoproctus_, ...) are found in Northern 
