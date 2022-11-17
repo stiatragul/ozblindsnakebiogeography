@@ -15,7 +15,10 @@ load('data/intermediate_data/bears/BSB_50.Rdata')
 
 # EXTRACT BSM OUTPUT ------------------------------------------------------
 
-# Range-switching dispersal (all observed 'a' dispersals): fixed to 0 in DEC models
+# For DEC+j+x 
+## CLADOGENETIC Events -- sympatry (subset) + vicariance (range splitting)
+## ANAGETIC Events -- Founder (jump j parameter) + extinction
+
 # Range-expansion dispersal (all observed 'd' dispersals): controlled by the parameter 'd', which is freely estimated in DEC and related models.
                                                          # If the d parameter is 0, these counts are zero, but otherwise there should be a few events.
 
@@ -23,7 +26,6 @@ load('data/intermediate_data/bears/BSB_50.Rdata')
 # Cladogenetic dispersal (mean of all observed jump 'j' dispersals): founder event 'j '
 
 # ALL dispersal (mean of all observed anagenetic 'a', 'd' dispersals, PLUS cladogenetic founder/jump dispersal):
-
 summary_counts_BSMs = counts_list$summary_counts_BSMs
 
 # Summary of BSM
@@ -145,7 +147,7 @@ inwards_dispersal_grp <- ggplot(data = inward_disp_area, aes(fill= subset_from, 
 ### stitch together with patchwork package
 
 # Save PDF to be included as inset in BioGeoBEARS plot
-pdf(file = 'output/supp_biogeobears_dispersal.pdf', width = 11.33, height = 8.5)
+pdf(file = 'output/biogeobears_dispersal_freq.pdf', width = 11.5, height = 5.7)
 outward_dispersal_grp +inwards_dispersal_grp
 dev.off()
 
