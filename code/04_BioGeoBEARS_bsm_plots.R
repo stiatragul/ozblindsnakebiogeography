@@ -7,11 +7,10 @@
 library(dplyr)
 library(stringr)
 library(patchwork)
+library(corrplot)
 
 # Load data ---------------------------------------------------------------
 load('data/intermediate_data/bears/BSB_50.Rdata')
-
-
 
 # EXTRACT BSM OUTPUT ------------------------------------------------------
 
@@ -70,6 +69,56 @@ biome_colours <- c("#dcc674", #0
                    "#92d1bd", #7
                    "#eaf400")
 
+# Mean transitions
+mean_in_disp <- counts_list$all_dispersals_counts_fromto_means 
+
+# change row names
+mean_in_disp$to <- paste0("to", rownames(mean_in_disp))
+
+
+mean_in_disp_area <- mean_in_disp %>% 
+  tidyr::pivot_longer(!to, names_to = "from", values_to = "count") %>% 
+  dplyr::mutate(state_from = ifelse(from == "C", "arid", "non_arid")) %>% 
+  dplyr::mutate(state_to = ifelse(to == "toC", "arid", "non_arid")) %>% 
+  dplyr::mutate(subset_from = ifelse(from %in% c("G", "H", "I"), "island", from)) %>% 
+  dplyr::mutate(subset_to = ifelse(to %in% c("toG", "toH", "toI"), "tozisland", to))
+
+# outwards dispersals 
+outwards_disp <- ggplot(data = inward_disp_area, aes(fill= from, y = count, x = to)) + 
+  geom_bar(position="stack", stat="identity") +
+  labs(x = "Inward dispersal", y = "frequency") + 
+  scale_x_discrete(labels = biome_labs) + 
+  scale_fill_manual(labels = biome_labs, values = biome_colours) +
+  guides(fill = guide_legend(title = "From")) +
+  theme(legend.position = "none")
+
+# outwards dispersals geo state
+outwards_disp_geo <- ggplot(data = inward_disp_area, aes(fill= state_from, y = count, x = state_to)) + 
+  geom_bar(position="stack", stat="identity") +
+  labs(x = "Inward dispersal", y = "frequency") + 
+  scale_fill_manual(labels = c('arid', 'non-arid'), values = c(biome_colours[3], "grey")) +
+  guides(fill = guide_legend(title = "From")) +
+  theme(legend.position = "bottom")
+
+# outwards dispersals grp
+outwards_disp_grp <- ggplot(data = inward_disp_area, aes(fill= subset_from, y = count, x = subset_to)) + 
+  geom_bar(position="stack", stat="identity") +
+  labs(x = "Inward dispersal", y = "frequency") + 
+  scale_x_discrete(labels = c(biome_labs[1:6], 'islands')) +
+  scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
+  guides(fill = guide_legend(title = "From")) +
+  theme(legend.position = "none")
+
+
+
+
+
+
+
+# RAW FREQUENCY FROM 50 BSM -----------------------------------------------
+
+# Get average score instead
+outward_disp_df$count <- outward_disp_df$count/50
 
 # plot outward dispersal from - > to
 outward_dispersal <- ggplot(data = outward_disp_df, aes(fill= to, y = count, x = from)) + 
@@ -96,26 +145,30 @@ outward_dispersal_grp <- ggplot(data = outward_disp_df, aes(fill= subset_to, y =
   scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
   guides(fill = guide_legend(title = "Destination")) +
   theme(legend.position = "top")
-  
 
-# Inward dispersal
-# transpose the matrix
-ana_disp_array <- counts_list$anagenetic_dispersals_counts_cube
+outward_disp_df %>% group_by(from) %>% 
+  dplyr::summarise(mean = mean(count))
 
-# turn array of matrix into list of matrix to be transposed
-ana_disp_list <- lapply(seq(dim(ana_disp_array)[3]), function(x) ana_disp_array[ , , x])
+outward_disp_df %>% group_by(from) %>% 
+  dplyr::summarise(total = sum(count))
 
-t_ana_disp_list <- lapply(ana_disp_list, FUN = t)
+# # Inward dispersal
 
-# Find the sum of BSM from transposed 
-inward_disp_area_df <- Reduce('+', t_ana_disp_list) %>% data.frame() 
-inward_disp_area_df$to <- rownames(inward_disp_area_df)
+# # transpose the matrix
+
+counts_list$all_dispersals_counts_fromto_means
+inward_disp_area_df <- t(counts_list$all_dispersals_counts_fromto_means) %>% as.data.frame()
+
+# # t_ana_disp_list <- lapply(ana_disp_list, FUN = t)
+# # # Find the sum of BSM from transposed 
+# inward_disp_area_df <- Reduce('+', t_ana_disp_list) %>% data.frame() 
+inward_disp_area_df$to <- paste0("to", rownames(inward_disp_area_df))
 
 inward_disp_area <- inward_disp_area_df %>% 
   tidyr::pivot_longer(!to, names_to = "from", values_to = "count") %>% 
-  dplyr::mutate(state_from = ifelse(from == "fromC", "arid", "non_arid")) %>% 
+  dplyr::mutate(state_from = ifelse(from == "C", "arid", "non_arid")) %>% 
   dplyr::mutate(state_to = ifelse(to == "toC", "arid", "non_arid")) %>% 
-  dplyr::mutate(subset_from = ifelse(from %in% c("fromG", "fromH", "fromI"), "island", from)) %>% 
+  dplyr::mutate(subset_from = ifelse(from %in% c("G", "H", "I"), "island", from)) %>% 
   dplyr::mutate(subset_to = ifelse(to %in% c("toG", "toH", "toI"), "tozisland", to))
 
 # inwards dispersals 
@@ -158,7 +211,36 @@ outward_dispersal + outward_dispersal_geo + scale_y_continuous(limits = c(0, 140
   patchwork::plot_layout(widths = c(2,1))
 dev.off()
 
-counts_list
+# Heat map of transitions -------------------------------------------------
+
+# Combine island transitions into  one
+means_dispersal <- as.matrix(counts_list$all_dispersals_counts_fromto_means)
+means_dispersal_df <- counts_list$all_dispersals_counts_fromto_means
+
+means_disp_df <- means_dispersal_df[1:6, 1:6]
+means_disp_df$island <- c(0.12,0,0,0,0,0)
+means_disp_df <- rbind(means_disp_df, c(0.04,0,0,0,0,0,0.1))
+
+rownames(means_disp_df) <- c(LETTERS[1:6], 'island')
+
+.M <- as.matrix(means_disp_df)
+
+dev.off()
+
+pdf(file = 'output/supp_biogeobears_biome_transitions.pdf')
+p_disp_island <- corrplot(.M, is.corr = FALSE, addCoef.col = 'black', col = COL2('RdBu', 100),type = 'full') 
+p_disp_all <- corrplot(means_dispersal, is.corr = FALSE, col = COL2('RdBu', 100), type = 'full')
+dev.off()
+
+# StDEV
+counts_list$all_dispersals_counts_fromto_sds %>% tibble()
+
+
+
+
+dev.off()
+
+
 
 ## STATs ##
 # Check individual data
