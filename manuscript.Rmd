@@ -140,13 +140,10 @@ Base data visualisations were performed in run in R version 4.2 (CITE R) using b
 
 We identified the DEC+_j_+_x_ model as the most preferred biogeographical history model (delta AICc = -4.47, see Table-supp-BioGeoBEARS). 
 Likelihood ratio test (LRT) indicates that both founder events (+*j* parameter) and distance between biome (+x parameter) together provides statistically significant improvement over the simpler DEC model, DEC+x  and DEC+j (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001). 
-Our best model inferred tropical grassland biome to be the ancestral biome of Australian _Anilios_ (\@ref(fig:fig-biogeobears)), but the origin of crown *Anilios* is ambiguous.
-
-Following the hypothesized colonisation event from a single common ancestor, the diversifcation of _Anilios_ occurred very rapidly. Descendents of the earliest split remained in the tropical grassland biome but within a million years later another split occured. The earliest biome transition was from tropical grassland biome into the temperate forest biome around 25 MYA (95% HPD: 28 – 22 MYA) for branch leading _A. siliva_, and another branch that included current arid and mediterranean species starting 24 MYA (95% HPD: 28 – 21 MYA). Based on 50 biogeographic stochastic mapping, we found that the largest source of total outward dispersal (anagenetic and cladogenetic) is the tropical grassland biome (mean = XX) almost double the number of dispersals from the arid biome (mean = XX) (\@ref(fig:fig-biogeobears)). On the other hand, the largest sink for all inward dispersal is the mediterranean biome (
-
-The top recipients of dispersals from tropical grassland biome is the temperate grassland (5.06 ± 0.79), follotropical forest (4.12 ± 1.29), , 
-
-Subsequent splits show transitions from the arid biome into the mediterranean biome starting after 15 MYA (\@ref(fig:fig-biogeobears). Current distributions of _Anilios_ are mostly concentrated in the tropical grassland biome closely followed by the Arid zone and Mediterranean biome. We observed that closely related species tend to share the same biome and occur around the same geographical areas. 
+Based on 50 biogeographic stochastic mapping of our best model, we inferred the tropical grassland biome to be the ancestral biome of Australian _Anilios_ (\@ref(fig:fig-biogeobears)), but the origin of crown *Anilios* is ambiguous. We estimated an average of 71.2 ± 1.3 total events (anagenesis and cladogenesis) occured throughout the phylogeny, out of which the majority were a combination of anagenetic dispersal (31.2±1.3 events) and founder events (6.1±1.5 events) (see supp-summary_counts_bsm_table). 
+We found that the largest source of outward dispersal is the tropical grassland biome (16.2±4.9 events mean±SD; 43.6%) making up almost double the number of dispersals from the arid biome (9.7±3.2 events; 26.0%) (\@ref(fig:fig-biogeobears)). On the other hand, the largest sink for all inward dispersal are the temperate grassland biome (7.9±4.2 events; 21.2%) and the mediterranean biome (7.0±2.9 events; 18.8%). The largest directional transition is from the arid biome to the mediterranean biome (5.3±1.5 events) followed by transitions from the tropical grassland into temperate forest biome (5.1±1.3 events). 
+Following the hypothesized colonisation event from a single common ancestor, the diversification of _Anilios_ occurred very rapidly. Descendents of the earliest split remained in the tropical grassland biome but within a million years later another split occured. The earliest biome transition was from tropical grassland biome into the temperate forest biome around 25 MYA (95% HPD: 28 – 22 MYA) for branch leading _A. siliva_, and another branch that included current arid and mediterranean species starting 24 MYA (95% HPD: 28 – 21 MYA). 
+Subsequent splits show transitions from the arid biome into the mediterranean biome starting after 15 MYA (\@ref(fig:fig-biogeobears). Current distributions of _Anilios_ are mostly concentrated in the tropical grassland biome closely followed by the arid and mediterranean biomes. We observed that closely related species tend to share the same biome and occur around the same geographical areas. 
 
 ## Paleoclimate estimates
 
@@ -159,9 +156,6 @@ We found that the exponential environment-dependent speciation and constant exti
 ## Rates of diversification 
 
 Rates of diversification between arid and non-arid, and widespread. 
-
-
-
 
 \newpage
 
