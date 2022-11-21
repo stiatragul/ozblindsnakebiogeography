@@ -8,6 +8,9 @@ library(dplyr)
 library(stringr)
 library(patchwork)
 library(corrplot)
+library(GenSA);library(FD)      
+library(rexpokit);library(cladoRcpp); library(BioGeoBEARS)
+library(ggplot2)
 
 # Load data ---------------------------------------------------------------
 load('data/intermediate_data/bears/BSB_50.Rdata')
@@ -31,30 +34,75 @@ summary_counts_BSMs = counts_list$summary_counts_BSMs
 conditional_format_table(summary_counts_BSMs)
 
 # Histogram of event counts
-hist_event_counts(counts_list, pdffn=paste0("output/", model_name, "_histograms_of_event_counts.pdf"))
+# hist_event_counts(counts_list, pdffn=paste0("output/", model_name, "_histograms_of_event_counts.pdf"))
 
-# Count individual stuff --------------------------------------------------
+counts_list$all_dispersals_counts_fromto_means
+rowSums(counts_list$all_dispersals_counts_fromto_means)
+rowSums(counts_list$all_dispersals_counts_fromto_sds)
 
-### Sum up dispersal event to different locations ###
 
-# Change row and column names to be more informative (from and to)
-dimnames(counts_list$anagenetic_dispersals_counts_cube) <- list(paste0('from', LETTERS[1:9]), paste0('to', LETTERS[1:9]), 1:50)
+df %>% 
+  mutate(tot = sum(Freq)) %>% 
+  group_by(Var2) %>% # For each Gr in Var2 
+  summarise(Freq = sum(Freq)) %>% 
+  mutate(Prop = 100*Freq/sum(Freq))
 
-# Find sum of each column (to get gross number of dispersal TO each biome per stochastic map)
-sum_disp_area <- rowSums(counts_list$anagenetic_dispersals_counts_cube, dims = 2)
+ggplot(data = df,
+       aes(x = Var2, y = Freq)) +
+  geom_bar(stat = "identity",
+           aes(fill = Var1)) +
+  geom_text(data = df2,
+            aes(y = Freq + 1,
+                label = sprintf('%.2f%%', Prop)))
 
-counts_list$anagenetic_dispersals_counts_cube
 
-rownames(sum_disp_area) <- LETTERS[1:9]
-sum_disp_area_df <- data.frame(sum_disp_area)
-sum_disp_area_df$from <- rownames(sum_disp_area_df)
 
-outward_disp_df <- sum_disp_area_df %>% 
+# Mean transitions --------------------------------------------------------
+###
+### OUTWARDS DISPERSAL ###
+####
+mean_out_disp <- counts_list$all_dispersals_counts_fromto_means 
+sd_out_disp <- counts_list$all_dispersals_counts_fromto_sds
+
+### INWARDS DISPERSAL ###
+# Opposite of outwards dispersal so just need to transpose matrix t()
+
+# Transpose matrix for inwards transition
+mean_in_disp <- as.data.frame(t(counts_list$all_dispersals_counts_fromto_means))
+sd_in_disp <- t(counts_list$all_dispersals_counts_fromto_sds)
+
+
+# change row names for both inwards and outwards df
+mean_out_disp$from <- paste0("from", rownames(mean_in_disp))
+mean_in_disp$to <- paste0("to", rownames(mean_in_disp))
+
+# Pivot longer and prep for ggplot 
+mean_out_disp_area <- mean_out_disp %>%
   tidyr::pivot_longer(!from, names_to = "to", values_to = "count") %>% 
+  dplyr::mutate(state_from = ifelse(from == "fromC", "arid", "non_arid")) %>% 
+  dplyr::mutate(state_to = ifelse(to == "C", "arid", "non_arid")) %>% 
+  dplyr::mutate(subset_from = ifelse(from %in% c("fromG", "fromH", "fromI"), "island", from)) %>% 
+  dplyr::mutate(subset_to = ifelse(to %in% c("G", "H", "I"), "tozisland", to))  
+
+mean_out_disp_prop <- mean_out_disp_area %>% 
+  dplyr::group_by(subset_from) %>% 
+  dplyr::summarise(Freq = sum(count)) %>% 
+  dplyr::mutate(Prop = 100*Freq/sum(Freq))
+
+mean_in_disp_area <- mean_in_disp %>% 
+  tidyr::pivot_longer(!to, names_to = "from", values_to = "count") %>% 
   dplyr::mutate(state_from = ifelse(from == "C", "arid", "non_arid")) %>% 
   dplyr::mutate(state_to = ifelse(to == "toC", "arid", "non_arid")) %>% 
   dplyr::mutate(subset_from = ifelse(from %in% c("G", "H", "I"), "island", from)) %>% 
   dplyr::mutate(subset_to = ifelse(to %in% c("toG", "toH", "toI"), "tozisland", to))
+
+mean_in_disp_prop <- mean_in_disp_area %>% 
+  dplyr::group_by(to) %>% 
+  dplyr::summarise(Freq = sum(count)) %>% 
+  dplyr::mutate(Prop = 100*Freq/sum(Freq))
+  
+
+# Plotting ----------------------------------------------------------------
 
 # x-labels
 biome_labs <- c("Trop Grass", "Temp Forest", "Arid", "Mediterranean", "Trop Forest", "Temp Grass", "Sunda", "N Guinea", "Bismarck Arc")
@@ -69,139 +117,79 @@ biome_colours <- c("#dcc674", #0
                    "#92d1bd", #7
                    "#eaf400")
 
-# Mean transitions
-mean_in_disp <- counts_list$all_dispersals_counts_fromto_means 
-
-# change row names
-mean_in_disp$to <- paste0("to", rownames(mean_in_disp))
-
-
-mean_in_disp_area <- mean_in_disp %>% 
-  tidyr::pivot_longer(!to, names_to = "from", values_to = "count") %>% 
-  dplyr::mutate(state_from = ifelse(from == "C", "arid", "non_arid")) %>% 
-  dplyr::mutate(state_to = ifelse(to == "toC", "arid", "non_arid")) %>% 
-  dplyr::mutate(subset_from = ifelse(from %in% c("G", "H", "I"), "island", from)) %>% 
-  dplyr::mutate(subset_to = ifelse(to %in% c("toG", "toH", "toI"), "tozisland", to))
+### OUTWARDS TRANSITION PLOT
 
 # outwards dispersals 
-outwards_disp <- ggplot(data = inward_disp_area, aes(fill= from, y = count, x = to)) + 
+outwards_disp <- ggplot(data = mean_out_disp_area, aes(fill= to, y = count, x = from)) + 
   geom_bar(position="stack", stat="identity") +
-  labs(x = "Inward dispersal", y = "frequency") + 
+  labs(x = "Outwards dispersal", y = "Mean outwards transition frequency") + 
   scale_x_discrete(labels = biome_labs) + 
   scale_fill_manual(labels = biome_labs, values = biome_colours) +
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "none")
 
 # outwards dispersals geo state
-outwards_disp_geo <- ggplot(data = inward_disp_area, aes(fill= state_from, y = count, x = state_to)) + 
+outwards_disp_geo <- ggplot(data = mean_in_disp_area, aes(fill= state_to, y = count, x = state_from)) + 
   geom_bar(position="stack", stat="identity") +
-  labs(x = "Inward dispersal", y = "frequency") + 
+  labs(x = "Outwards dispersal", y = "Mean outwards transition frequency") + 
   scale_fill_manual(labels = c('arid', 'non-arid'), values = c(biome_colours[3], "grey")) +
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "bottom")
 
 # outwards dispersals grp
-outwards_disp_grp <- ggplot(data = inward_disp_area, aes(fill= subset_from, y = count, x = subset_to)) + 
+outwards_disp_grp <- ggplot(data = mean_in_disp_area, aes(y = count, x = subset_from)) + 
   geom_bar(position="stack", stat="identity") +
-  labs(x = "Inward dispersal", y = "frequency") + 
+  labs(x = "Outwards dispersal", y = "Mean outwards transition frequency") + 
   scale_x_discrete(labels = c(biome_labs[1:6], 'islands')) +
   scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
   guides(fill = guide_legend(title = "From")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") 
+  # geom_text(data = mean_out_disp_prop,
+  #           aes(y = Freq + 1, x = subset_from,
+  #               label = sprintf('%.2f%%', Prop)))
+  
+  # geom_text(aes(label = count), position = position_stack(vjust = 0.5))
 
-
-
-
-
-
-
-# RAW FREQUENCY FROM 50 BSM -----------------------------------------------
-
-# Get average score instead
-outward_disp_df$count <- outward_disp_df$count/50
-
-# plot outward dispersal from - > to
-outward_dispersal <- ggplot(data = outward_disp_df, aes(fill= to, y = count, x = from)) + 
-  geom_bar(position="stack", stat="identity") +
-  labs(x = "Outward dispersals", y = "frequency") + 
-  scale_x_discrete(labels = biome_labs) + 
-  scale_fill_manual(labels = biome_labs, values = biome_colours) +
-  guides(fill = guide_legend(title = "Destination/From")) +
-  theme(legend.position = "top")
-
-# Outward dispersal by geographic state
-outward_dispersal_geo <- ggplot(data = outward_disp_df, aes(fill= state_to, y = count, x = state_from)) + 
-  geom_bar(position="stack", stat="identity") + 
-  labs(x = "Outward dispersals", y = "frequency") + 
-  scale_fill_manual(labels = c('arid', 'non-arid'), values = c(biome_colours[3], "grey")) +
-  guides(fill = guide_legend(title = "Destination")) +
-  theme(legend.position = "top")
-
-# Island grouped
-outward_dispersal_grp <- ggplot(data = outward_disp_df, aes(fill= subset_to, y = count, x = subset_from)) + 
-  geom_bar(position="stack", stat="identity") + 
-  labs(x = "Outward dispersals", y = "frequency") + 
-  scale_x_discrete(labels = c(biome_labs[1:6], 'islands')) + 
-  scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
-  guides(fill = guide_legend(title = "Destination")) +
-  theme(legend.position = "top")
-
-outward_disp_df %>% group_by(from) %>% 
-  dplyr::summarise(mean = mean(count))
-
-outward_disp_df %>% group_by(from) %>% 
-  dplyr::summarise(total = sum(count))
-
-# # Inward dispersal
-
-# # transpose the matrix
-
-counts_list$all_dispersals_counts_fromto_means
-inward_disp_area_df <- t(counts_list$all_dispersals_counts_fromto_means) %>% as.data.frame()
-
-# # t_ana_disp_list <- lapply(ana_disp_list, FUN = t)
-# # # Find the sum of BSM from transposed 
-# inward_disp_area_df <- Reduce('+', t_ana_disp_list) %>% data.frame() 
-inward_disp_area_df$to <- paste0("to", rownames(inward_disp_area_df))
-
-inward_disp_area <- inward_disp_area_df %>% 
-  tidyr::pivot_longer(!to, names_to = "from", values_to = "count") %>% 
-  dplyr::mutate(state_from = ifelse(from == "C", "arid", "non_arid")) %>% 
-  dplyr::mutate(state_to = ifelse(to == "toC", "arid", "non_arid")) %>% 
-  dplyr::mutate(subset_from = ifelse(from %in% c("G", "H", "I"), "island", from)) %>% 
-  dplyr::mutate(subset_to = ifelse(to %in% c("toG", "toH", "toI"), "tozisland", to))
+### Inward transitions
 
 # inwards dispersals 
-inwards_dispersal <- ggplot(data = inward_disp_area, aes(fill= from, y = count, x = to)) + 
+inwards_disp <- ggplot(data = mean_in_disp_area, aes(fill= from, y = count, x = to)) + 
   geom_bar(position="stack", stat="identity") +
-  labs(x = "Inward dispersal", y = "frequency") + 
+  labs(x = "Inwards dispersal", y = "Mean inwards transition frequency") + 
   scale_x_discrete(labels = biome_labs) + 
   scale_fill_manual(labels = biome_labs, values = biome_colours) +
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "none")
 
-# inwards dispersals geo state
-inwards_dispersal_geo <- ggplot(data = inward_disp_area, aes(fill= state_from, y = count, x = state_to)) + 
+geom_text(data = df2,
+          aes(y = Freq + 1,
+              label = sprintf('%.2f%%', Prop)))# inwards dispersals geo state
+inwards_disp_geo <- ggplot(data = mean_in_disp_area, aes(fill= state_from, y = count, x = state_to)) + 
   geom_bar(position="stack", stat="identity") +
-  labs(x = "Inward dispersal", y = "frequency") + 
+  labs(x = "Inwards dispersal", y = "Mean inwards transition frequency") + 
   scale_fill_manual(labels = c('arid', 'non-arid'), values = c(biome_colours[3], "grey")) +
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "bottom")
 
 # inwards dispersals grp
-inwards_dispersal_grp <- ggplot(data = inward_disp_area, aes(fill= subset_from, y = count, x = subset_to)) + 
+inwards_disp_grp <- ggplot(data = mean_in_disp_area, aes(fill= subset_from, y = count, x = subset_to)) + 
   geom_bar(position="stack", stat="identity") +
-  labs(x = "Inward dispersal", y = "frequency") + 
+  labs(x = "Inwards dispersal", y = "Mean inwards transition frequency") + 
   scale_x_discrete(labels = c(biome_labs[1:6], 'islands')) +
   scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
   guides(fill = guide_legend(title = "From")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") 
+  # geom_text(aes(label = count), position = position_stack(vjust = 0.5))
+
+
+
+# SAVE TO PDF -------------------------------------------------------------
 
 ### stitch together with patchwork package
 
 # Save PDF to be included as inset in BioGeoBEARS plot
 pdf(file = 'output/biogeobears_dispersal_freq.pdf', width = 11.5, height = 5.7)
-outward_dispersal_grp +inwards_dispersal_grp
+outwards_disp_grp +inwards_disp_grp
 dev.off()
 
 # Save PDF for supplementary
