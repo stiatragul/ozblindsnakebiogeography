@@ -37,24 +37,17 @@ conditional_format_table(summary_counts_BSMs)
 # hist_event_counts(counts_list, pdffn=paste0("output/", model_name, "_histograms_of_event_counts.pdf"))
 
 counts_list$all_dispersals_counts_fromto_means
+counts_list$all_dispersals_counts_fromto_sds
+
+
+## Largest outwards dispersal
 rowSums(counts_list$all_dispersals_counts_fromto_means)
 rowSums(counts_list$all_dispersals_counts_fromto_sds)
 
+## Largest inwards dispersals
 
-df %>% 
-  mutate(tot = sum(Freq)) %>% 
-  group_by(Var2) %>% # For each Gr in Var2 
-  summarise(Freq = sum(Freq)) %>% 
-  mutate(Prop = 100*Freq/sum(Freq))
-
-ggplot(data = df,
-       aes(x = Var2, y = Freq)) +
-  geom_bar(stat = "identity",
-           aes(fill = Var1)) +
-  geom_text(data = df2,
-            aes(y = Freq + 1,
-                label = sprintf('%.2f%%', Prop)))
-
+rowSums(t(counts_list$all_dispersals_counts_fromto_means))
+rowSums(t(counts_list$all_dispersals_counts_fromto_sds))
 
 
 # Mean transitions --------------------------------------------------------
@@ -106,7 +99,7 @@ mean_in_disp_prop <- mean_in_disp_area %>%
 
 # x-labels
 biome_labs <- c("Trop Grass", "Temp Forest", "Arid", "Mediterranean", "Trop Forest", "Temp Grass", "Sunda", "N Guinea", "Bismarck Arc")
-biome_values <- unique(outward_disp_df$to)
+biome_values <- unique(mean_in_disp_prop$to)
 biome_colours <- c("#dcc674", #0
                    "#1f4733", #1
                    "#e03f28", #2
@@ -125,8 +118,8 @@ outwards_disp <- ggplot(data = mean_out_disp_area, aes(fill= to, y = count, x = 
   labs(x = "Outwards dispersal", y = "Mean outwards transition frequency") + 
   scale_x_discrete(labels = biome_labs) + 
   scale_fill_manual(labels = biome_labs, values = biome_colours) +
-  guides(fill = guide_legend(title = "From")) +
-  theme(legend.position = "none")
+  guides(fill = guide_legend(title = "From")) 
+  # theme(legend.position = "none")
 
 # outwards dispersals geo state
 outwards_disp_geo <- ggplot(data = mean_in_disp_area, aes(fill= state_to, y = count, x = state_from)) + 
@@ -143,11 +136,11 @@ outwards_disp_grp <- ggplot(data = mean_in_disp_area, aes(y = count, x = subset_
   scale_x_discrete(labels = c(biome_labs[1:6], 'islands')) +
   scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
   guides(fill = guide_legend(title = "From")) +
-  theme(legend.position = "none") 
-  # geom_text(data = mean_out_disp_prop,
-  #           aes(y = Freq + 1, x = subset_from,
-  #               label = sprintf('%.2f%%', Prop)))
-  
+  theme(legend.position = "none") +
+  geom_text(data = mean_out_disp_prop,
+            aes(y = Freq + 1, x = subset_from,
+                label = sprintf('%.2f%%', Prop)))
+
   # geom_text(aes(label = count), position = position_stack(vjust = 0.5))
 
 ### Inward transitions
