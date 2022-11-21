@@ -238,7 +238,15 @@ ana_events_tables = BSMs_w_sourceAreas$ana_events_tables
 
 # Count all anagenetic and cladogenetic events
 counts_list = count_ana_clado_events(clado_events_tables, ana_events_tables,
-                                     areanames, actual_names)
+                                     areanames, actual_names, timeperiod = c(0,0.1))
+
+count_ana_clado_events(clado_events_tables, ana_events_tables,
+                       areanames, actual_names)
+
+counts_list = count_ana_clado_events(clado_events_tables, ana_events_tables,
+                                     areanames, actual_names, timeperiod = c(5,10))
+
+
 
 #######################################################
 # Print counts to files
