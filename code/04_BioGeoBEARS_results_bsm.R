@@ -191,7 +191,7 @@ stratified = stratified
 
 # Loop through the maps and plot to PDF
 pdffn = paste0("output/", model_name, "_", length(clado_events_tables), "BSMs_v1.pdf")
-pdf(file=pdffn, width=6, height=6)
+pdf(file=pdffn, width=11.33, height=7.5)
 
 nummaps_goal = 50
 for (i in 1:nummaps_goal)
@@ -199,7 +199,7 @@ for (i in 1:nummaps_goal)
   clado_events_table = clado_events_tables[[i]]
   analysis_titletxt = paste0(model_name, " - Stochastic Map #", i, "/", nummaps_goal)
   plot_BSM(results_object=res, clado_events_table=clado_events_table, stratified=stratified, analysis_titletxt=analysis_titletxt, addl_params=list("j", "x"),
-           label.offset=0.5, plotwhat="text", cornercoords_loc=scriptdir, root.edge=TRUE, colors_list_for_states=colors_list_for_states, show.tip.label=TRUE, 
+           label.offset=0.5, plotwhat="pie", cornercoords_loc=scriptdir, root.edge=TRUE, colors_list_for_states=colors_list_for_states, show.tip.label=TRUE, 
            include_null_range=include_null_range)
 } # END for (i in 1:nummaps_goal)
 
