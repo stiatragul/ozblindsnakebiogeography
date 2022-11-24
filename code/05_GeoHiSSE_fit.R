@@ -191,8 +191,12 @@ mod5 <- GeoHiSSE(phy = phy, data = state, f=fraction,
 # Models with higher weight show better fit to the data and, as a result, 
 # have more weight when performing model averaging.
 
+# hisse::GetAICWeights(list(model1 = mod1, model2 = mod2, model3 = mod3, model4 = mod4, model5 = mod5), criterion="AICc")
+
+hisse::GetAICWeights(list(model1 = mod1, model2 = mod2, model3 = mod3, model4 = mod4), criterion="AIC")
+
 hisse::GetAICWeights(list(model1 = mod1, model2 = mod2, model3 = mod3,
-                          model4 = mod4, model5 = mod5), criterion="AICc")
+                          model4 = mod4), criterion="AIC")
 
 
 ### Model averaging and plotting
