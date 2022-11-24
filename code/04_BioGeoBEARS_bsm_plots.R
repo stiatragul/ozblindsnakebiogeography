@@ -130,18 +130,18 @@ outwards_disp_geo <- ggplot(data = mean_in_disp_area, aes(fill= state_to, y = co
   theme(legend.position = "bottom")
 
 # outwards dispersals grp
-outwards_disp_grp <- ggplot(data = mean_in_disp_area, aes(y = count, x = subset_from)) + 
+outwards_disp_grp <- ggplot(data = mean_in_disp_area, aes(y = count, fill= subset_to, x = subset_from)) + 
   geom_bar(position="stack", stat="identity") +
   labs(x = "Outwards dispersal", y = "Mean outwards transition frequency") + 
   scale_x_discrete(labels = c(biome_labs[1:6], 'islands')) +
   scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "none") +
-  geom_text(data = mean_out_disp_prop,
-            aes(y = Freq + 1, x = subset_from,
-                label = sprintf('%.2f%%', Prop)))
+  # geom_text(data = mean_out_disp_prop,
+  #           aes(y = Freq + 1, x = subset_from,
+  #               label = sprintf('%.2f%%', Prop)))
 
-  # geom_text(aes(label = count), position = position_stack(vjust = 0.5))
+  geom_text(aes(label = count), position = position_stack(vjust = 0.5))
 
 ### Inward transitions
 
