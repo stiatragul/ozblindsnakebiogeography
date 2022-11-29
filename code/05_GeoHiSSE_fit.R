@@ -229,7 +229,7 @@ recon.mod5 <- MarginReconGeoSSE(phy = mod5$phy, data = mod5$data, f = mod5$f,
 
 # Marginal reconstruction computed above is used to compute the model average.
 
-recon.models <- list(recon.mod1, recon.mod2, recon.mod3, recon.mod4, recon.mod5)
+recon.models <- list(recon.mod1, recon.mod2, recon.mod3, recon.mod4)
 
 # save.image(file = 'data/intermediate_data/geohisse/geohisse_three_states.Rdata')
 load('data/intermediate_data/geohisse/geohisse_three_states.Rdata')
@@ -347,10 +347,15 @@ plot.geohisse.states(x = recon.models, rate.param = "turnover", type = "fan",
 
 # AIC ---------------------------------------------------------------------
 
-recon.mod1$AIC; recon.mod2$AIC; recon.mod3$AIC; recon.mod4$AIC; recon.mod5$AIC
-mod1$AIC; mod2$AIC; mod3$AIC; mod4$AIC; mod5$AIC
+# recon.mod1$AIC; recon.mod2$AIC; recon.mod3$AIC; recon.mod4$AIC; recon.mod5$AIC
+recon.mod1$AIC; recon.mod2$AIC; recon.mod3$AIC; recon.mod4$AIC
+# mod1$AIC; mod2$AIC; mod3$AIC; mod4$AIC; mod5$AIC
+mod1$AIC; mod2$AIC; mod3$AIC; mod4$AIC
 
-mod1$AICc; mod2$AICc; mod3$AICc; mod4$AICc; mod5$AICc
+mod1$AICc; mod2$AICc; mod3$AICc; mod4$AICc
+
+
+
 
 recon.mod1$rates.mat
 recon.mod2$rates.mat
