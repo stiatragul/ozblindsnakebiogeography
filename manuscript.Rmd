@@ -147,12 +147,9 @@ We found that the largest source of outward dispersal is the tropical grassland 
 
 On the other hand, the largest sink for all inward dispersal are the temperate grassland biome (7.9 ± 4.2 events; 21.2%) and the mediterranean biome (7.0 ± 2.9 events; 18.8%). The largest directional transition is from the arid biome to the mediterranean biome (5.3 ± 1.5 events) and from the tropical grassland into the temperate forest biome (5.1 ± 1.3 events) (\@ref(fig:fig-biogeobears)c-d. 
 
-We applied GeoHiSSE models to evaluate whether speciation, extinction, and turnover rates differ between lineages in arid, non-arid, and widespread ranges. We found that the model where where geographic range was not linked to variation in diversification rates but rather to a hidden unobserved state fit the data better than models where diversification rates were depdendent on geographic range (see supp-table-geohisse). The best-fitting model accounts for 0.95 of the AIC weight and had AIC value 7.02 units lower than that of the second best-fitting model (see suupp-table-geohiss). The weighted average parameter estimates indicate both diversification rates and turnover rates did not differ between arid and non-arid ranges (REF FIGURE).
+We applied GeoHiSSE models to evaluate whether speciation, extinction, and turnover rates differ between lineages in arid, non-arid, and widespread ranges. We found that the model where variation in diversification rates were not linked to geographic range fit the data better than models where diversification rates were depdendent on geographic range (see supp-table-geohisse). The best-fitting geographic range independent model included a hidden unobserved state, indicating diversification rates is better explained by a hidden unobserved state. Compared to the three other models ,the best-fitting model accounts for 0.95 of the AIC weight and had AIC value 7.02 units lower than that of the second best-fitting model (see supp-table-geohiss). The weighted average parameter estimates from all models indicate both diversification rates and turnover rates did not differ between arid and non-arid ranges (REF FIGURE). However, net diversification rates for the widespread lineages were slightly higher (see figure), but this may be due to low amount of lineages. 
 
-Results from our ClaDS analysis is consistent with that of GeoHiSSE, showing branch-specific diversification rates slow down towards the present. 
-
-The analysis shows slow down in diversification rates over time. 
-
+Results from our ClaDS analysis show that variation in branch-specific diversification rates generally slowed down towards the present (fig-ClaDS), and did not differ between arid, non-arid, and widespread lineages (fig-ClaDS).
 
 ## Paleoclimate estimates
 
@@ -160,11 +157,12 @@ Paleoclimate reconstructions of aridity differed slightly between the two method
 
 ## Environment-dependent diversification 
 
-We found that the exponential environment-dependent speciation and constant extinction (BEnvDCST) with aridity index derived from @scoteseAtlas2021 provided the best fit to the phylogeny (AICc = 238.43; see Table-RPANDA). This model indicates that increase aridity is exponentially associate with decrease speciation rate (lambda = 1.32, alpha = -0.14) and with a constant background extinction (mu = 0.23). The second and third most competitive models (delta AICc < 2) also found increase aridity is exponentially associated with decrease speciation rate but without estimating extinction (Table-RPANDA-TOP10). Among exponential environment-dependent models fitted to our blind snake phylogeny, we found that models that uses Australia-specific paleoclimate data received better AICc support compared to fit with global paleoclimate (see supp-TABLE_FULL_RPANDA_model_fit). 
+We found that the exponential environment-dependent speciation and constant extinction (BEnvDCST) with aridity index derived from @scoteseAtlas2021 provided the best fit to the phylogeny (AICc = 238.43; see Table-RPANDA). This model indicates that increase aridity is exponentially associate with decrease speciation rate (lambda = 1.32, alpha = -0.14) and with a constant background extinction (mu = 0.23). The second and third most competitive models (delta AICc < 2) also found increase aridity is exponentially associated with decrease speciation rate but without estimating extinction (Table-RPANDA-TOP10). Among exponential environment-dependent models, we found Australia-specific paleoclimate data provides a better fit to our phylogeny than global paleoclimate (see supp-TABLE_FULL_RPANDA_model_fit).  
+
+
 
 
 ## Rates of diversification 
-
 
 
 
@@ -192,10 +190,10 @@ Australia Torres Strait Islands, and southern parts of New Guinea.
 
 - Limitations is we can only coarsely assign species to one biome one some are range-limited endemics on islands (e.g. _A. longissimus_)
 
-
 - Recent biogeographic reconstruction recovered India as the origin for superfamily Typhlopoidea (Gerrhopilidae, Xenotyphlopidae and Typhlopidae) [@kleinEvolution2021]. 
 
 Microhabitat better explains diversification than climate, but typhlopidae has the second highest speciation rates among fossorial snakes [@bars-closelDiversification2017]. 
+
 
 Future phylogeographic study should consider densely sampling species to see whether there are more expansion into or out of arid zone for widespread taxa. Two pulses of speciation early Miocene and then another early Pleistocene. Geographic barrier for mesic adapted lineages in the temperate and tropical forests may have a hard time crossing the lines [@bryantLines2016]
 
@@ -206,10 +204,15 @@ Future phylogeographic study should consider densely sampling species to see whe
 - Blind snakes are thought to not move very much and so formation of geological barriers during aridification may accelerate speciation between 20 – 10 MYA. 
 - The fact that DEC+J+x model was preferred over DEC+J may be due to poor dispersal ability as closely related species occupy the same or nearby areas. Events like floods are likely to have faciliated dispersals but in short distances. 
 Discuss species that are far apart...
-- High rates of diversification observed in concert with changing climate may be explained by allopatric speciation. 
 - Speciation could even be sympatric but no evidence to support this. 
 
-## Niche evolution
+- High rates of diversification observed in concert with changing climate may be explained by allopatric speciation. 
+
+## Environment-dependent diversification
+- Diversification rate decrease with aridification. 
+- Our RPANDA model did not model environment-dependent extinction. 
+- Extinction is a big cavaet especially because we suspect there are more species
+- 
 
 # Conclusion
 
