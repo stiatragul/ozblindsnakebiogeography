@@ -116,7 +116,7 @@ The five SSE models vary by whether they allow diversification rates to be assoc
 
 ## Reconstruction of Australian paleo climate
 <!-- Consult Alex Skeels -->
-To estimate paleoclimate, we used three paleographic digital elevation models (DEMs) from @scoteseAtlas2021, @straumeGlobal2020, and [VALDES]. Each DEM provide paleotopography at resolution of 1&deg; x 1&deg; and 5 myr resolution. We projected the paleoenvironmental reconstructions into an equal-area Behrmann projection of 110km x 110km following methods described in @hagenGen3sis2021. From the projected data we extracted temperature and aridity values across all grid cells that fall within Sahul by manually drawing a polygon that encompassed the continent from 40 mya to the present-day. Because reptiles are sensitive to extremely low and high temperature, we decided to to summarise the reconstructed paleo temperature data into three different data sets: minimum temperature, maximum temperature, and mean temperature. 
+To estimate paleoclimate, we used three paleographic digital elevation models (DEMs) from @scoteseAtlas2021, @straumeGlobal2020, and [VALDES citation]. Each DEM provide paleotopography at resolution of 1&deg; x 1&deg; and 5 myr resolution. We projected the paleoenvironmental reconstructions into an equal-area Behrmann projection of 110km x 110km following methods described in @hagenGen3sis2021. From the projected data we extracted temperature and aridity values across all grid cells that fall within Sahul by manually drawing a polygon that encompassed the continent from 40 mya to the present-day. Because reptiles are sensitive to extremely low and high temperature, we decided to to summarise the reconstructed paleo temperature data into three different data sets: minimum temperature, maximum temperature, and mean temperature. 
 
 --More information about summarising values and determining aridity index ---
 
@@ -135,17 +135,20 @@ Base data visualisations were performed in run in R version 4.2 (CITE R) using b
 
 # Results
 
-## Biogeographic history and biome transitions
+## Ancestral biome reconstruction and biogeographic history
 
 <!-- ## values and info from 04_BioGeoBEARS_bsm_plots.R -->
-We found that _Anilios_ species are mostly found solely or partially in the tropical grassland biome (n = 20) followed by the arid biome (n = 13) and mediterranean biome (n = 10). Closely related species tend to share the same biome (\@ref(fig:fig-biogeobears). 
-We identified the DEC+_j_+_x_ model as the most preferred biogeographical history model (delta AICc = -4.47, see Table-supp-BioGeoBEARS). 
-Likelihood ratio test (LRT) indicates that both founder events (+*j* parameter) and distance between biome (+x parameter) together provides statistically significant improvement over the simpler DEC model, DEC+x  and DEC+j (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001).
 
-Based on 50 BioGeoBEARS biogeographic stochastic mapping of our best model, we inferred the tropical grassland biome to be the ancestral biome of Australian _Anilios_ (\@ref(fig:fig-biogeobears)), but the origin of crown *Anilios* is ambiguous. We estimated an average of 71.2 ± 1.3 (mean ± SD) total anagenetic and cladogenetic events occured throughout the phylogeny, out of which the majority were a combination of anagenetic dispersal (31.2 ± 1.3 events) and founder events (6.1 ± 1.5 events) (see supp-summary_counts_bsm_table). 
-We found that the largest source of outward dispersal is the tropical grassland biome (16.2 ± 4.9 events; 43.6%) making up almost double the number of outward dispersals from the arid biome (9.7 ± 3.2 events; 26.0%) (\@ref(fig:fig-biogeobears))c-d. Together the tropical grassland biome and the arid biome make up the majority (69.6%) of outward transitions.
+All BioGeoBEARS analyses inferred tropical grassland as the ancestral biome of *Anilios*. We identified the DEC+_j_+_x_ model as the most preferred biogeographical history model (delta AICc = -4.47, see Table-supp-BioGeoBEARS). Likelihood ratio test (LRT) indicates that both founder events (+*j* parameter) and distance between biome (+x parameter) together provides statistically significant improvement over the simpler DEC model, DEC+x  and DEC+j (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001).
+
+We found that _Anilios_ species are mostly found solely or partially in the tropical grassland biome (n = 20) followed by the arid biome (n = 13) and mediterranean biome (n = 10). Closely related species tend to share the same biome (\@ref(fig:fig-biogeobears). 
+
+Based on 50 BioGeoBEARS biogeographic stochastic mapping of our best model, while we inferred the tropical grassland biome to be the ancestral biome of Australian _Anilios_ (\@ref(fig:fig-biogeobears)), the ancestor leading to crown *Anilios* is ambiguous. We estimated an average of 71.2 ± 1.3 (mean ± SD) total anagenetic and cladogenetic events occured throughout the phylogeny, out of which the majority were a combination of anagenetic dispersal (31.2 ± 1.3 events) and founder events (6.1 ± 1.5 events) (see supp-summary_counts_bsm_table). 
+We found that the largest source of outward dispersal is the tropical grassland biome (16.2 ± 4.9 events; 43.6%) making up almost double the number of outward dispersals from the arid biome (9.7 ± 3.2 events; 26.0%) (\@ref(fig:fig-biogeobears))c-d. Together the tropical grassland biome and the arid biome make up the largest source of diversificttion accounting for 69.6% of outward transitions.
 
 On the other hand, the largest sink for all inward dispersal are the temperate grassland biome (7.9 ± 4.2 events; 21.2%) and the mediterranean biome (7.0 ± 2.9 events; 18.8%). The largest directional transition is from the arid biome to the mediterranean biome (5.3 ± 1.5 events) and from the tropical grassland into the temperate forest biome (5.1 ± 1.3 events) (\@ref(fig:fig-biogeobears)c-d. 
+
+## Diversification rates between arid and non-arid biomes
 
 We applied GeoHiSSE models to evaluate whether speciation, extinction, and turnover rates differ between lineages in arid, non-arid, and widespread ranges. We found that the model where variation in diversification rates were not linked to geographic range fit the data better than models where diversification rates were depdendent on geographic range (see supp-table-geohisse). The best-fitting geographic range independent model included a hidden unobserved state, indicating diversification rates is better explained by a hidden unobserved state. Compared to the three other models ,the best-fitting model accounts for 0.95 of the AIC weight and had AIC value 7.02 units lower than that of the second best-fitting model (see supp-table-geohiss). The weighted average parameter estimates from all models indicate both diversification rates and turnover rates did not differ between arid and non-arid ranges (REF FIGURE). However, net diversification rates for the widespread lineages were slightly higher (see figure), but this may be due to low amount of lineages. 
 
