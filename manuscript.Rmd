@@ -168,11 +168,10 @@ We applied GeoHiSSE models to evaluate whether speciation, extinction, and turno
 
 # Discussion
 
-Our study 
 
-
-BIG SUMMARY
-
+With 47 recognised species, the mostly Australian-endemic genus *Anilios* is currently the most diverse genus of scolecophidia in the world. In this study we inferred the the genus has a tropical grassland origin. Within a few million years the ancestral lineage diversified rapidly and the tropical grassland biome served as a major source of diversification as lineages transitioned into what we now consider the arid biome and subsequently into the mediterranean and temperate XXXXgrassland biomes. 
+We found that paleo aridity index provides the best fit to diversification dynamics observed in our blind snake tree. 
+Although aridification has been shown to accelerate diversification in other groups of vertebrates, we found that *Anilios* blind snakes follow a different trajectory. Increased aridity from the late Miocene-early Pleistocene coincided with reduced diversification rates for genus. 
 
 SCIENTIFIC FINDING AS EXTENSION OF PREVIOUS WORK 
 
@@ -188,7 +187,7 @@ IMPORTANCE OF THIS TECHNICAL ASPECT OF THIS WORK
 - We show that reconstruction of localised paleo environment is possible and argue that it is more appropriate as a correlate to diversification rates. 
 - Building these paleoclimate models for regional areas will be of interested for studies where species are geographically restricted. 
 - Studies that aim to understand how aridification affect diversification rates in Australia should apply paleoclimate or use them to inform models and inferences. 
-- For example, models like NEMo allows bounding ancestral niche with estimates of paleo climate. 
+- For example, models like NEMo allows ancestral niche to be informed by paleo environment as a prior. 
 
 ## Ancestral biome of Australian *Anilios* 
 
@@ -211,10 +210,7 @@ Discuss species that are far apart...
   - Solomon Island 40 MYA [@hallCenozoic2002]
 
 
-
-
 ## Rates of diversification between arid and non-arid lineages
-
 
 - Alternatively, since they are fossorial they may not be subject to the same selective pressures epigean (surface dwelling) species. For example, their association with their prey, ants and termites, may buffer them from dessication and predation pressures (Nevo 1979** cite). 
 - It is also possible that fossorial species are more cryptic and thus the full extent of their diversity is under appreciated. 
