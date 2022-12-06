@@ -60,15 +60,11 @@ The aridification on continental Australia began around 20 million years ago wit
 
 Today, the arid zone covers the majority of area in the Australian landscape (70%) and provides habitat to 43% of all of Australia's terrestrial reptiles, termites, and ants [@byrneBirth2008]. Squamate reptiles (lizards and snakes) represent the largest vertebrate diversity in Australia with over 1000 species (~800 lizards and ~200 snakes), many of which diversified in the last 20 - 6 myr [@brennanMass2017;@oliverPhylogenetic2017]. 
 
-Some clades, like Elapid snakes [@leeDiversification2016;@sandersMolecular2008] and scincid lizards [[@raboskyExceptional2007] showed dramatic ecological diversity taking up different niches .
-
-Other clades like geckos and blind snakes remain morphologically conserved and were thought to be species poor until recent molecular data suggested otherwise [@marinHidden2013;@moritzCryptic2018;@zozayaAre2019]. 
-
-The species richness and distribution of squamate reptiles across different biomes makes them a good group to test hypotheses about the tempo and mode of diversification in Australia.
-
 For example, agamid dragons [@chenSexual2012], monitor lizards [@brennanPhylogenomics2021], _Sphenomorphus_ and _Eugongylus_ skinks [@skinnerLygosomine2011], _Gehyra_ geckos [@ashmanDiversification2018], elapid snakes [@leeDiversification2016], pythons [@esquerrePhylogenomics2020], and blind snakes [@marinTracing2013] are reptiles that colonised Australia from elsewhere and have diversified remarkably from the beginning of the Miocene. 
 
-Roughly a quarter of the snake species diversity in Australia is represented by blindsnakes of the genus _Anilios_, which comprises **47** described species [@uetzQuarter2021]. All currently described species of _Anilios_ are found in Australia except for _A. eryncinus_, which is endemic to New Guinea. Blind snakes are morphologically conserved and often difficult to distinguis. Extensive phylogenetic studies and several efforts to revisit specimens revealed the true species diversity is underestimated [@marinHidden2013;@pyronSystematics2014;@hedgesTaxonomic2014;@ellisTyphlopid2019].
+Some clades, like Elapid snakes [@leeDiversification2016;@sandersMolecular2008] and scincid lizards [[@raboskyExceptional2007] showed dramatic ecological diversity taking up different niches. Other clades like geckos and blind snakes remain morphologically conserved and were thought to be species poor until recent molecular data suggested otherwise [@marinHidden2013;@moritzCryptic2018;@zozayaAre2019]. The species richness and distribution of squamate reptiles across different biomes makes them a good group to test hypotheses about the tempo and mode of diversification in Australia. 
+
+Roughly a quarter of the snake species diversity in Australia is represented by blindsnakes of the genus _Anilios_, which comprises **47** described species [@uetzQuarter2021]. All currently described species of _Anilios_ are found in Australia except for _A. eryncinus_, which is endemic to New Guinea. Blind snakes are morphologically conserved and often difficult to distinguish. Extensive phylogenetic studies and several efforts to revisit specimens revealed the true species diversity is underestimated [@marinHidden2013;@pyronSystematics2014;@hedgesTaxonomic2014;@ellisTyphlopid2019].
 
 The diversification of _Anilios_ is reported to have originated from a single colonisation event by a mesic adapted ancestor from Asia between 19-39 mya [@vidalBlindsnake2010;@marinTracing2013], before the onset of aridification over the past 20 million years [@byrneBirth2008]. However, how and 
 
@@ -168,72 +164,70 @@ We applied GeoHiSSE models to evaluate whether speciation, extinction, and turno
 
 # Discussion
 
-
-With 47 recognised species, the mostly Australian-endemic genus *Anilios* is currently the most diverse genus of scolecophidia in the world. In this study we inferred the the genus has a tropical grassland origin. Within a few million years the ancestral lineage diversified rapidly and the tropical grassland biome served as a major source of diversification as lineages transitioned into what we now consider the arid biome and subsequently into the mediterranean and temperate XXXXgrassland biomes. 
-We found that paleo aridity index provides the best fit to diversification dynamics observed in our blind snake tree. 
-Although aridification has been shown to accelerate diversification in other groups of vertebrates, we found that *Anilios* blind snakes follow a different trajectory. Increased aridity from the late Miocene-early Pleistocene coincided with reduced diversification rates for genus. 
-
-SCIENTIFIC FINDING AS EXTENSION OF PREVIOUS WORK 
-
-FINDINGS' SCIENTIFIC IMPLICATIONS 
-
-HOW THIS WILL FACILITATE FUTURE RESEARCH 
-
-
-FORWARD-LOOKING STATEMENTS ABOUT FIELD AS A WHOLE 
-- As more genetic data allow us to build more extensive phylogenies, there is a growing need to develop methods and ways that can estimate environmental conditions in the past. Having this will allow us to test further hypotheses about how different macroevolutionary processes influence diversification on a larger scale. 
-
-IMPORTANCE OF THIS TECHNICAL ASPECT OF THIS WORK 
-- We show that reconstruction of localised paleo environment is possible and argue that it is more appropriate as a correlate to diversification rates. 
-- Building these paleoclimate models for regional areas will be of interested for studies where species are geographically restricted. 
-- Studies that aim to understand how aridification affect diversification rates in Australia should apply paleoclimate or use them to inform models and inferences. 
-- For example, models like NEMo allows ancestral niche to be informed by paleo environment as a prior. 
+With 47 recognised species, the mostly Australian-endemic genus *Anilios* is currently the most diverse genus of scolecophidia in the world. In this study we inferred the extant species in Australia has a tropical grassland origin. Within a few million years, this ancestral lineage split with one clade staying in the tropical grassland biome while the other transitioned into the arid biome. Subsequent transitions from these two lineages resulted in the distribution of biomes we observed across the phylogeny today. We also found that paleo aridity index provides the best fit to diversification dynamics observed in our blind snake tree. Although aridification has been shown to accelerate diversification rates in other groups of vertebrates (CITE), we found no such difference for Australian *Anilios* blind snakes. 
 
 ## Ancestral biome of Australian *Anilios* 
 
-- Our result also supports the hypothesis that the ancestor of the Australian clade first invaded the mesic part of the continent [@marinTracing2013], but exactly where they lived prior to this invasion is equivocal between the Bismarck Archipelago and New Guinea. 
+Our result supports the hypothesis that the ancestor of the Australian clade first invaded the mesic part of the Australian continent between 25.8 – 16 MYA [@marinTracing2013]. Our analyses cannot conclude whether the Australian radiation was a result of an oceanic dispersal from Southeast Asia or Indonesia as previously proposed [@vidalBlindsnake2010]. Instead, our results suggest the ancestor of Australian _Anilios_ occured either in the Bismarck Archipelago, New Guinea, or a combination of both. 
 
 - We expected the biogeographic models with jump dispersal to be the best fitting model because _Anilios_ are believed to have non-Australian origins [@marinTracing2013;@vidalBlindsnake2010;@oliverPhylogenetic2017].
 
+After arriving to Australia in the late Oligocene - early Miocene (~25 MYA), the ancestral _Anilios_ initially diversified rapidly within less than 1 million years. Our analysis is consistent with the conclusion that Australian blindsnakes, like several other Australian squamates, originated from tropical-mesic origins and expanded into the arid biome since the mid-Miocene [@chappleParallel2004;@melvilleEvolutionary2011]. For example elapid snakes were hypothesised to have colonised Australia from Southeast Asia (CITE) or New Guinea (cite) around the same time (cite Paul). 
+
+However, we were not able to include the New Guinean endemic _Anilios erycinus_, which is the only recognised species of _Anilios_ not found in Australia. Therefore, we cannot make any conclusions about transitions between New Guinea and Australia even though at least two species (i.e. _A. torresianus_ and _A. leucoproctus_) are found between southern New Guinea and Far North Queensland 
+
+Placement of _R. multilineatus_ in the phylogeny renders _Ramphotyphlops_ paraphyletic (as discussed in Tiatragul 2023) 
+The sister group to _Anilios_ is the genus _Ramphotyphlops_, which comprises XX species of blind snakes that occur in mesic areas across south and southeast Asia. 
+
 - The fact that DEC+J+x model was preferred over DEC+J may be due to poor dispersal ability as closely related species occupy the same or nearby areas. Events like floods are likely to have faciliated dispersals but in short distances. 
-Discuss species that are far apart...
-
-- After arriving to Australia in the late Oligocene - early Miocene (~25 MYA), the ancestral _Anilios_ initially diversified rapidly within less than 1 million years. Our analysis is consistent with the conclusion that Australian blindsnakes, like several other Australian squamates, originated from tropical-mesic origins and expanded into the arid zone since the mid-Miocene [@chappleParallel2004;@melvilleEvolutionary2011]. 
-
-- However, the rates of diversification slowed down as Australia started to become more arid. We found that transitions into the arid biome for many lineages actually pre-dated the intense aridification in the late Miocene, which indicates that blind snakes may be pre-adapted to arid environment. This pattern has been observed in XXX (Paul Oliver's paper about ____ reptile). Arid environemnts is heterogenous and some areas have acted as refugia during glaciation, which may cause isolation and subsequent speciation. 
-
-- We found transitions from XXX to XXX to be common as have been shown / as opposed to other Australian squamates (CITATIONS)
-- Arid zone was not arid until ~20 Million Years ago. Ancestors in deeper time probably occupied temperate or tropical areas that subsequently became the arid zone we know see today. 
-- The Australo-Papuan clade seems to have stayed in Australia for the most part but we were not able to include New Guinean endemic _Anilios erycinus_, the only recognised species of _Anilios_ not found in Australia. Therefore, we cannot make any conclusions about transitions between Australia and New Guinea even though at least three species (_A. torresianus_, _A. leucoproctus_, ...) are found in Northern Australia. 
-  - Range expansion was important for diversification ...
-  - Topography dyanmics [@brazModelling2021]
-  - Solomon Island 40 MYA [@hallCenozoic2002]
-
-
-## Rates of diversification between arid and non-arid lineages
-
-- Alternatively, since they are fossorial they may not be subject to the same selective pressures epigean (surface dwelling) species. For example, their association with their prey, ants and termites, may buffer them from dessication and predation pressures (Nevo 1979** cite). 
-- It is also possible that fossorial species are more cryptic and thus the full extent of their diversity is under appreciated. 
-
-- The early burst of speciation is observed in lineages that colonise new areas, ecological release. For example. 
-- Interestingly blind snakes have diversified greatly compared to other fossorial vertebrates. 
-
-Microhabitat better explains diversification than climate, but typhlopidae has the second highest speciation rates among fossorial snakes [@bars-closelDiversification2017]. 
-
+- Range expansion was important for diversification ...
+- Topography dynamics [@brazModelling2021]
+- Solomon Island 40 MYA [@hallCenozoic2002]
 - Recent biogeographic reconstruction recovered India as the origin for superfamily Typhlopoidea (Gerrhopilidae, Xenotyphlopidae and Typhlopidae) [@kleinEvolution2021]. 
 
+- However, the rates of diversification slowed down as Australia started to become more arid. We found that transitions into the arid biome for many lineages actually pre-dated the intense aridification in the late Miocene, which indicates that blind snakes may be pre-adapted to arid environment. This pattern has been observed in XXX (Paul Oliver's paper about __ reptile). Arid environemnts is heterogenous and some areas have acted as refugia during glaciation, which may cause isolation and subsequent speciation. 
+
+## Influence of paleoclimate on diversification rates 
+
+Climate is one of the
+- Australian blind snakes follow a different trajectory, one in which increased aridity from the late Miocene to early Pleistocene coincided with reduced diversification rates for genus. 
+- In contrast to other vertebrates, our results suggest aridification reduces the rate of diversification in blind snakes. 
+[@dornStrange2014;@deepakAridification2018;@catulloAridification2014;@fujitaDiversification2010;@pepperGenetic2011;@pepperPalaeoclimate2011;@oliverIndependent2014;@oliverContrasting2014;@owenHow2017;@crispHow2013;@toussaintUnveiling2015]
+- Our study is the first to quantitatively assess the influence of aridity on the diversification rates of a group of vertebrate on a macroevolutionary scale. 
+
+- Overall the average temperature from Australia specific reconstruction is consistently is warmer than global mean temperature. 
+
+In the context of our birth-death models, our the absolute value of temperature might not have made much of a difference because our environment-dependent models fit the spline rather than absolute temperature. 
+
+- Paleoclimate reconstructions based on DEM by Scotese and Straume were similar in profile. However, DEM base on Valdes differed from the other two. Scotese is characterised by repeated fluctuations in the Pleistocene to reflect glacial cycles. 
+However, models that take in account thermal niche tolerance, such as NEMo, will benefit from paleoclimate reconstructions such as these to inform limits (boundaries). 
+- Aridity index is a good indicator, but aridity is geographically restricted to the arid zone. In our phylogeny, a lot of diversity is observed is in the mesic zones.
+- Warmer and dryer environment may not directly increase speciation rate because blind snakes are physically adapting to warmer temperatures, rather it is the fragmentation of the landscape. 
+- Thermal tolerance and preference for blind snakes remains unknown but fossorial species tend to live in pretty stable climate? 
+- Our RPANDA model did not model environment-dependent extinction. 
+- Studies that aim to understand how aridification affect diversification rates in Australia should apply paleoclimate or use them to inform models and inferences. 
+- For example, models like NEMo allows ancestral niche to be informed by paleo environment as a prior. 
+
+## Rates of diversification between arid and non-arid lineages
+- The early burst of speciation is observed in lineages that colonise new areas, ecological release. For example. 
+
+- Diversification rate decrease with aridification. But this is not explained by lineages transitioning into the arid biome as diversification rates did not differ between lineages in arid and non-arid biomes. Turnover rate also ... 
+
+- Alternatively, since they are fossorial they may not be subject to the same selective pressures epigean (surface dwelling) species. For example, their association with their prey, ants and termites, may buffer them from dessication and predation pressures (Nevo 1979** cite). 
+
+- Interestingly blind snakes have diversified greatly compared to other fossorial vertebrates. 
+
+  - It is also possible that fossorial species are more cryptic and thus the full extent of their diversity is under appreciated. 
+Microhabitat better explains diversification than climate, but typhlopidae has the second highest speciation rates among fossorial snakes [@bars-closelDiversification2017]. 
+  - Extinction is a big cavaet especially because we suspect there are more species. Arid adapted lineages may have experienced higher extinction OR not well sampled in remote Western Australia. Most species are sampled next to roads (Xia's paper or do supplemental analyses).
+
+
+  - Blind snakes are thought to not move very much and so formation of geological barriers during aridification may accelerate speciation between 20 – 10 MYA. 
+  - High rates of diversification observed in concert with changing climate may be explained by allopatric speciation. 
+  - Speciation could even be sympatric but no evidence to support this. 
 
 Future phylogeographic study should consider densely sampling species to see whether there are more expansion into or out of arid zone for widespread taxa. Two pulses of speciation early Miocene and then another early Pleistocene. Geographic barrier for mesic adapted lineages in the temperate and tropical forests may have a hard time crossing the lines [@bryantLines2016]
 
-- Diversification rate decrease with aridification. But this is not explained by lineages transitioning into the arid biome as diversification rates did not differ between lineages in arid and non-arid biomes. 
-
-- Our RPANDA model did not model environment-dependent extinction. 
-- Extinction is a big cavaet especially because we suspect there are more species
-
-- Blind snakes are thought to not move very much and so formation of geological barriers during aridification may accelerate speciation between 20 – 10 MYA. 
-
-- High rates of diversification observed in concert with changing climate may be explained by allopatric speciation. 
-- Speciation could even be sympatric but no evidence to support this. 
 
 ## Limitations
 There are several limitations in our models. 
@@ -246,9 +240,11 @@ There are several limitations in our models.
 
 - Limitations is we can only coarsely assign species to one biome one some are range-limited endemics on islands. For example *A. longissimus* has only been collected from 30m underground on Barrow Island located XX km the northwest coast of Western Australia. Placing that species with arid biome is not realistic but that area is considered the arid zone by our criteria. 
 
-
-
 # Conclusion
+
+
+As we continue generate more genetic data to build ever more extensive phylogenies, there is a growing need to develop methods and complimentary paleo environmental datasets that allow us to test hypotheses about how different macroevolutionary processes influence diversification. We show that tools like `gen3sis` can be used to reconstruct localised paleo environment that provides a more appropriate fit to our Australian blind snake phylogeny than generic paleo global temperature. We believe these regional paleoclimate models will be of interested for studies where species are geographically restricted. 
+- Furthermore we provide the first quantitative measure of paleo aridity 
 
 # Tables
 
