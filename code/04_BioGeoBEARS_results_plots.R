@@ -89,7 +89,7 @@ dev.off()
 
 
 
-# pdf('output/pie_ancestral.pdf')
+# pdf('output/bgb_pie_ancestral.pdf', width = 11.5, height = 8.5)
 # Pie chart
 BioGeoBEARS::plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j","x"), plotwhat="pie", 
                                       label.offset=0.45, tipcex=0.02, statecex=0.4, splitcex=0.4, titlecex=0.8, plotsplits=F, 
