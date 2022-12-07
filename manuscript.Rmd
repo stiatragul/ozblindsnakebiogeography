@@ -168,24 +168,33 @@ With 47 recognised species, the mostly Australian-endemic genus *Anilios* is cur
 
 ## Ancestral biome of Australian *Anilios* 
 
-Our result supports the hypothesis that the ancestor of the Australian clade first invaded the mesic part of the Australian continent between 25.8 – 16 MYA [@marinTracing2013]. Our analyses cannot conclude whether the Australian radiation was a result of an oceanic dispersal from Southeast Asia or Indonesia as previously proposed [@vidalBlindsnake2010]. Instead, our results suggest the ancestor of Australian _Anilios_ occured either in the Bismarck Archipelago, New Guinea, or a combination of both. 
+Our result supports the hypothesis that the ancestor of the Australian clade first invaded the mesic part of the Australian continent between 25.8 – 16 MYA [@marinTracing2013]. This is also consistent with other radiations of Australian squamates, where the ancestral lineage first inhabited tropical-mesic regions before later expanding into other biomes [@chappleParallel2004;@melvilleEvolutionary2011;@oliverPhylogenetic2017]. Given what we know about the current distribution of species included in our phylogeny, our analyses support the idea that *Anilios* have non-Australian origins. However, whether the Australian radiation was a result of an oceanic dispersal from Southeast Asia or Indonesia as proposed by @vidalBlindsnake2010 is equivocal. Instead, our results suggest the ancestor of Australian _Anilios_ most likely occurred either in the Bismarck Archipelago, New Guinea, or a combination of both. Increasing taxonomic sampling, particularly by including the New Guinean endemic _Anilios erycinus_ and other closely related Typhlopidae snakes (e.g. *Ramphotyphlops*, *Acutotyphlops*) as outgroups will enable us to make inferences about the origin prior to colonising Australia. 
 
-- We expected the biogeographic models with jump dispersal to be the best fitting model because _Anilios_ are believed to have non-Australian origins [@marinTracing2013;@vidalBlindsnake2010;@oliverPhylogenetic2017].
+## Biome transition and current distributions 
 
-After arriving to Australia in the late Oligocene - early Miocene (~25 MYA), the ancestral _Anilios_ initially diversified rapidly within less than 1 million years. Our analysis is consistent with the conclusion that Australian blindsnakes, like several other Australian squamates, originated from tropical-mesic origins and expanded into the arid biome since the mid-Miocene [@chappleParallel2004;@melvilleEvolutionary2011]. For example elapid snakes were hypothesised to have colonised Australia from Southeast Asia (CITE) or New Guinea (cite) around the same time (cite Paul). 
+After their arrival to Australia, the ancestral _Anilios_ initially diversified rapidly (<1 million years) in the tropical grassland biome. The first transition out of the tropical grassland biome were to the Tropical Forest biome (for the branch leading to _A. silvia_) and the arid biome (\@ref(fig:fig-biogeobears))a. 
 
-However, we were not able to include the New Guinean endemic _Anilios erycinus_, which is the only recognised species of _Anilios_ not found in Australia. Therefore, we cannot make any conclusions about transitions between New Guinea and Australia even though at least two species (i.e. _A. torresianus_ and _A. leucoproctus_) are found between southern New Guinea and Far North Queensland 
+We found that the initial transition into the arid biome around 20 MYA pre-dated the continent wide aridification that intensified up in the late Miocene [@byrneBirth2008]. 
 
-Placement of _R. multilineatus_ in the phylogeny renders _Ramphotyphlops_ paraphyletic (as discussed in Tiatragul 2023) 
-The sister group to _Anilios_ is the genus _Ramphotyphlops_, which comprises XX species of blind snakes that occur in mesic areas across south and southeast Asia. 
+The Pilbara region has both lineages that have deep coalescent histories and shallower divergences (_A. ammodytes_ and _A. ganei_)
+(Reference to phylogeography supplementary figure)
 
-- The fact that DEC+J+x model was preferred over DEC+J may be due to poor dispersal ability as closely related species occupy the same or nearby areas. Events like floods are likely to have faciliated dispersals but in short distances. 
+Arid environemnts is heterogenous and some areas have acted as refugia during glaciation, which may cause isolation and subsequent speciation. 
+
+The western part of Australia dried up earlier than the east around 20 MYA (CITE Mitzy).   
+
+Which indicates that blind snakes may be pre-adapted to arid environment. This pattern has been observed in XXX [@oliverPhylogenetic2017]. 
+
+
 - Range expansion was important for diversification ...
-- Topography dynamics [@brazModelling2021]
-- Solomon Island 40 MYA [@hallCenozoic2002]
-- Recent biogeographic reconstruction recovered India as the origin for superfamily Typhlopoidea (Gerrhopilidae, Xenotyphlopidae and Typhlopidae) [@kleinEvolution2021]. 
+The fact that DEC+J+x model was preferred over DEC+J may be due to poor dispersal ability as closely related species occupy the same or nearby areas. Events like floods are likely to have faciliated dispersals but in short distances. 
 
-- However, the rates of diversification slowed down as Australia started to become more arid. We found that transitions into the arid biome for many lineages actually pre-dated the intense aridification in the late Miocene, which indicates that blind snakes may be pre-adapted to arid environment. This pattern has been observed in XXX (Paul Oliver's paper about __ reptile). Arid environemnts is heterogenous and some areas have acted as refugia during glaciation, which may cause isolation and subsequent speciation. 
+
+
+The rates of diversification slowed down as Australia started to become more arid
+
+
+
 
 ## Influence of paleoclimate on diversification rates 
 
@@ -239,6 +248,8 @@ There are several limitations in our models.
 - Need to account for heterogeneity of the arid zone [@pepperLife2021].
 
 - Limitations is we can only coarsely assign species to one biome one some are range-limited endemics on islands. For example *A. longissimus* has only been collected from 30m underground on Barrow Island located XX km the northwest coast of Western Australia. Placing that species with arid biome is not realistic but that area is considered the arid zone by our criteria. 
+
+Therefore, we cannot make any conclusions about transitions between New Guinea and Australia even though at least two species (i.e. _A. torresianus_ and _A. leucoproctus_) are found between southern New Guinea and Far North Queensland 
 
 # Conclusion
 
