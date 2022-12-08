@@ -127,9 +127,10 @@ To test whether diversification rates differ between lineages in arid biomes and
 In the second approach we fit four state-dependent speciation and extinction (SSE) models to the phylogeny and geographic range data under the GeoSSE [@goldbergPhylogenetic2011] and GeoHiSSE [@caetanoHidden2018] framework using the R package `hisse` v. 2.1.9 [@beaulieuDetecting2016]. 
 Since these SSE models only allow two states, we restricted our geographic states to arid and non-arid biomes. Based on the same categories we used in our BioGeoBEARS anaylses, we classified species that primarily occur in the arid biome as arid (State 0; n = 8), species that occur primarily other biomes as non-arid (State 1; n = 24), and those that occupy both the arid and non-arid biomes as widespread (State 01; n = 5). 
 
-The four SSE models vary by whether they allow diversification rates to be associated with geographic states (range-dependent or range-independent) and whether they allow an unmeasured trait ('hidden states') to influence diversification rates [@beaulieuDetecting2016;@caetanoHidden2018]. 
-Model 1 assumes equal diversification rates regardless of geographic state. Model 2 allows geographic range to affect diversification rates (canonical GeoSSE model). 
-Models 3 and 4 are derivations of models 1 and 2 but also allow unmeasured trait ('hidden states') to contribute to diversification rates (see Table GeoHiSSE table). By incoporating hidden states, we are able to assess whether geographic range or an unmeasured trait contributes more to the observed diversification. For each model, we assumed uniform taxon sampling for 89% in arid lineages, 71% in non-arid lineages, and 83% in widespread lineages based on number of species in the phylogeny and all currently described species of _Anilios_. We then calculated AIC to identify the best-fitting models. Following the approach in @caetanoHidden2018, we averaged the estimates of diversification parameters and ancestral geographic range estimate across all models according to their AIC weights. 
+The four SSE models vary in whether they allow diversification rates to be associated with geographic states (range-dependent or range-independent) and whether they allow an unmeasured trait ('hidden states') to influence diversification rates [@beaulieuDetecting2016;@caetanoHidden2018]. 
+Model 1 assumes equal diversification rates regardless of geographic state. Model 2 allows geographic range to affect diversification rates (canonical geoSSE model).
+Models 3 and 4 are based on models 1 and 2, but they also allow unmeasured trait ('hidden states') to contribute to diversification rates (see Table GeoHiSSE table). By incorporating hidden states, we can assess whether geographic range or an unmeasured trait contributes more to the observed diversification.
+For each model, we assumed uniform taxon sampling for 89% in arid lineages, 71% in non-arid lineages, and 83% in widespread lineages, based on the number of species in the phylogeny and all currently described species of _Anilios_. We then calculated AIC to identify the best-fitting models. Following the approach in @caetanoHidden2018, we averaged the estimates of diversification parameters and ancestral geographic range estimate across all models according to their AIC weights.
 
 ## Data visualisation and software
 ClaDS was implemented in `Julia` v.1.8.1 [@bezansonJulia2012], all other analyses were performed in `R` v.4.2 (CITE R). Figures and graphs were prepared using a combination of baseR and `ggplot2` (CITE) to process raw output from R. The bioregion map was created using the Free and Open Source `QGIS` v.3.6 (CITE Australian Map). We arranged and finalised all figures using Adobe Illustrator v2022.
@@ -139,12 +140,13 @@ ClaDS was implemented in `Julia` v.1.8.1 [@bezansonJulia2012], all other analyse
 ## Ancestral biome reconstruction and transitions
 
 <!-- ## values and info from 04_BioGeoBEARS_bsm_plots.R -->
-All BioGeoBEARS analyses inferred tropical grassland as the ancestral biome of *Anilios*. We identified the DEC+_j_+_x_ model as the most preferred biogeographical history model (delta AICc = -4.47, see Table-supp-BioGeoBEARS). Likelihood ratio test (LRT) indicates that both founder events (+*j* parameter) and distance between biome (+x parameter) together provides statistically significant improvement over the simpler DEC model, DEC+x  and DEC+j (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001). We found that most _Anilios_ species are found entirely or at least partially in the tropical grassland biome (n = 20) followed by the arid biome (n = 13) and mediterranean biome (n = 10). We also observed that closely related species tend to share the same biome (\@ref(fig:fig-biogeobears). 
+Our BioGeoBEARS analyses all inferred tropical grassland as the ancestral biome of *Anilios* but the ancestor leading to the crown *Anilios* is ambiguous. We found that the DEC+_j_+_x_ model was the most preferred biogeographical history model (delta AICc = -4.47, see Table-supp-BioGeoBEARS). A likelihood ratio test (LRT) showed that both founder events (+*j* parameter) and distance between biomes (+x parameter) together provide a statistically significant improvement over the simpler DEC model, DEC+x, and DEC+j (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001).
 
-Based on 50 BioGeoBEARS biogeographic stochastic mapping of our best model, we inferred the tropical grassland biome to be the ancestral biome of Australian _Anilios_ (\@ref(fig:fig-biogeobears)). However, the ancestor leading to crown *Anilios* is ambiguous. 
-We estimated an average of 71.2 ± 1.3 (mean ± SD) total anagenetic and cladogenetic events occured throughout the phylogeny. The majority of these events were anagenetic dispersal (31.2 ± 1.3 events) and cladogenetic founder events (6.1 ± 1.5 events) (see supp-summary_counts_bsm_table). 
+Based on 50 BioGeoBEARS biogeographic stochastic mappings (BSM) of our best-fitting model. We estimated that an average of 71.2 ± 1.3 (mean ± SD) total anagenetic and cladogenetic events occurred throughout the phylogeny. Most of these events were anagenetic dispersals (31.2 ± 1.3 events) and cladogenetic founder events (6.1 ± 1.5 events). 
 
 The largest source of outward dispersal is the tropical grassland biome (16.2 ± 4.9 events; 43.6%), which makes up almost double the number of outward dispersals from the arid biome (9.7 ± 3.2 events; 26.0%) (\@ref(fig:fig-biogeobears))c-d. Together the tropical grassland biome and the arid biome contributes the largest source of diversification accounting for 69.6% of outward transitions. On the other hand, the largest sink for all inward dispersals are the temperate grassland biome (7.9 ± 4.2 events; 21.2%) and the mediterranean biome (7.0 ± 2.9 events; 18.8%). The greatest directional transition is from the arid biome to the mediterranean biome (5.3 ± 1.5 events) and from the tropical grassland into the temperate forest biome (5.1 ± 1.3 events) (\@ref(fig:fig-biogeobears)c-d.
+
+Based on current distributions (ALA) most _Anilios_ species are found entirely or at least partially in the tropical grassland biome (n = 20) followed by the arid biome (n = 13) and mediterranean biome (n = 10). The model indicates two pulses of biogeographic transitions for the two major clades, which we will refer to as *Group 1* (n=21 lineages) and *Group 2* (n=14 lineages) (\@ref(fig:fig-biogeobears)a. The common ancestor of *Group 1* remained mostly in the Tropical Grassland Biome, but 12/21 lineages expanded or transitioned into other biomes. The common ancestor of *Group 2* transitioned into the arid biome, and 7/14 lineages expanded to the Mediterranean and Temperate Forest biomes, and/or transitioned back into the Tropical Grassland Biome. 
 
 ## Paleoclimate estimates
 
@@ -152,49 +154,42 @@ Paleoclimate reconstructions of aridity differed slightly between the two method
 
 ## Environment-dependent diversification 
 
-We found that the exponential environment-dependent speciation and constant extinction (BEnvDCST) with aridity index derived from @scoteseAtlas2021 provided the best fit to the phylogeny (AICc = 238.43; see Table-RPANDA). This best-fitting model indicates that increase aridity is exponentially associated with decrease speciation rate (lambda = 1.32, alpha = -0.14) and a constant background extinction (mu = 0.23). The second and third most competitive models (delta AICc < 2) also found increase aridity is exponentially associated with decrease speciation rate but without estimating extinction (Table-RPANDA-TOP10). Among exponential environment-dependent models, we found Australia-specific paleoclimate data provides a better fit to our phylogeny than global paleoclimate (see supp-TABLE_FULL_RPANDA_model_fit). 
+We found that the exponential environment-dependent speciation and constant extinction (BEnvDCST) with aridity index derived from @scoteseAtlas2021 provided the best fit to the phylogeny (AICc = 238.43; see Table-RPANDA). This best-fitting model indicates that an increase in aridity is exponentially associated with a decrease in speciation rate (lambda = 1.32, alpha = -0.14) and a constant background extinction rate (mu = 0.23). The second and third most competitive models (delta AICc < 2) also found that an increase in aridity is exponentially associated with a decrease in speciation rate, but without estimating extinction (see Table-RPANDA-TOP10). Among the exponential environment-dependent models, we found that Australia-specific paleoclimate data provided a better fit to our phylogeny than global paleoclimate data (see supp-TABLE_FULL_RPANDA_model_fit).
 
 ## Diversification rates between arid and non-arid biomes
 
-Results from our ClaDS analysis show that branch-specific diversification rates gradually decrease towards the present (fig-ClaDS). Mean branch-specific rates did did not differ between arid, non-arid, and widespread lineages (fig-ClaDS). 
+Results from our ClaDS analysis show that branch-specific diversification rates gradually decrease towards the present (see fig-ClaDS). The mean branch-specific rates did not differ significantly between lineages in arid, non-arid, and widespread ranges (see fig-ClaDS).
 
-We applied GeoHiSSE models to evaluate whether speciation, extinction, and turnover rates differ between lineages in arid, non-arid, and widespread ranges. We found that the range-independent model fit the data better than models where diversification rates were depdendent on geographic range (see supp-table-geohisse). The best-fitting geographic range independent model included a hidden unobserved state, indicating diversification rates is better explained by a hidden unobserved state. Compared to the three other models, the best-fitting model accounts for 0.95 of the AIC weight and had AIC value 7.02 units lower than that of the second best-fitting model (see supp-table-geohiss). The weighted average parameter estimates from all models indicate both speciation rates and turnover rates did not differ between arid and non-arid ranges (REF FIGURE; see supplementary XX for net diversification rate and extinction rates). 
+We applied GeoHiSSE models to evaluate whether speciation, extinction, and turnover rates differ between lineages in arid, non-arid, and widespread ranges. We found that the range-independent model fit the data better than models where diversification rates were dependent on geographic range (see supp-table-geohisse). The best-fitting geographic range-independent model included a hidden unobserved state, indicating that diversification rates are better explained by this hidden state. Compared to the three other models, the best-fitting model accounted for 0.95 of the AIC weight and had an AIC value 7.02 units lower than that of the second best-fitting model (see supp-table-geohiss). The weighted average parameter estimates from all models indicate that both speciation rates and turnover rates did not differ significantly between arid and non-arid ranges (see REF FIGURE and supplementary XX for net diversification rate and extinction rates).
 
 \newpage
 
 # Discussion
 
-With 47 recognised species, the mostly Australian-endemic genus *Anilios* is currently the most diverse genus of scolecophidia in the world. In this study we inferred the extant species in Australia has a tropical grassland origin. Within a few million years, this ancestral lineage split with one clade staying in the tropical grassland biome while the other transitioned into the arid biome. Subsequent transitions from these two lineages resulted in the distribution of biomes we observed across the phylogeny today. We also found that paleo aridity index provides the best fit to diversification dynamics observed in our blind snake tree. Although aridification has been shown to accelerate diversification rates in other groups of vertebrates (CITE), we found no such difference for Australian *Anilios* blind snakes. 
+With 47 recognised species, the mostly Australian-endemic genus *Anilios* is currently the most diverse genus of scolecophidia in the world. In this study we inferred the extant species in Australia has a tropical grassland origin. Within a few million years, this ancestral lineage split with one group staying in the tropical grassland biome while the other group transitioning into the arid biome. Subsequent transitions in these two groups resulted in the distribution of biomes we observed across the phylogeny today. We also found that paleo aridity index provides the best fit to diversification dynamics observed in our blind snake tree. Although aridification has been shown to accelerate diversification rates in other groups of vertebrates (CITE), we found no such difference for Australian *Anilios* blind snakes. 
 
 ## Ancestral biome of Australian *Anilios* 
 
 Our result supports the hypothesis that the ancestor of the Australian clade first invaded the mesic part of the Australian continent between 25.8 – 16 MYA [@marinTracing2013]. This is also consistent with other radiations of Australian squamates, where the ancestral lineage first inhabited tropical-mesic regions before later expanding into other biomes [@chappleParallel2004;@melvilleEvolutionary2011;@oliverPhylogenetic2017]. Given what we know about the current distribution of species included in our phylogeny, our analyses support the idea that *Anilios* have non-Australian origins. However, whether the Australian radiation was a result of an oceanic dispersal from Southeast Asia or Indonesia as proposed by @vidalBlindsnake2010 is equivocal. Instead, our results suggest the ancestor of Australian _Anilios_ most likely occurred either in the Bismarck Archipelago, New Guinea, or a combination of both. Increasing taxonomic sampling, particularly by including the New Guinean endemic _Anilios erycinus_ and other closely related Typhlopidae snakes (e.g. *Ramphotyphlops*, *Acutotyphlops*) as outgroups will enable us to make inferences about the origin prior to colonising Australia. 
 
+
+
 ## Biome transition and current distributions 
 
-After their arrival to Australia, the ancestral _Anilios_ initially diversified rapidly (<1 million years) in the tropical grassland biome. The first transition out of the tropical grassland biome were to the Tropical Forest biome (for the branch leading to _A. silvia_) and the arid biome (\@ref(fig:fig-biogeobears))a. 
-
-We found that the initial transition into the arid biome around 20 MYA pre-dated the continent wide aridification that intensified up in the late Miocene [@byrneBirth2008]. 
-
-The Pilbara region has both lineages that have deep coalescent histories and shallower divergences (_A. ammodytes_ and _A. ganei_)
-(Reference to phylogeography supplementary figure)
-
-Arid environemnts is heterogenous and some areas have acted as refugia during glaciation, which may cause isolation and subsequent speciation. 
-
-The western part of Australia dried up earlier than the east around 20 MYA (CITE Mitzy).   
-
-Which indicates that blind snakes may be pre-adapted to arid environment. This pattern has been observed in XXX [@oliverPhylogenetic2017]. 
 
 
-- Range expansion was important for diversification ...
-The fact that DEC+J+x model was preferred over DEC+J may be due to poor dispersal ability as closely related species occupy the same or nearby areas. Events like floods are likely to have faciliated dispersals but in short distances. 
+Consistent with @marinTracing2013, we found the initial diversification occurred very rapidly (<1 million years) in the tropical grassland biome followed by multiple transitions into the arid biome and subsequent expansion to the Mediterranean biome. However, our results show that the timing of these transition and diversification in the arid biome, for both species in groups 1 and 2, occured earlier (20 – 10 MYA) than previously proposed (10 MYA) by @marinTracing2013. 
+
+For Group 1 eastward transitions might have occured 
+
+Pilbara in the west acted as a refugia and perhaps source of diversification 
+Arid environemnts is heterogenous and some areas have acted as refugia during glaciation (CITE), which may cause isolation and subsequent speciation. For example, the Pilbara region has both lineages that have deep coalescent histories and shallower divergences (_A. ammodytes_ and _A. ganei_). These species may have once been widely distributed but became extirpated as aridification intensified and are now found only in their place of refuge during glacial fluctuations. 
+
+Alternatively, this suggests that these lineages have diversified before the intensive continent-wide aridification in the late Miocene that resulted in the present dry and sandy red centre of Australia [@byrneBirth2008]. 
+This pattern may indicate that blind snakes, like other fossorial animals, are pre-adapted to arid environments (CITE). Subterranean microhabitat is relatively stable compared to ground. 
 
 
-
-The rates of diversification slowed down as Australia started to become more arid
-
-
-
+Our results suggest that range expansion was important for diversification. The fact that DEC+J+x model was preferred over DEC+J may be due to poor dispersal ability as closely related species occupy the same or nearby areas. Events like floods are likely to have faciliated dispersals but in short distances. 
 
 ## Influence of paleoclimate on diversification rates 
 
