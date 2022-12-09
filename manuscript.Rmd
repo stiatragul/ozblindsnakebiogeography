@@ -146,7 +146,7 @@ Based on 50 BioGeoBEARS biogeographic stochastic mappings (BSM) of our best-fitt
 
 The largest source of outward dispersal is the tropical grassland biome (16.2 ± 4.9 events; 43.6%), which makes up almost double the number of outward dispersals from the arid biome (9.7 ± 3.2 events; 26.0%) (\@ref(fig:fig-biogeobears))c-d. Together the tropical grassland biome and the arid biome contributes the largest source of diversification accounting for 69.6% of outward transitions. On the other hand, the largest sink for all inward dispersals are the temperate grassland biome (7.9 ± 4.2 events; 21.2%) and the mediterranean biome (7.0 ± 2.9 events; 18.8%). The greatest directional transition is from the arid biome to the mediterranean biome (5.3 ± 1.5 events) and from the tropical grassland into the temperate forest biome (5.1 ± 1.3 events) (\@ref(fig:fig-biogeobears)c-d.
 
-Based on current distributions (ALA) most _Anilios_ species are found entirely or at least partially in the tropical grassland biome (n = 20) followed by the arid biome (n = 13) and mediterranean biome (n = 10). The model indicates two pulses of biogeographic transitions for the two major clades, which we will refer to as *Group 1* (n=21 lineages) and *Group 2* (n=14 lineages) (\@ref(fig:fig-biogeobears)a. The common ancestor of *Group 1* remained mostly in the Tropical Grassland Biome, but 12/21 lineages expanded or transitioned into other biomes. The common ancestor of *Group 2* transitioned into the arid biome, and 7/14 lineages expanded to the Mediterranean and Temperate Forest biomes, and/or transitioned back into the Tropical Grassland Biome. 
+Based on current distributions (ALA) most _Anilios_ species are found entirely or at least partially in the tropical grassland biome (n = 20) followed by the arid biome (n = 13) and mediterranean biome (n = 10). The model indicates two pulses of biogeographic transitions for the two major clades, which we will refer to as *Group 1* (n=21 lineages) and *Group 2* (n=14 lineages) (\@ref(fig:fig-biogeobears)a. The common ancestor of *Group 1* remained mostly in the Tropical Grassland Biome, then 12/21 lineages expanded or transitioned into other biomes. The common ancestor of *Group 2* first transitioned into the arid biome, and then 7/14 lineages expanded to the Mediterranean and Temperate Forest biomes, and/or transitioned back into the Tropical Grassland Biome. 
 
 ## Paleoclimate estimates
 
@@ -172,22 +172,23 @@ With 47 recognised species, the mostly Australian-endemic genus *Anilios* is cur
 
 Our result supports the hypothesis that the ancestor of the Australian clade first invaded the mesic part of the Australian continent between 25.8 – 16 MYA [@marinTracing2013]. This is also consistent with other radiations of Australian squamates, where the ancestral lineage first inhabited tropical-mesic regions before later expanding into other biomes [@chappleParallel2004;@melvilleEvolutionary2011;@oliverPhylogenetic2017]. Given what we know about the current distribution of species included in our phylogeny, our analyses support the idea that *Anilios* have non-Australian origins. However, whether the Australian radiation was a result of an oceanic dispersal from Southeast Asia or Indonesia as proposed by @vidalBlindsnake2010 is equivocal. Instead, our results suggest the ancestor of Australian _Anilios_ most likely occurred either in the Bismarck Archipelago, New Guinea, or a combination of both. Increasing taxonomic sampling, particularly by including the New Guinean endemic _Anilios erycinus_ and other closely related Typhlopidae snakes (e.g. *Ramphotyphlops*, *Acutotyphlops*) as outgroups will enable us to make inferences about the origin prior to colonising Australia. 
 
-
-
 ## Biome transition and current distributions 
 
+Consistent with @marinTracing2013, we found the initial diversification occurred very rapidly (<1 million years) in the tropical grassland biome followed by transitions and/or expansion into other biomes. 
+However, as opposedrecent invasion (<10 MYA) and diversification (<5 MYA) into the arid zone [@marinHidden2013], our results show that species in both groups 1 and 2 have deep divergence between 20 – 10 MYA, during the time when the Australia was still relatively wet and humid [@byrneBirth2008]. This suggests that these lineages have diversified before the intensive continent-wide aridification in the late Miocene that resulted in the present dry and sandy areas of the arid biome [@byrneBirth2008]. 
 
+One hypothesis to explain contemporary distribution in the arid biome is that *Anilios* may be pre-adapted to arid environments. Blind snakes have been found in xeric areas around the world, for example _Myriopholis macrorhyncha_ in the desert 
 
-Consistent with @marinTracing2013, we found the initial diversification occurred very rapidly (<1 million years) in the tropical grassland biome followed by multiple transitions into the arid biome and subsequent expansion to the Mediterranean biome. However, our results show that the timing of these transition and diversification in the arid biome, for both species in groups 1 and 2, occured earlier (20 – 10 MYA) than previously proposed (10 MYA) by @marinTracing2013. 
+North American  and the Palearctic _Letheobia episcopus_) possibly because subterranean microhabitat has relatively stable climate compared to surface [@kinlawReview1999;@nevoAdaptive1979].
+
+Australian blind snakes and these blind snakes share similar morphological features and diet consisting of eggs, larvae, and pupae. of ants and termites.
+
+The fact that we observed multiple independent transitions into the arid biome.
 
 For Group 1 eastward transitions might have occured 
 
 Pilbara in the west acted as a refugia and perhaps source of diversification 
 Arid environemnts is heterogenous and some areas have acted as refugia during glaciation (CITE), which may cause isolation and subsequent speciation. For example, the Pilbara region has both lineages that have deep coalescent histories and shallower divergences (_A. ammodytes_ and _A. ganei_). These species may have once been widely distributed but became extirpated as aridification intensified and are now found only in their place of refuge during glacial fluctuations. 
-
-Alternatively, this suggests that these lineages have diversified before the intensive continent-wide aridification in the late Miocene that resulted in the present dry and sandy red centre of Australia [@byrneBirth2008]. 
-This pattern may indicate that blind snakes, like other fossorial animals, are pre-adapted to arid environments (CITE). Subterranean microhabitat is relatively stable compared to ground. 
-
 
 Our results suggest that range expansion was important for diversification. The fact that DEC+J+x model was preferred over DEC+J may be due to poor dispersal ability as closely related species occupy the same or nearby areas. Events like floods are likely to have faciliated dispersals but in short distances. 
 
