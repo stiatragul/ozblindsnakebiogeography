@@ -142,11 +142,11 @@ ClaDS was implemented in `Julia` v.1.8.1 [@bezansonJulia2012], all other analyse
 <!-- ## values and info from 04_BioGeoBEARS_bsm_plots.R -->
 Our BioGeoBEARS analyses all inferred tropical grassland as the ancestral biome of *Anilios* but the ancestor leading to the crown *Anilios* is ambiguous. We found that the DEC+_j_+_x_ model was the most preferred biogeographical history model (delta AICc = -4.47, see Table-supp-BioGeoBEARS). A likelihood ratio test (LRT) showed that both founder events (+*j* parameter) and distance between biomes (+x parameter) together provide a statistically significant improvement over the simpler DEC model, DEC+x, and DEC+j (X^2^, DF = 2, D-statistic = 26.7, p-value < 0.001).
 
-Based on 50 BioGeoBEARS biogeographic stochastic mappings (BSM) of our best-fitting model. We estimated that an average of 71.2 ± 1.3 (mean ± SD) total anagenetic and cladogenetic events occurred throughout the phylogeny. Most of these events were anagenetic dispersals (31.2 ± 1.3 events) and cladogenetic founder events (6.1 ± 1.5 events). 
+Based on 50 BioGeoBEARS biogeographic stochastic mappings (BSM) of the DEC+_j_+_x_ model. We estimated that an average of 71.2 ± 1.3 (mean ± SD) total anagenetic and cladogenetic events occurred throughout the phylogeny (see supplementary_table_BioGEOBEARS). Of these 40 ± 0 were cladogenetic events compared to 31.2 ± 1.3 anagenetic dispersal events. Out of the 40 cladogenetic dispersal events, most were narrow sympatry range expansion events (23.8±2.1 events) followed by subset sympatry (5.2±2.3 events), vicariance (4.9 ± 1.3), and founder events (6.1 ± 1.5).
 
 The largest source of outward dispersal is the tropical grassland biome (16.2 ± 4.9 events; 43.6%), which makes up almost double the number of outward dispersals from the arid biome (9.7 ± 3.2 events; 26.0%) (\@ref(fig:fig-biogeobears))c-d. Together the tropical grassland biome and the arid biome contributes the largest source of diversification accounting for 69.6% of outward transitions. On the other hand, the largest sink for all inward dispersals are the tropical forest biome (7.9 ± 4.2 events; 21.2%) and the mediterranean biome (7.0 ± 2.9 events; 18.8%). The greatest directional transition is from the arid biome to the mediterranean biome (5.3 ± 1.5 events) and from the tropical grassland into the temperate forest biome (5.1 ± 1.3 events) (\@ref(fig:fig-biogeobears)c-d.
 
-Based on current distributions (ALA) most _Anilios_ species are found entirely or at least partially in the tropical grassland biome (n = 20) followed by the arid biome (n = 13) and mediterranean biome (n = 10). The model indicates two pulses of biogeographic transitions for the two major clades, which we will refer to as *Group 1* (n=21 lineages) and *Group 2* (n=14 lineages) (\@ref(fig:fig-biogeobears)a. The common ancestor of *Group 1* remained mostly in the Tropical Grassland Biome, then 12/21 lineages expanded or transitioned into other biomes. The common ancestor of *Group 2* first transitioned into the arid biome, and then 7/14 lineages expanded to the Mediterranean and Temperate Forest biomes, and/or transitioned back into the Tropical Grassland Biome. 
+Based on current distributions (ALA) most _Anilios_ species are found entirely or at least partially in the tropical grassland biome (n = 20) followed by the arid biome (n = 13) and mediterranean biome (n = 10). The model indicates two pulses of biogeographic transitions for each  of the two major clades, which we will refer to as *Group 1* (n=21 lineages) and *Group 2* (n=14 lineages) (\@ref(fig:fig-biogeobears)a. The common ancestor of *Group 1* remained mostly in the Tropical Grassland Biome, then 12/21 lineages expanded or transitioned into other biomes. The common ancestor of *Group 2* first transitioned into the arid biome, and then 7/14 lineages expanded to the Mediterranean and Temperate Forest biomes, and/or transitioned back into the Tropical Grassland Biome.
 
 ## Paleoclimate estimates
 
@@ -166,7 +166,7 @@ We applied GeoHiSSE models to evaluate whether speciation, extinction, and turno
 
 # Discussion
 
-With 47 recognised species, the mostly Australian-endemic genus *Anilios* is currently the most diverse genus of scolecophidia in the world. In this study we inferred the extant species in Australia has a tropical grassland origin. Within a few million years, this ancestral lineage split with one group staying in the tropical grassland biome while the other group transitioning into the arid biome. Subsequent transitions in these two groups resulted in the distribution of biomes we observed across the phylogeny today. We also found that paleo aridity index provides the best fit to diversification dynamics observed in our blind snake tree. Although aridification has been shown to accelerate diversification rates in other groups of vertebrates (CITE), we found no such difference for Australian *Anilios* blind snakes. 
+With 47 recognised species, the mostly Australian-endemic genus *Anilios* is currently the most diverse genus of scolecophidia in the world. In this study we inferred the extant species in Australia has a tropical grassland origin. Within a few million years, this ancestral lineage split with one group staying in the tropical grassland biome while the other group transitioning into the arid biome. Subsequent transitions in these two groups resulted in the distribution of biomes we observed across the phylogeny today. We also found that paleo aridity index provides the best fit to diversification dynamics observed in our blind snake tree. Although aridification has been linked elevated diversification rates in other plants and animals [@brennanMass2017;@raboskyAnalysis2014;@hernandez-hernandezAridification2014;@jhaPhylogeny2021], we found no such association for Australian *Anilios* blind snakes. 
 
 ## Ancestral biome of Australian *Anilios* 
 
@@ -175,13 +175,17 @@ Our result supports the hypothesis that the ancestor of the Australian clade fir
 ## Biome transition and current distributions 
 
 Consistent with @marinTracing2013, we found the initial diversification occurred very rapidly (<1 million years) in the tropical grassland biome followed by transitions and/or expansion into other biomes. 
-However, as opposedrecent invasion (<10 MYA) and diversification (<5 MYA) into the arid zone [@marinHidden2013], our results show that species in both groups 1 and 2 have deep divergence between 20 – 10 MYA, during the time when the Australia was still relatively wet and humid [@byrneBirth2008]. This suggests that these lineages have diversified before the intensive continent-wide aridification in the late Miocene that resulted in the present dry and sandy areas of the arid biome [@byrneBirth2008]. 
+However, our results show that species in both groups 1 and 2 have deep divergence between 20 – 10 MYA and gradually diversified during the time when the Australia was still relatively wet and humid [@byrneBirth2008] as opposed more recent invasion (<10 MYA) and diversification (<5 MYA) into the arid zone proposed by @marinHidden2013. This suggests that these lineages have diversified before the intensive continent-wide aridification in the late Miocene that resulted in the present dry and sandy areas of the arid biome [@byrneBirth2008]. 
 
 One hypothesis to explain contemporary distribution in the arid biome is that *Anilios* may be pre-adapted to arid environments. Blind snakes have been found in xeric areas around the world, for example _Myriopholis macrorhyncha_ in the desert 
 
 North American  and the Palearctic _Letheobia episcopus_) possibly because subterranean microhabitat has relatively stable climate compared to surface [@kinlawReview1999;@nevoAdaptive1979].
 
-Australian blind snakes and these blind snakes share similar morphological features and diet consisting of eggs, larvae, and pupae. of ants and termites.
+
+
+We found that closely related species share similar biome and distribution. 
+Our results indicate that cladogenetic processes (sympatry, vicariance, and founder event) made up the majority of range expansion events. Negative values for the distance parameter _X_ suggest that range expansion is expected to decrease as distance increase (CITE BioGeoBEARs intepetration?). 
+
 
 The fact that we observed multiple independent transitions into the arid biome.
 
@@ -190,7 +194,10 @@ For Group 1 eastward transitions might have occured
 Pilbara in the west acted as a refugia and perhaps source of diversification 
 Arid environemnts is heterogenous and some areas have acted as refugia during glaciation (CITE), which may cause isolation and subsequent speciation. For example, the Pilbara region has both lineages that have deep coalescent histories and shallower divergences (_A. ammodytes_ and _A. ganei_). These species may have once been widely distributed but became extirpated as aridification intensified and are now found only in their place of refuge during glacial fluctuations. 
 
-Our results suggest that range expansion was important for diversification. The fact that DEC+J+x model was preferred over DEC+J may be due to poor dispersal ability as closely related species occupy the same or nearby areas. Events like floods are likely to have faciliated dispersals but in short distances. 
+While there's not study to show, blind snakes probably have small ranges and poor dispersal ability as closely related species occupy the same or nearby areas. Stochastic events like floods may have facilitated dispersals but in short distances. 
+
+Australian blind snakes and these blind snakes share similar morphological features and diet consisting of eggs, larvae, and pupae. of ants and termites.
+
 
 ## Influence of paleoclimate on diversification rates 
 
