@@ -177,15 +177,7 @@ Our result supports the hypothesis that the ancestor of the Australian clade fir
 Consistent with @marinTracing2013, we found the initial diversification occurred very rapidly (<1 million years) in the tropical grassland biome followed by transitions and/or expansion into other biomes. 
 However, our results show that species in both groups 1 and 2 have deep divergence between 20 – 10 MYA and gradually diversified during the time when the Australia was still relatively wet and humid [@byrneBirth2008] as opposed more recent invasion (<10 MYA) and diversification (<5 MYA) into the arid zone proposed by @marinHidden2013. This suggests that these lineages have diversified before the intensive continent-wide aridification in the late Miocene that resulted in the present dry and sandy areas of the arid biome [@byrneBirth2008]. 
 
-One hypothesis to explain contemporary distribution in the arid biome is that *Anilios* may be pre-adapted to arid environments. Blind snakes have been found in xeric areas around the world, for example _Myriopholis macrorhyncha_ in the desert 
-
-North American  and the Palearctic _Letheobia episcopus_) possibly because subterranean microhabitat has relatively stable climate compared to surface [@kinlawReview1999;@nevoAdaptive1979].
-
-
-
-We found that closely related species share similar biome and distribution. 
 Our results indicate that cladogenetic processes (sympatry, vicariance, and founder event) made up the majority of range expansion events. Negative values for the distance parameter _X_ suggest that range expansion is expected to decrease as distance increase (CITE BioGeoBEARs intepetration?). 
-
 
 The fact that we observed multiple independent transitions into the arid biome.
 
@@ -198,6 +190,9 @@ While there's not study to show, blind snakes probably have small ranges and poo
 
 Australian blind snakes and these blind snakes share similar morphological features and diet consisting of eggs, larvae, and pupae. of ants and termites.
 
+We also found that closely related species share similar biome and distribution. 
+One hypothesis to explain contemporary distribution in the arid biome is that *Anilios* (and other blind snakes in general) may be pre-adapted to living in arid environments. 
+Blind snakes have been found in xeric areas around the world, for example _Rena humilis_ in the desert of North America and _Myriopholis macrorhyncha_ semi-arid areas of from east Africa to the Middle East [@sindacoReptiles2013]. To our knowledge, these species share similar dietary and morphological specialisations with their closest relatives, which is a pattern identified across all fossorial snakes [@cyriacDigging2018]. Because subterranean microhabitat has relatively stable climate compared to the surface [@kinlawReview1999;@nevoAdaptive1979], modification from the already specialised pheonotype may not be selected for. Future studies that investigate phenotypic variations across all blind snakes will further our understanding of how blind snakes evolved with seemingly conserved phenotypes. 
 
 ## Influence of paleoclimate on diversification rates 
 
