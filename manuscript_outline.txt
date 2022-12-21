@@ -25,7 +25,8 @@ Aims:
 
 - Investigate how paleo-environmental changes influence rates of diversification + Assess model fit between paleo-environment.  
 --- Paleoclimate reconstructions based on DEM by Scotese and Straume were similar in profile. However, DEM base on Valdes differed from the other two. Scotese is characterised by repeated fluctuations in the Pleistocene to reflect glacial cycles. 
---- Overall the average temperature from Australia specific reconstruction is consistently is warmer than global mean temperature. In the context of our model might not have made much of a difference because our environment-dependent models fit the spline rather than absolute temperature. 
+- Overall the average temperature from Australia specific reconstruction is consistently is warmer than global mean temperature. 
+- In the context of our model might not have made much of a difference because our environment-dependent models fit the spline rather than absolute temperature. 
 However, models that take in account thermal niche tolerance, such as NEMo, will benefit from paleoclimate reconstructions such as these to inform limits (boundaries). 
 --- Aridity index is a good indicator, but aridity is geographically restricted to the arid zone. In our phylogeny, a lot of diversity is observed is in the mesic zones.
 --- Warmer and dryer environment may not directly increase speciation rate because blind snakes are physically adapting to warmer temperatures, rather it is the fragmentation of the landscape. 
