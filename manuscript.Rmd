@@ -56,7 +56,7 @@ scolecophidia, Diversification, paleoclimate, BioGeoBEARS, GeoHiSSE
 
 The present-day distribution of extant species can provide clues about their biogeographic history and insight into the tempo and mode with which different groups diversified. The aridification of continental Australia began around 20 million years ago, with pockets of arid zone developing and subsequent extreme warming and cooling periods in the last ~5 million years creating what is now known as the 'outback' [@byrneBirth2008]. During this period, arid-adapted vegetation expanded and mesic biomes became more fragmented [@crispHow2013;@martinCenozoic2006]. This period of aridification is believed to have involved the rapid speciation of many arid-adapted vertebrates [@raboskyExceptional2007;@pepperPalaeoclimate2011;@brennanMass2017] and the extinction of some mesic-adapted groups [@bryantLines2016;@cardilloPhylogeny2017;@owenHow2017].
 
-Today, the arid zone covers the majority of area in the Australian landscape (70%) and provides habitat to 43% of all of Australia's terrestrial reptiles, termites, and ants [@byrneBirth2008]. Squamate reptiles (lizards and snakes) represent the largest vertebrate diversity in Australia with over 1000 species (~800 lizards and ~200 snakes), many of which diversified in the last 20 - 6 myr [@brennanMass2017;@oliverPhylogenetic2017]. Examples of reptilest that have colonised Australia from elsewhere and have diversified remarkably from the beginning of the Miocene include  agamid dragons [@chenSexual2012], monitor lizards [@brennanPhylogenomics2021], _Sphenomorphus_ and _Eugongylus_ skinks [@skinnerLygosomine2011], _Gehyra_ geckos [@ashmanDiversification2018], elapid snakes [@leeDiversification2016], pythons [@esquerrePhylogenomics2020], and blind snakes [@marinTracing2013]. 
+Today, the arid zone covers the majority of area in the Australian landscape (70%) and provides habitat to 43% of all of Australia's terrestrial reptiles, termites, and ants [@byrneBirth2008]. Squamate reptiles (lizards and snakes) represent the largest vertebrate diversity in Australia with over 1000 species (~800 lizards and ~200 snakes), many of which diversified in the last 20 - 6 myr [@brennanMass2017;@oliverPhylogenetic2017]. Examples of reptilest that have colonised Australia from elsewhere and have diversified remarkably from the beginning of the Miocene include agamid dragons [@chenSexual2012], monitor lizards [@brennanPhylogenomics2021], _Sphenomorphus_ and _Eugongylus_ skinks [@skinnerLygosomine2011], _Gehyra_ geckos [@ashmanDiversification2018], elapid snakes [@leeDiversification2016], pythons [@esquerrePhylogenomics2020], and blind snakes [@marinTracing2013]. 
 
 Some clades, like Elapid snakes [@leeDiversification2016;@sandersMolecular2008] and scincid lizards [[@raboskyExceptional2007] showed dramatic ecological diversity taking up different niches. Other clades like geckos and blind snakes remain morphologically conserved and were thought to be species poor until recent molecular data suggested otherwise [@marinHidden2013;@moritzCryptic2018;@zozayaAre2019]. The species richness and distribution of squamate reptiles across different biomes makes them a good group to test hypotheses about the tempo and mode of diversification in Australia. 
 
@@ -154,7 +154,7 @@ Our result supports the hypothesis that the ancestor of the Australian clade fir
 
 ## Biome transition and current distributions 
 
-Consistent with previous research by @marinTracing2013, we found that the initial diversification of Anilios occurred in the Tropical Grassland biome, followed by transitions and/or expansion into other biomes. However, our analyses indicated that species-level divergence occurred earlier, between 20 – 10 MYA, compared to the 15 – 10 MYA proposed by @marinTracing2013. Our BioGeoBEARS analyses suggest that _Anilios_ gradually diversified in the tropical grassland (Group 1) and arid biome (Group 2) during a time when Australia was relatively wet and humid [@byrneBirth2008]. This indicates that many species found in arid biomes, particularly in Group 2, diversified in the arid biome prior to the onset of aridification in the late Miocene [@byrneBirth2008]. 
+Consistent with previous research by @marinTracing2013, we found that the initial diversification of _Anilios_ occurred in the Tropical Grassland biome, followed by transitions and/or expansion into other biomes. However, our analyses indicated that species-level divergence occurred earlier, between 20 – 10 MYA, compared to the 15 – 10 MYA proposed by @marinTracing2013. Our BioGeoBEARS analyses suggest that _Anilios_ gradually diversified in the tropical grassland (Group 1) and arid biome (Group 2) during a time when Australia was relatively wet and humid [@byrneBirth2008]. This indicates that many species found in arid biomes, particularly in Group 2, diversified in the arid biome prior to the onset of aridification in the late Miocene [@byrneBirth2008]. 
 
 A hypothesis to explain the contemporary distribution of _Anilios_ and other blind snakes in arid biomes is that they may be pre-adapted to living in such environments. Blind snakes have been found in xeric areas around the world, such as _Rena humilis_ in the desert of North America and _Myriopholis macrorhyncha_ in semi-arid areas from east Africa to the Middle East [@sindacoReptiles2013]. To our knowledge, these species share similar dietary and morphological specialisations with their closest relatives, which is a pattern identified across all fossorial snakes [@cyriacDigging2018]. Because the subterranean microhabitat has a relatively stable climate compared to the surface [@kinlawReview1999;@nevoAdaptive1979], modification from the already specialised phenotype may not be selected for. Future studies that investigate phenotypic variations across all blind snakes will further our understanding of how these snakes evolved with seemingly conserved phenotypes.
 
@@ -164,42 +164,52 @@ Our best-fitting model show that aridity is negatively associated with speciatio
 
 While not the best fitting model, we observed that our reconstructed Australia-specific paleotemperature data provided a better fit than the global temperature data set [@condamineMacroevolutionary2013]. In the context of our birth-death models, the absolute value of temperature might not have made much of a difference because our environment-dependent models fit the spline rather than absolute temperature. However, models that take in account thermal niche tolerance, such as NEMo [@huaAdapting2022], will benefit from paleoclimate reconstructions such as these to inform limits (boundaries). We suggest future studies that aim to understand how aridification affect diversification rates in Australia consider using these paleoclimate models to inform model inferences. 
 
-
-
 ALEX SKEELS add to this discussion?
-- Paleoclimate reconstructions based on DEM by Scotese and Straume were similar in profile. However, DEM base on Valdes differed from the other two. Scotese is characterised by repeated fluctuations in the Pleistocene to reflect glacial cycles. to add discussion to this?
+- Paleoclimate reconstructions based on DEM by Scotese and Straume were similar in profile. However, DEM base on Valdes differed from the other two. Scotese is characterised by repeated fluctuations in the Pleistocene to reflect glacial cycles. 
 
 ## Diversification in the arid zone
 
-- Diversification rate decrease with aridification. But this is not explained by lineages transitioning into the arid biome as diversification rates did not differ between lineages in arid and non-arid biomes. Turnover rate also ... 
+Several studies have shown that arid-adapted species originated either from a single ancestor present in Australia before the Miocene, or through multiple independent expansion into the arid zone [@byrneBirth2008]. Our ancestral biome analyses show that several non-arid ancestors of _Anilios_ blind snakes have diverged into the arid zone evident by multiple arid species throughout the phylogeny. This pattern is consistent with several other groups vertebrates that started to diversify in the Miocene including goannas [@brennanPhylogenomicsMonitorLizards2021;@pavon-vazquezCompetition2022], frogs [@catulloAridification2014], and several geckos [@fujitaDiversification2010;@oliverIndependent2014]. 
 
-- Lineages that have evolved more recently in the arid zone became extinct with the Plio-Pleistocene glacial cycles leaving only species that have survived in pockets of refugia. 
-- Vast arid biome covers 70% of the continent, which the largest biome in Australia with lots of heterogeneity [@pepperLife2021]. 
-- Pockets of certain areas were refugia during glaciation cycles of the Pleistocene. 
+Although the expansion of the arid zone and fragmentation of mesic environments throughout the Miocene has been linked with increase speciation [cite], studies have found that mountainous areas in the arid zone habour more diversity than the flat featureless desert [@pepperPalaeoclimate2011].
+
+
+-- new open dry habitats for different species of reptiles to fill [@sandersMolecular2008;@hugallPhylogeny2008], which 
+
+
+our state speciation-extinction analyses on the blind snake phylogeny also indicate that speciation, extinction, and turnover rates did not differ between lineages in arid and non-arid biomes. 
+
+
 
 - Warmer and dryer environment may not directly decrease speciation rate because blind snakes are physically adapting to warmer temperatures. However, climatic fluctuations can contract and fragment available niche for blind snakes and thus influence diversification rates. 
+- Alternatively, since they are fossorial they may not be subject to the same selective pressures epigean (surface dwelling) species. For example, their association with their prey, ants and termites, may buffer them from dessication and predation pressures (Nevo 1979** cite)
+- Microhabitat better explains diversification than climate, but typhlopidae has the second highest speciation rates among fossorial snakes [@bars-closelDiversification2017]. 
+
+
+- Lineages that have evolved more recently in the arid zone became extinct with the Plio-Pleistocene glacial cycles leaving only species that have survived in pockets of refugia. 
+- Pockets of certain areas were refugia during glaciation cycles of the Pleistocene. 
 
 - The early burst of speciation is observed in lineages that colonise new areas. For example ... 
 
 - Interestingly blind snakes have diversified greatly compared to other fossorial vertebrates. 
   - It is also possible that fossorial species are more cryptic and thus the full extent of their diversity is under appreciated. 
 
-- Alternatively, since they are fossorial they may not be subject to the same selective pressures epigean (surface dwelling) species. For example, their association with their prey, ants and termites, may buffer them from dessication and predation pressures (Nevo 1979** cite)
-
-- Microhabitat better explains diversification than climate, but typhlopidae has the second highest speciation rates among fossorial snakes [@bars-closelDiversification2017]. 
-
 - Extinction is a big cavaet especially because we suspect there are more species. Arid adapted lineages may have experienced higher extinction OR not well sampled in remote Western Australia. Most species are sampled next to roads [CITE Xia's paper or do supplemental analyses].
 
 - Future phylogeographic study should consider densely sampling species to see whether there are more expansion into or out of arid zone for widespread taxa. 
 - Geographic barrier for mesic adapted lineages in the temperate and tropical forests may have difficulty crossing the lines [@bryantLines2016]
 
-@deepakAridification2018 - accelerated speciation with aridification from the late Miocene. Probably due to emergence of open habitats
-@catulloAridification2014 - multiple independent origing from mesic or monsoonal ancestors into the arid zone. Lineages older than intense aridification. 
-@fujitaDiversification2010 - independent origins of arid zone lineages in _Heteronotia_
+<!---
 @pepperGenetic2011 - mountain ranges harbour more diversity than deserts. arid zone vertebrates show little genetic diff. But recent population expansion in the desert. 
+@catulloAridification2014 - multiple independent origin from mesic or monsoonal ancestors into the arid zone. Lineages older than intense aridification. 
+@fujitaDiversification2010 - independent origins of arid zone lineages in _Heteronotia_
 @oliverIndependent2014 - multiple independent invasion into the arid zone.
 @owenHow2017 - cicada increase speciation in arid zone compared to mesic zone (SSE)
 @toussaintUnveiling2015 - diving beetle boom and bust diversification. Invaded arid zone and changed ecologically
+@deepakAridification2018 - India accelerated speciation with aridification from the late Miocene. Probably due to emergence of open habitats
+--->
+
+
 
 ## Limitations
 There are several limitations in our models. 
