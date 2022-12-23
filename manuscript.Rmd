@@ -156,7 +156,7 @@ Our result supports the hypothesis that the ancestor of the Australian clade fir
 
 Consistent with previous research by @marinTracing2013, we found that the initial diversification of _Anilios_ occurred in the Tropical Grassland biome, followed by transitions and/or expansion into other biomes. However, our analyses indicated that species-level divergence occurred earlier, between 20 – 10 MYA, compared to the 15 – 10 MYA proposed by @marinTracing2013. Our BioGeoBEARS analyses suggest that _Anilios_ gradually diversified in the tropical grassland (Group 1) and arid biome (Group 2) during a time when Australia was relatively wet and humid [@byrneBirth2008]. This indicates that many species found in arid biomes, particularly in Group 2, diversified in the arid biome prior to the onset of aridification in the late Miocene [@byrneBirth2008]. 
 
-A hypothesis to explain the contemporary distribution of _Anilios_ and other blind snakes in arid biomes is that they may be pre-adapted to living in such environments. Blind snakes have been found in xeric areas around the world, such as _Rena humilis_ in the desert of North America and _Myriopholis macrorhyncha_ in semi-arid areas from east Africa to the Middle East [@sindacoReptiles2013]. To our knowledge, these species share similar dietary and morphological specialisations with their closest relatives, which is a pattern identified across all fossorial snakes [@cyriacDigging2018]. Because the subterranean microhabitat has a relatively stable climate compared to the surface [@kinlawReview1999;@nevoAdaptive1979], modification from the already specialised phenotype may not be selected for. Future studies that investigate phenotypic variations across all blind snakes will further our understanding of how these snakes evolved with seemingly conserved phenotypes.
+A hypothesis to explain the contemporary distribution of _Anilios_ and other blind snakes in arid biomes is that they may be pre-adapted to living in such environments. Blind snakes have been found in xeric areas around the world, such as _Rena humilis_ in the desert of North America and _Myriopholis macrorhyncha_ in semi-arid areas from east Africa to the Middle East [@sindacoReptiles2013]. To our knowledge, these species share similar dietary and morphological specialisations with their closest relatives, which is a pattern identified across all fossorial snakes [@cyriacDigging2018]. 
 
 ## Influence of paleoenvironment on diversification rates 
 
@@ -169,35 +169,30 @@ ALEX SKEELS add to this discussion?
 
 ## Diversification in the arid zone
 
-Several studies have shown that arid-adapted species originated either from a single ancestor present in Australia before the Miocene, or through multiple independent expansion into the arid zone [@byrneBirth2008]. Our ancestral biome analyses show that several non-arid ancestors of _Anilios_ blind snakes have diverged into the arid zone evident by multiple arid species throughout the phylogeny. This pattern is consistent with several other groups vertebrates that started to diversify in the Miocene including goannas [@brennanPhylogenomicsMonitorLizards2021;@pavon-vazquezCompetition2022], frogs [@catulloAridification2014], and several geckos [@fujitaDiversification2010;@oliverIndependent2014]. 
+Several studies have shown that arid-adapted species originated either from a single ancestor present in Australia before the Miocene, or through multiple independent expansion into the arid zone [@byrneBirth2008]. Our ancestral biome analyses show that several non-arid ancestors of _Anilios_ blind snakes have diverged into the arid zone evident by multiple arid species throughout the phylogeny. This pattern is consistent with several other groups of reptiles that started to diversify in the Miocene including goannas [@brennanPhylogenomicsMonitorLizards2021;@pavon-vazquezCompetition2022], elapid snake [@sandersMolecular2008], pythons [@esquerrePhylogenomics2020] and several geckos [@fujitaDiversification2010;@oliverIndependent2014]. 
 
-Although the expansion of the arid zone and fragmentation of mesic environments throughout the Miocene has been linked with increase speciation [cite], studies have found that mountainous areas in the arid zone habour more diversity than the flat featureless desert [@pepperPalaeoclimate2011].
-
-
--- new open dry habitats for different species of reptiles to fill [@sandersMolecular2008;@hugallPhylogeny2008], which 
+For these terrestrial reptiles, increased rates of speciation for arid adapted taxa have been attributed to species filling niche in the saxicolous and xeric habitats that emerged with the contraction of mesic forest throughout the Miocene [@sandersMolecular2008;@hugallPhylogeny2008]. However, results from our weighted-averaged state speciation-extinction analyses on the Australian blind snake phylogeny indicated that speciation, extinction, and turnover rates did not differ between lineages in arid and non-arid biomes. One hypothesis is that fossorial species may not be subjected to the same selective pressures present in the arid zone, such as extreme temperatures [@pepperLife2021], as much surface dwelling species do. For instance, because blind snakes live in subterranean microhabitat with relatively stable climate compared to the surface [@kinlawReview1999;@nevoAdaptive1979], modification from the already specialised phenotype may not be selected for [@cyriacDigging2018]. Future studies that investigate phenotypic variations across all blind snakes will further our understanding of how these snakes evolved with seemingly conserved phenotypes.
 
 
-our state speciation-extinction analyses on the blind snake phylogeny also indicate that speciation, extinction, and turnover rates did not differ between lineages in arid and non-arid biomes. 
+- Future phylogeographic study should consider densely sampling species to see whether there are more expansion into or out of arid zone for widespread taxa. 
 
+Warmer and dryer environment may not directly influence speciation rate because blind snakes are physically adapting to warmer temperatures. 
+However, climatic fluctuations can contract and fragment available niche for blind snakes and thus influence diversification rates. 
 
-
-- Warmer and dryer environment may not directly decrease speciation rate because blind snakes are physically adapting to warmer temperatures. However, climatic fluctuations can contract and fragment available niche for blind snakes and thus influence diversification rates. 
-- Alternatively, since they are fossorial they may not be subject to the same selective pressures epigean (surface dwelling) species. For example, their association with their prey, ants and termites, may buffer them from dessication and predation pressures (Nevo 1979** cite)
 - Microhabitat better explains diversification than climate, but typhlopidae has the second highest speciation rates among fossorial snakes [@bars-closelDiversification2017]. 
 
-
-- Lineages that have evolved more recently in the arid zone became extinct with the Plio-Pleistocene glacial cycles leaving only species that have survived in pockets of refugia. 
-- Pockets of certain areas were refugia during glaciation cycles of the Pleistocene. 
-
-- The early burst of speciation is observed in lineages that colonise new areas. For example ... 
 
 - Interestingly blind snakes have diversified greatly compared to other fossorial vertebrates. 
   - It is also possible that fossorial species are more cryptic and thus the full extent of their diversity is under appreciated. 
 
+##### Geographical things
+- Geographic barrier for mesic adapted lineages in the temperate and tropical forests may have difficulty crossing the lines [@bryantLines2016]
+- Certain regions with complex topographic features tend to harbour more diveristy than flat featureless desert areas [@pepperPalaeoclimate2011]. 
+- Lineages that have evolved more recently in the arid zone became extinct with the Plio-Pleistocene glacial cycles leaving only species that have survived in pockets of refugia. 
+
+- The early burst of speciation is observed in lineages that colonise new areas. For example ... 
 - Extinction is a big cavaet especially because we suspect there are more species. Arid adapted lineages may have experienced higher extinction OR not well sampled in remote Western Australia. Most species are sampled next to roads [CITE Xia's paper or do supplemental analyses].
 
-- Future phylogeographic study should consider densely sampling species to see whether there are more expansion into or out of arid zone for widespread taxa. 
-- Geographic barrier for mesic adapted lineages in the temperate and tropical forests may have difficulty crossing the lines [@bryantLines2016]
 
 <!---
 @pepperGenetic2011 - mountain ranges harbour more diversity than deserts. arid zone vertebrates show little genetic diff. But recent population expansion in the desert. 
