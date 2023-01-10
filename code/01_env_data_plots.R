@@ -34,11 +34,21 @@ env_plottr <- function(.df){
   ggplot(data = ., aes(x = age, colour = source)) +
     geom_line(aes(y = vals), size = 1) +
     geom_point(aes(y = vals)) + 
-    deeptime::coord_geo(xlim = c(46, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
+    deeptime::coord_geo(xlim = c(26, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
     # scale_colour_manual(values = viridis(4), name = "Data source", labels = c("RPANDA Global", "Scotese Australia", "Straume Australia", "Valdes Australia")) +
-    scale_y_continuous(limits = c(-5, 40), breaks = seq(-5, 40, 5)) + labs(y = "Mean temperature (°C)") +
-    scale_x_reverse("Age (Ma)", limits = c(45, 0), breaks = seq(45, 0, by = -5)) + theme_bw() 
+    scale_y_continuous(limits = c(-5, 30), breaks = seq(-5, 30, 5)) + labs(y = "Mean temperature (°C)") +
+    scale_x_reverse("Age (Ma)", limits = c(25, 0), breaks = seq(25, 0, by = -5)) + theme_bw() 
 }
+# env_plottr <- function(.df){
+#   .df %>% 
+#   ggplot(data = ., aes(x = age, colour = source)) +
+#     geom_line(aes(y = vals), size = 1) +
+#     geom_point(aes(y = vals)) + 
+#     deeptime::coord_geo(xlim = c(46, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
+#     # scale_colour_manual(values = viridis(4), name = "Data source", labels = c("RPANDA Global", "Scotese Australia", "Straume Australia", "Valdes Australia")) +
+#     scale_y_continuous(limits = c(-5, 40), breaks = seq(-5, 40, 5)) + labs(y = "Mean temperature (°C)") +
+#     scale_x_reverse("Age (Ma)", limits = c(45, 0), breaks = seq(45, 0, by = -5)) + theme_bw() 
+# }
 
 # pdf(file = "output/paleo_env_data_plots.pdf", height = 10, width = 10)
 
@@ -48,14 +58,20 @@ env_df[which(env_df$source %in% c("mean_str", "max_str", "min_str")),] %>% env_p
 
 env_df[which(env_df$source %in% c("mean_val", "max_val", "min_val")),] %>% env_plottr()
 
-env_df[which(env_df$source %in% c("arid_sco", "arid_str", "arid_val")),] %>% 
-  ggplot(data = ., aes(x = age, colour = source)) +
-  geom_line(aes(y = vals), size = 1) +
-  scale_x_reverse("Age (Ma)", limits = c(45, 0), breaks = seq(45, 0, by = -5)) + theme_bw() +
-  deeptime::coord_geo(xlim = c(46, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
-  labs(y = "Aridity index")
-
 dev.off()  
 
+temp_plots <- env_df[which(env_df$source %in% c("mean_sco", "mean_str", "mean_val", "global_temp")),] %>% env_plottr()
 
+arid_plots <- env_df[which(env_df$source %in% c("arid_sco", "arid_str", "arid_val")),] %>% 
+  ggplot(data = ., aes(x = age, colour = source)) +
+  geom_line(aes(y = vals), size = 1) +
+  scale_x_reverse("Age (Ma)", limits = c(25, 0), breaks = seq(25, 0, by = -5)) + theme_bw() +
+  deeptime::coord_geo(xlim = c(26, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
+  labs(y = "Aridity index")
 
+library(patchwork)
+
+pdf(file = "output/paleo_data_compare_plots.pdf", height = 11.33, width = 8.5)
+temp_plots /
+  arid_plots
+dev.off()
