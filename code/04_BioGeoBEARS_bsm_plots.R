@@ -154,9 +154,9 @@ inwards_disp <- ggplot(data = mean_in_disp_area, aes(fill= from, y = count, x = 
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "none")
 
-geom_text(data = df2,
-          aes(y = Freq + 1,
-              label = sprintf('%.2f%%', Prop)))# inwards dispersals geo state
+# geom_text(data = df2,
+#           aes(y = Freq + 1,
+#               label = sprintf('%.2f%%', Prop)))# inwards dispersals geo state
 inwards_disp_geo <- ggplot(data = mean_in_disp_area, aes(fill= state_from, y = count, x = state_to)) + 
   geom_bar(position="stack", stat="identity") +
   labs(x = "Inwards dispersal", y = "Mean inwards transition frequency") + 
@@ -181,7 +181,8 @@ inwards_disp_grp <- ggplot(data = mean_in_disp_area, aes(fill= subset_from, y = 
 ### stitch together with patchwork package
 
 # Save PDF to be included as inset in BioGeoBEARS plot
-pdf(file = 'output/biogeobears_dispersal_freq.pdf', width = 11.5, height = 5.7)
+# pdf(file = 'output/biogeobears_dispersal_freq.pdf', width = 11.5, height = 5.7)
+pdf(file = 'output/biogeobears_dispersal_mean.pdf', width = 11.5, height = 5.7)
 outwards_disp_grp +inwards_disp_grp
 dev.off()
 
