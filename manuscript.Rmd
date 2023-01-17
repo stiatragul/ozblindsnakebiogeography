@@ -1,5 +1,5 @@
 ---
-title: "Diversification of Australian blind snakes"
+title: ""
 date: "`r Sys.Date()`"
 author: 
 output: 
@@ -33,20 +33,28 @@ library(ape); library(phytools);
 library(kableExtra); library(RPANDA)
 ```
 
+Possible titles:
+- Diversification rates of Australian blind snakes slows down as the continent became more dry up.
+- Reconstructed paleoaridity correlate with decreased diversification rates in Australian blind snakes.
+- Drying up speciation: aridification of Australia slowed down diversification of Australian blind snakes
+- Dull when dry: increased aridity correlate with decrease diversification in blind snakes
+
 **Abstract**
+
+**Aim**: Shifts in diversification rates of Australian flora and fauna has been associated with aridification, but the relationship between diversification rates and aridity ifself has never been quantified. We investigate how paleoenvironmental changes have influenced the diversification rates of the mostly endemic Australian blind snakes genus, Anilios. We explored how changes in temperature and aridity during the Neogene have influenced the diversification of the Australian blind snake and we further investigate whether diversification rates differ between arid-adapted lineages vs mesic-adapted lineages. 
 
 **Taxon**: Blind snakes
 
 **Location**: Australasia
 
-**Methods**:
+**Materials and Methods**: We infer the ancestral biome of Australian blind snakes using BioGeoBEARS. We reconstruct the paleoenvironments of Australia during the Neogene using the gen3sis engine. We fit several birth-death models and estimate diversification rates under paleoenvironmental conditions using RPANDA. We further compare diversification rates between arid-adapted lineages versus mesic-adapted lineages using ClaDS and GeoHiSSE. 
 
-**Results**:
+**Results**: Results from our BioGeoBEARS analyses indicate that Australian blind snakes have tropical grassland origins. We found that local Australian paleoenvironments provide better fit than global paleoenvironments. Diversification rates of blind snakes decreased with increasing aridity. We found no difference in diversification rates between arid- and mesic-adapted lineages. 
 
-**Main conclusions**:
+**Main conclusions**: Soon after colonising Australia, the common ancestors of Australian blind snakes diversified rapidly in mesic habitats during early Miocene. When the continent became more arid, diversification rates decreased. However, two clades emerged with one staying mostly in mesic habitats and the other exploiting the burgeoning arid biome. Both the arid and tropical biomes were important sources and sinks of subsequent diversification. 
 
 **Keywords**
-Scolecophidia, Diversification, paleoclimate, BioGeoBEARS, GeoHiSSE
+Scolecophidia, Diversification, gen3sis, BioGeoBEARS, GeoHiSSE
 
 \newpage
 
@@ -152,7 +160,12 @@ knitr::include_graphics(paste0(WD, '/assets/figures/paleo_data_compare.jpg'))
 
 ## Environment-dependent diversification 
 
-We found that the exponential environment-dependent speciation and constant extinction (BEnvDCST) model based on paleoaridity (estimated from @scoteseAtlas2021) provided the best fit to the phylogeny (AICc = 238.43; see Table-RPANDA-TOP10). This best-fitting model indicates that an increase in aridity is exponentially associated with a decrease in speciation rate (λ = 1.32, α = -0.14) and a constant background extinction rate (µ = 0.23). The second and third most competitive models (ΔAICc < 2) also found that an increase in aridity is exponentially associated with a decrease in speciation rate, but without estimating extinction (see Table-RPANDA-TOP10). Among the exponential environment-dependent models, we found that Australia-specific paleotemperature data provided a better fit to our phylogeny than global paleotemperature data (see supp-TABLE_FULL_RPANDA_model_fit).
+We found that the exponential environment-dependent speciation and constant extinction (BEnvDCST) model based on paleoaridity (estimated from @scoteseAtlas2021) provided the best fit to the phylogeny (AICc = 238.43; see Table-RPANDA-TOP10). This best-fitting model indicates that an increase in aridity is exponentially associated with a decrease in speciation rate (λ = 1.32, α = -0.14) and a constant background extinction rate (µ = 0.23) (Fig. \@ref(fig:fig-RPANDA)). The second and third most competitive models (ΔAICc < 2) also found that an increase in aridity is exponentially associated with a decrease in speciation rate, but without estimating extinction (see Table-RPANDA-TOP10). Among the exponential environment-dependent models, we found that Australia-specific paleotemperature data provided a better fit to our phylogeny than global paleotemperature data (see supp-TABLE_FULL_RPANDA_model_fit).
+
+```{r fig-RPANDA, fig.cap= 'Effect of aridity change on the diversification of Anilios estimated from the phylogeny. (a) The aridity index through time calculated from reconstructed paleoclimate (dotted line), and lineage through time estimated from the phylogeny (solid line). (b) Speciation rates through time from the best diversification model. (c) Association between speciation rate and aridity index. We found that increased aridity is associated with decrease speciation rate.'}
+
+knitr::include_graphics(paste0(WD, '/assets/figures/RPANDA_fit_arid.jpg'))
+```
 
 ```{r Table-RPANDA-TOP10}
 
@@ -242,12 +255,10 @@ Our BioGeoBEARS ancestral biome estimation is limited by the areas (e.g. in this
 Therefore, we cannot make any conclusions about transitions between New Guinea and Australia even though at least two species (i.e. _A. torresianus_ and _A. leucoproctus_) are found between southern New Guinea and Far North Queensland 
 --->
 
-
 # Conclusion
 
 As we continue generate more genetic data to build ever more extensive phylogenies, there is a growing need to develop methods and complimentary paleoenvironmental data sets that allow us to test hypotheses about how different macroevolutionary processes influence diversification. We inferred that tropical grassland is the ancestral biome of Australian _Anilios_ and acted as a major source of biodiversity to other biomes. Compared to other Australian reptile radiation in the Miocene, we observe a burst of diversification when the lineage first arrived on the continent and gradual decrease in diversification as the continent aridify. 
 We showed that tools like gen3sis can be used to reconstruct localised paleoaridity data that provides a better fit to our Australian blind snake phylogeny than generic global paleotemperature. To our knowledge, this is the first study that empirically fit diversification models to reconstructed paleo-aridity data. We believe these regional paleoclimate models will be of interested for studies where species are geographically restricted. 
-
 
 \newpage
 
@@ -256,6 +267,8 @@ We showed that tools like gen3sis can be used to reconstruct localised paleoarid
 Fig. Ancestral biome estimation and transitions of Australo-Papuan blind snakes in BioGeoBEARS, using the DEC+j+x model. (a) Pie charts based on 50 biogeographic stochastic map (BSM) representing probabilities of each biome at speciation event. Inset map (left) shows the current distribution of biomes. Inset maps to the right of the tree shows distribution of species in Group 1 and Group 2, respectively. (b) Histogram showing frequency and composition of outward transitions from Australian biomes and combined non-Australian islands. (c) Histogram showing frequency and composition of inward transitions from Australian biomes and combined non-Australian islands. Abbreviations: TrG = Tropical grassland, TmF = Temperate forest, AR = Arid, MD = Mediterranean, TrF = Tropical Forest, and TmG = Temperate grassland.
 
 Fig. Paleoclimate estimation based different data sets in gen3sis and RPANDA. (a) Estimated mean paleo temperature in Australia compared to RPANDA global paleotemperature data. (b) Estimated mean aridity index based on precipitation threshold. Abbreviations Pli = Paleocene and Ple = Pleistocene.
+
+Fig. Effect of aridity change on the diversification of Anilios estimated from the phylogeny. (a) The aridity index through time calculated from reconstructed paleoclimate (dotted line), and lineage through time estimated from the phylogeny (solid line). (b) Speciation rates through time from the best diversification model. (c) Association between speciation rate and aridity index. We found that increased aridity is associated with decrease speciation rate.
 
 Fig. Diversification rates estimates from ClaDS and SSE models. (a) Branch-specific rates across the phylogeny. (b) Mean branch-specific rates over time. (c) Density plot of branch-specific rates by geographic range from ClaDS analysis. (d) Speciation rates from four geographic diversification rate models averaged by model weight. (e) Estimates of speciation rate and (d) turnover rates for arid, non-arid, and widespread lineages
 
