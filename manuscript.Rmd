@@ -121,7 +121,7 @@ We employed the most comprehensive time-calibrated phylogenomic tree of Australi
 
 To investigate the biogeographic history of blind snakes, we used the R package BioGeoBEARS v.1.1.1 [@matzkeBioGeoBEARS2013]. BioGeoBEARS provides a flexible, likelihood-based framework that models how branches in the phylogeny (representing extant taxa and their ancestors) have shifted among a set of discrete biomes over time. These shifts in biomes can occur within a single branch (anagenetic events, including processes such as dispersal and extinction) or at the time of branching (cladogenetic events involving sympatric, vicariant, and founder-event speciation). 
 <!--The fundamental inputs for the software include a time-calibrated phylogeny, information about the biome/range in which each species is found, and a historical biogeographic model.  -->
-We divided Australo-Papua into nine discrete biomes and assigned each Australian species to one or more biomes based on their occurrence records. Biome classifications were based on the World Wildlife Fund's (WWF) Terrestrial Ecoregions of the World data set [@olsonTerrestrial2001] and followed the nomenclature of published Australia-specific studies [@cardilloPhylogeny2017;@pavon-vazquezComprehensive2021].
+We divided Australo-Papua into nine discrete biomes and assigned each Australian species to one or more biomes based on their occurrence records from the Atlas of Living Australia database as described in @tiatragulAustralia2022. Biome classifications were based on the World Wildlife Fund's (WWF) Terrestrial Ecoregions of the World data set [@olsonTerrestrial2001] and followed the nomenclature of published Australia-specific studies [@cardilloPhylogeny2017;@pavon-vazquezComprehensive2021].
 
 Using the phylogeny and distribution data, we fitted three widely used historical biogeographical methods, which vary in the kinds of cladogenetic and anagenetic events they model, including likelihood implementations of Dispersal-Vicariance Analysis(DIVALIKE) [@ronquistDispersalVicariance1997], Dispersal-Extinction-Cladogenesis (DEC) [@reeMaximum2008], and BayArea (BAYAREALIKE) [@landisBayesian2013] in the R package BioGeoBEARS [@matzkeBioGeoBEARS2013]. 
 We also fitted these three models, with two additional free parameters that we thought were relevant, both singly and together, for a total of 12 alternative models. The first additional parameter, *j*, assigns per-event weight to founder-events [@matzkeModel2014], and the second parameter, _x_, multiplies the probability of dispersal by distance to the power of _x_ [@vandamEvaluating2016] (see Appendix 1).
@@ -181,7 +181,7 @@ knitr::include_graphics(paste0(WD, '/assets/figures/biogeobears.jpg'))
 
 ## Paleoenvironment estimates
 
-Paleotemperature estimates for Australia differed between the three different methods (Fig. \@ref(fig:fig-paleoclimate-compare)b). However, all three paleotemperature models indicate Australia was hotter than the average global temperature (Fig. \@ref(fig:fig-paleoclimate-compare)a). Paleoclimate in Australia were also relatively constant compared to global temperature until the Plio-Pleistocene, a period characterised by fluctuations corresponding to the glacial cycles. 
+Paleotemperature estimates for Australia differed between the three different methods (Fig. \@ref(fig:fig-paleoclimate-compare)a). However, all three paleotemperature models indicate Australia was hotter than the average global temperature (Fig. \@ref(fig:fig-paleoclimate-compare)a). Paleoclimate in Australia were also relatively constant compared to global temperature until the Plio-Pleistocene, a period characterised by fluctuations corresponding to the glacial cycles. 
 Reconstructions of paleoaridity differed slightly between the two Köppen band methods, but these differed substantially to the aridity index derived from the GCM data (Fig. \@ref(fig:fig-paleoclimate-compare)b). Both Köppen band-based aridity indices show increasing aridity from 10 Ma, consistent with the onset of aridification of the continent [@byrneBirth2008;@pepperLife2021]. 
 
 ```{r fig-paleoclimate-compare, fig.cap= 'Paleoclimate estimation based different data sets in gen3sis and RPANDA. (a) Estimated mean paleotemperature in Australia compared to RPANDA global paleotemperature data. (b) Estimated mean aridity index based on precipitation threshold. Abbreviations Pli = Paleocene and Ple = Pleistocene.'}
@@ -192,12 +192,8 @@ knitr::include_graphics(paste0(WD, '/assets/figures/paleo_data_compare.jpg'))
 
 ## Environment-dependent diversification 
 
-Among all the birth-death, time-dependent, and environment-dependent models fitted in RPANDA, we found that environment-dependent models were preferred. Of the fitted environment-dependent models, we found the exponential environment-dependent speciation and constant extinction (BEnvDCST) model based on paleoaridity (estimated from @scoteseAtlas2021) provided the best fit to the phylogeny (AICc = 238.43; see Table 1). This best-fitting model indicates that an increase in aridity is exponentially associated with a decrease in speciation rate (λ = 1.32, α = -0.14) and a constant background extinction rate (µ = 0.23) (Fig. \@ref(fig:fig-RPANDA)). The second and third most competitive models (ΔAICc < 2) also found that an increase in aridity is exponentially associated with a decrease in speciation rate, but without estimating extinction (see Table 1). Among the exponential environment-dependent models, we found that Australia-specific paleotemperature data provided a better fit to our phylogeny than global paleotemperature data (Table S3).
+Among all the birth-death, time-dependent, and environment-dependent models fitted in RPANDA, we found that environment-dependent models were preferred. Of the fitted environment-dependent models, we found the exponential environment-dependent speciation and constant extinction (BEnvDCST) model based on paleoaridity estimated from @scotesePALEOMAP2018 provided the best fit to the phylogeny (AICc = 238.43; see Table 1). This best-fitting model indicates that an increase in aridity is exponentially associated with a decrease in speciation rate (λ = 1.32, α = -0.14) and a constant background extinction rate (µ = 0.23) (Fig. \@ref(fig:fig-RPANDA)). The second and third most competitive models (ΔAICc < 2) also found that an increase in aridity is exponentially associated with a decrease in speciation rate, but without estimating extinction (see Table 1). Among the exponential environment-dependent models, we found that Australia-specific paleotemperature data provided a better fit to our phylogeny than global paleotemperature data (Table S3).
 
-```{r fig-RPANDA, fig.cap= 'Effect of aridity change on the diversification of Anilios estimated from the phylogeny. (a) The aridity index through time calculated from reconstructed paleoclimate (dotted line), and lineage through time estimated from the phylogeny (solid line). (b) Speciation rates through time from the best diversification model. (c) Association between speciation rate and aridity index. We found that increased aridity is associated with decrease speciation rate.'}
-
-knitr::include_graphics(paste0(WD, '/assets/figures/RPANDA_fit_arid.jpg'))
-```
 
 <!-- {r Table-RPANDA-TOP10} -->
 
@@ -208,6 +204,10 @@ Table 1. Results of the 10 most supported RPANDA diversification models on the A
 | Header      | Title       |
 | Paragraph   | Text        |
 
+```{r fig-RPANDA, fig.cap= 'Effect of aridity change on the diversification of Anilios estimated from the phylogeny. (a) The aridity index through time calculated from reconstructed paleoclimate (dotted line), and lineage through time estimated from the phylogeny (solid line). (b) Speciation rates through time from the best diversification model. (c) Association between speciation rate and aridity index. We found that increased aridity is associated with decrease speciation rate.'}
+
+knitr::include_graphics(paste0(WD, '/assets/figures/RPANDA_fit_arid.jpg'))
+```
 
 
 ## Diversification rates between arid and non-arid biomes
@@ -215,11 +215,6 @@ Table 1. Results of the 10 most supported RPANDA diversification models on the A
 We applied ClaDS and SSE models to evaluate whether diversification rates differ between lineages in arid, non-arid, and widespread ranges. Results from our ClaDS analysis show mean branch-specific rates did not differ significantly between lineages in arid, non-arid, and widespread ranges (Fig. \@ref(fig:fig-clads-sse)). ClaDS also indicate branch-specific diversification rates was high when the genus first diversified and gradually decreased towards the present.
 
 In our SSE analyses, we found that the range-independent model fit the data better than models where diversification rates were dependent on geographic range (Table 2). The best-fitting geographic range-independent model included a hidden unobserved state, indicating that diversification rates are better explained by this hidden state. Compared to the three other models, the best-fitting model accounted for 95% of the AIC weight and had an AIC value 7.02 units lower than that of the second best-fitting model (Table 2). The weighted average parameter estimates from all models indicate that both speciation rates and turnover rates did not differ significantly between arid and non-arid ranges (see Fig. \@ref(fig:fig-clads-sse) and Fig. S2 for net diversification rate and extinction rates).
-
-```{r fig-clads-sse, fig.cap= 'Diversification rates estimates from ClaDS and SSE models. (a) Branch-specific rates across the phylogeny. (b) Mean branch-specific rates over time. (c) Density plot of branch-specific rates by geographic range from ClaDS analysis. (d) Speciation rates from four geographic diversification rate models averaged by model weight. (e) Estimates of speciation rate and (d) turnover rates for arid, non-arid, and widespread lineages.'}
-
-knitr::include_graphics(paste0(WD, '/assets/figures/fig-clads-sse.jpg'))
-```
 
 <!-- Table-geohisse -->
 
@@ -229,6 +224,13 @@ Table 2. Diversification rate models investigated in the GeoSSE and GeoHiSSE fra
 | ----------- | ----------- |
 | Header      | Title       |
 | Paragraph   | Text        |
+
+```{r fig-clads-sse, fig.cap= 'Diversification rates estimates from ClaDS and SSE models. (a) Branch-specific rates across the phylogeny. (b) Mean branch-specific rates over time. (c) Density plot of branch-specific rates by geographic range from ClaDS analysis. (d) Speciation rates from four geographic diversification rate models averaged by model weight. (e) Estimates of speciation rate and (d) turnover rates for arid, non-arid, and widespread lineages.'}
+
+knitr::include_graphics(paste0(WD, '/assets/figures/fig-clads-sse.jpg'))
+```
+
+
 
 
 <!--  -->
