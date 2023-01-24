@@ -68,7 +68,7 @@ temp_plots <- env_df[which(env_df$source %in% c("mean_sco", "mean_str", "mean_va
   geom_line(aes(y = vals), size = 1) +
   # geom_point(aes(y = vals)) + 
   deeptime::coord_geo(xlim = c(26, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
-  scale_colour_manual(values = c("#F0027F", "#386CB0", "#FDC086", "#666666"), name = "Data source", labels = c("RPANDA Global", "Scotese and Wright 2018", "Straume et al. 2019", "Valdes et al. 2021")) +
+  scale_colour_manual(values = c("#F0027F", "#386CB0", "#FDC086", "#666666"), name = "Data source", labels = c("RPANDA Global", "Scotese and Wright 2018", "Straume et al., 2020", "Valdes et al., 2021")) +
   # scale_color_brewer(type='qual',palette='Set1', name = "Data source", labels = c("RPANDA Global", "Scotese and Wright 2018", "Straume et al. 2019", "Valdes et al. 2021")) +
   scale_y_continuous(limits = c(-5, 30), breaks = seq(-5, 30, 5)) + labs(y = "Mean temperature (°C)") +
   scale_x_reverse("Time (Ma)", limits = c(25, 0), breaks = seq(25, 0, by = -5)) + theme_bw() +
@@ -84,7 +84,7 @@ arid_plots <-env_df[which(env_df$source %in% c("arid_sco", "arid_str", "arid_val
   labs(y = "Aridity index") +
   # scale_color_brewer(type='qual',palette='Set1') +
   # scale_color_brewer(type='qual',palette='Set1', name = "Data source", labels = c("Scotese and Wright 2018", "Straume et al. 2019", "Valdes et al. 2021")) +
-  scale_colour_manual(values = c("#386CB0", "#FDC086", "#666666"), name = "Data source", labels = c("Scotese and Wright 2018", "Straume et al. 2019", "Valdes et al. 2021")) +
+  scale_colour_manual(values = c("#386CB0", "#FDC086", "#666666"), name = "Data source", labels = c("Scotese and Wright 2018", "Straume et al., 2020", "Valdes et al., 2021")) +
   theme(panel.border = element_blank(), axis.line.x = element_line(color = "black", size = 0.5), axis.line.y = element_line(color = "black", size = 0.5)) +
   theme(legend.position = "right")
 
