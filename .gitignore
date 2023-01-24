@@ -9,6 +9,7 @@
 *.json
 
 myEnvironment/
+zenodo/
 
 *pamhLocal*
 
