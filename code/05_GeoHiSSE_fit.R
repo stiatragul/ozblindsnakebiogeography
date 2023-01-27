@@ -379,8 +379,7 @@ geohisse_summary <- rates_df %>%
 
 geohisse_summary_transposed <- t(geohisse_summary)
 
-write.table(geohisse_summary_transposed, file = "output/geohisse_summary.txt", sep = "\t", row.names = TRUE, quote = FALSE)
-
+# write.table(geohisse_summary_transposed, file = "output/geohisse_summary.txt", sep = "\t", row.names = TRUE, quote = FALSE)
 
 
 rates_df$speciation ~ rates_df$range
@@ -391,10 +390,7 @@ fit_3 <- lm(rates_df$turnover ~ rates_df$range)
 fit_4 <- lm(rates_df$extinction ~ rates_df$range)
 
 
-library(stats)
-
-
-
+# Anova and TukeyHSD
 anova(fit_1)
 TukeyHSD(aov(rates_df$speciation ~ rates_df$range))
 anova(fit_2)
@@ -403,6 +399,11 @@ anova(fit_3)
 TukeyHSD(aov(rates_df$turnover ~ rates_df$range))
 anova(fit_4)
 TukeyHSD(aov(rates_df$extinction ~ rates_df$range))
+
+# Number of samples
+rates_df %>% 
+  group_by(range) %>% 
+  count()
 
 summary(fit_1)
 summary(fit_2)
