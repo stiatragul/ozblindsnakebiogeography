@@ -94,3 +94,44 @@ pdf(file = "output/paleo_data_compare_plots.pdf", height = 11.33, width = 8.5)
 temp_plots /
   arid_plots
 dev.off()
+
+
+
+p_sco <- env_df[which(env_df$source %in% c("mean_sco", "max_sco", "min_sco")),] %>% 
+  ggplot(data = ., aes(x = age, colour = source)) +
+  geom_line(aes(y = vals), size = 1) +
+  geom_point(aes(y = vals)) +
+  deeptime::coord_geo(xlim = c(46, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
+  scale_colour_manual(values = viridis(3), name = "Scotese & Wright, 2018", labels = c("Max. temp", "Meann. temp", "Min. temp")) +
+  scale_y_continuous(limits = c(-5, 40), breaks = seq(-5, 40, 5)) + labs(y = "Temperature (°C)") +
+  scale_x_reverse("Time (Ma)", limits = c(45, 0), breaks = seq(45, 0, by = -5)) + theme_bw() +
+  theme(legend.position = "top")
+
+
+p_str <- env_df[which(env_df$source %in% c("mean_str", "max_str", "min_str")),] %>% 
+  ggplot(data = ., aes(x = age, colour = source)) +
+  geom_line(aes(y = vals), size = 1) +
+  geom_point(aes(y = vals)) +
+  deeptime::coord_geo(xlim = c(46, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
+  scale_colour_manual(values = viridis(3), name = "Straume et al., 2020", labels = c("Max. temp", "Meann. temp", "Min. temp")) +
+  scale_y_continuous(limits = c(-5, 40), breaks = seq(-5, 40, 5)) + labs(y = "Temperature (°C)") +
+  scale_x_reverse("Time (Ma)", limits = c(45, 0), breaks = seq(45, 0, by = -5)) + theme_bw() +
+  theme(legend.position = "top")
+
+p_val <- env_df[which(env_df$source %in% c("mean_val", "max_val", "min_val")),] %>% 
+  ggplot(data = ., aes(x = age, colour = source)) +
+  geom_line(aes(y = vals), size = 1) +
+  geom_point(aes(y = vals)) +
+  deeptime::coord_geo(xlim = c(46, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
+  scale_colour_manual(values = viridis(3), name = "Valdes et al., 2021", labels = c("Max. temp", "Meann. temp", "Min. temp")) +
+  scale_y_continuous(limits = c(-5, 40), breaks = seq(-5, 40, 5)) + labs(y = "Temperature (°C)") +
+  scale_x_reverse("Time (Ma)", limits = c(45, 0), breaks = seq(45, 0, by = -5)) + theme_bw() +
+  theme(legend.position = "top")
+
+
+pdf(file = "output/supp_paleo_temp.pdf", height = 7.02, width = 16.86)
+p_sco + p_str + p_val
+dev.off()
+
+
+
