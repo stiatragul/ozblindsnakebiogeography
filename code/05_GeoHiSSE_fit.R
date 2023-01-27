@@ -354,11 +354,57 @@ mod1$AIC; mod2$AIC; mod3$AIC; mod4$AIC
 
 mod1$AICc; mod2$AICc; mod3$AICc; mod4$AICc
 
-
-
-
 recon.mod1$rates.mat
 recon.mod2$rates.mat
 recon.mod3$rates.mat
 recon.mod4$rates.mat
 
+
+
+# Summary_statistics ------------------------------------------------------
+
+±
+
+geohisse_summary <- rates_df %>% 
+  dplyr::group_by(range) %>% 
+  dplyr::summarize(mean_speciation = mean(speciation), 
+                                     sd_speciation = sd(speciation),
+                                     mean_net.div = mean(net.div), 
+                                     sd_net.div = sd(net.div),
+                                     mean_turnover = mean(turnover),
+                                     sd_turnover = sd(turnover),
+                                     mean_extinction = mean(extinction),
+                                     sd_extinction = sd(extinction)
+                   )
+
+geohisse_summary_transposed <- t(geohisse_summary)
+
+write.table(geohisse_summary_transposed, file = "output/geohisse_summary.txt", sep = "\t", row.names = TRUE, quote = FALSE)
+
+
+
+rates_df$speciation ~ rates_df$range
+
+fit_1 <- lm(rates_df$speciation ~ rates_df$range)
+fit_2 <- lm(rates_df$net.div ~ rates_df$range)
+fit_3 <- lm(rates_df$turnover ~ rates_df$range)
+fit_4 <- lm(rates_df$extinction ~ rates_df$range)
+
+
+library(stats)
+
+
+
+anova(fit_1)
+TukeyHSD(aov(rates_df$speciation ~ rates_df$range))
+anova(fit_2)
+TukeyHSD(aov(rates_df$net.div ~ rates_df$range))
+anova(fit_3)
+TukeyHSD(aov(rates_df$turnover ~ rates_df$range))
+anova(fit_4)
+TukeyHSD(aov(rates_df$extinction ~ rates_df$range))
+
+summary(fit_1)
+summary(fit_2)
+summary(fit_3)
+summary(fit_4)
