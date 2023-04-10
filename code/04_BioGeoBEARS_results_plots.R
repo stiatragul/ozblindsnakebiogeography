@@ -77,7 +77,7 @@ tr=tree.c
 dev.off()
 # States
 
-pdf('output/bgb_letter_ancestral.pdf', width = 8.5, height = 11.33)
+# pdf('output/bgb_letter_ancestral.pdf', width = 8.5, height = 11.33)
 resstates = plot_BioGeoBEARS_results(results_object, analysis_titletxt, addl_params=list("j","x"), plotwhat="text", label.offset=0.45,
                                      tipcex=0.7, statecex=0.7, splitcex=0.6, titlecex=0.8, plotsplits=TRUE, cornercoords_loc=scriptdir, 
                                      include_null_range=TRUE, tr=tr,
