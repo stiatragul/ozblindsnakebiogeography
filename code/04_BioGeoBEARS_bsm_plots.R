@@ -118,6 +118,7 @@ outwards_disp <- ggplot(data = mean_out_disp_area, aes(fill= to, y = count, x = 
   labs(x = "Outwards dispersal", y = "Mean outwards transition frequency") + 
   scale_x_discrete(labels = biome_labs) + 
   scale_fill_manual(labels = biome_labs, values = biome_colours) +
+  scale_y_continuous(limits = c(0, 17)) +
   guides(fill = guide_legend(title = "From")) 
   # theme(legend.position = "none")
 
@@ -135,6 +136,7 @@ outwards_disp_grp <- ggplot(data = mean_in_disp_area, aes(y = count, fill= subse
   labs(x = "Outwards dispersal", y = "Mean outwards transition frequency") + 
   scale_x_discrete(labels = c(biome_labs[1:6], 'islands')) +
   scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
+  scale_y_continuous(limits = c(0, 17)) +
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "none") +
   # geom_text(data = mean_out_disp_prop,
@@ -151,6 +153,7 @@ inwards_disp <- ggplot(data = mean_in_disp_area, aes(fill= from, y = count, x = 
   labs(x = "Inwards dispersal", y = "Mean inwards transition frequency") + 
   scale_x_discrete(labels = biome_labs) + 
   scale_fill_manual(labels = biome_labs, values = biome_colours) +
+  scale_y_continuous(limits = c(0, 17)) +
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "none")
 
@@ -170,6 +173,7 @@ inwards_disp_grp <- ggplot(data = mean_in_disp_area, aes(fill= subset_from, y = 
   labs(x = "Inwards dispersal", y = "Mean inwards transition frequency") + 
   scale_x_discrete(labels = c(biome_labs[1:6], 'islands')) +
   scale_fill_manual(values = c(biome_colours[1:6], 'grey')) +
+  scale_y_continuous(limits = c(0, 17)) +
   guides(fill = guide_legend(title = "From")) +
   theme(legend.position = "none") 
   # geom_text(aes(label = count), position = position_stack(vjust = 0.5))
