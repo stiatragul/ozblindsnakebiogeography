@@ -208,4 +208,6 @@ tiplabels(tr$tip.label, adj = c(0,0.5), bg = NULL, col = NULL, frame = "none")
 
 dev.off()
 
+results_object$ML_marginal_prob_each_state_at_branch_top_AT_node
+plot(tr)
 
