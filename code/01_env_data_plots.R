@@ -73,7 +73,7 @@ temp_plots <- env_df[which(env_df$source %in% c("mean_sco", "mean_str", "mean_va
   scale_y_continuous(limits = c(-5, 30), breaks = seq(-5, 30, 5)) + labs(y = "Mean temperature (°C)") +
   scale_x_reverse("Time (Ma)", limits = c(25, 0), breaks = seq(25, 0, by = -5)) + theme_bw() +
   theme(panel.border = element_blank(), axis.line.x = element_line(color = "black", size = 0.5), axis.line.y = element_line(color = "black", size = 0.5)) +
-  theme(legend.position = "right")
+  theme(legend.position = "top")
 
 
 arid_plots <-env_df[which(env_df$source %in% c("arid_sco", "arid_str", "arid_val")),] %>% 
@@ -86,11 +86,12 @@ arid_plots <-env_df[which(env_df$source %in% c("arid_sco", "arid_str", "arid_val
   # scale_color_brewer(type='qual',palette='Set1', name = "Data source", labels = c("Scotese and Wright 2018", "Straume et al. 2019", "Valdes et al. 2021")) +
   scale_colour_manual(values = c("#386CB0", "#FDC086", "#666666"), name = "Data source", labels = c("Scotese and Wright 2018", "Straume et al., 2020", "Valdes et al., 2021")) +
   theme(panel.border = element_blank(), axis.line.x = element_line(color = "black", size = 0.5), axis.line.y = element_line(color = "black", size = 0.5)) +
-  theme(legend.position = "right")
+  theme(legend.position = "none")
 
 library(patchwork)
 
-pdf(file = "output/paleo_data_compare_plots.pdf", height = 11.33, width = 8.5)
+# pdf(file = "output/paleo_data_compare_plots.pdf", height = 11.33, width = 8.5)
+pdf(file = "output/paleo_data_compare_plots.pdf", height = 7, width = 4.33)
 temp_plots /
   arid_plots
 dev.off()
