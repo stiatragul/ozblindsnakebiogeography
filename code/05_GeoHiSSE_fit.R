@@ -259,14 +259,16 @@ statecolours <- c("#f03b20", "#ffeda0", "#feb24c")
                   # "#5ec284",
                   # "#fef6ff")
 
-pdf(file = 'output/three_states.pdf')
+# pdf(file = 'output/three_states.pdf')
+pdf(file = 'output/three_states.pdf', height = 11.33, width = 8.5)
+par(mfrow = c(2,2))
 boxplot(rates_df$net.div ~ rates_df$range, 
-        rates_df,
-        las = 1, ylab="Net Diversification", col=statecolours)
+        rates_df, bty = "n",
+        las = 1, ylab="Net Diversification", xlab="Range", col=statecolours)
 
 boxplot(rates_df$speciation ~ rates_df$range, 
         rates_df,
-        las = 1, ylab="Speciation", col=statecolours)
+        las = 1, ylab="Speciation", xlab="Range", col=statecolours)
 
 boxplot(rates_df$extinction ~ rates_df$range, 
         rates_df, notch=FALSE , las = 1, ylab="Extinction",
@@ -288,6 +290,14 @@ statecolours <- c("#F26B6D", # salmon red
 ratecolours <- colorRampPalette(brewer.pal(6, 'RdYlBu'))(100)
 
 base::rev(ratecolours)
+
+
+recon.models[[1]]$phy$tip.label <- gsub(pattern = "Anilios_", replacement = "A. ", recon.models[[1]]$phy$tip.label)
+recon.models[[1]]$phy$tip.label <- gsub(pattern = "_1", replacement = "", recon.models[[1]]$phy$tip.label)
+recon.models[[1]]$phy$tip.label <- gsub(pattern = "_2", replacement = "", recon.models[[1]]$phy$tip.label)
+recon.models[[1]]$phy$tip.label <- gsub(pattern = "_0", replacement = "", recon.models[[1]]$phy$tip.label)
+
+
 
 tmp <- plot.geohisse.states(x = recon.models, rate.param = "speciation", type = "phylogram",
                      show.tip.label = TRUE, legend = T,
@@ -345,6 +355,41 @@ plot.geohisse.states(x = recon.models, rate.param = "turnover", type = "fan",
 #   theme_classic()
 
 
+
+# PRINT OUTPUT ------------------------------------------------------------
+
+tp <- plot.geohisse.states(x = recon.models, rate.param = "speciation", type = "phylogram",
+                     show.tip.label = T, legend = T,
+                     # rate.colors = ratecolours,
+                     state.colors = statecolours,
+                     fsize = 1)
+
+plot(tp$rate.tree)
+
+dev.off()
+pdf(file = "output/supp_geohisse.pdf", width = 8.5, height = 8.5)
+# layout(matrix(c(1, 1, 2, 3, 1, 1, 4, 5), ncol = 2))
+# layout(matrix(c(1, 2, 3, 4), ncol = 2))
+par(mfrow = c(2,2))
+# plot(tmp$rate.tree)
+boxplot(rates_df$net.div ~ rates_df$range, 
+        rates_df, bty = "n",
+        las = 1, ylab="Net Diversification", xlab="Range", col=statecolours)
+
+boxplot(rates_df$speciation ~ rates_df$range, 
+        rates_df,
+        las = 1, ylab="Speciation", xlab="Range", col=statecolours)
+
+boxplot(rates_df$extinction ~ rates_df$range, 
+        rates_df, notch=FALSE , las = 1, ylab="Extinction",
+        col=statecolours)
+
+boxplot(rates_df$turnover ~ rates_df$range,
+        rates_df, notch=FALSE , las = 1, ylab="Turnover", 
+        col=statecolours)
+dev.off()
+
+
 # AIC ---------------------------------------------------------------------
 
 # recon.mod1$AIC; recon.mod2$AIC; recon.mod3$AIC; recon.mod4$AIC; recon.mod5$AIC
@@ -363,7 +408,6 @@ recon.mod4$rates.mat
 
 # Summary_statistics ------------------------------------------------------
 
-±
 
 geohisse_summary <- rates_df %>% 
   dplyr::group_by(range) %>% 
