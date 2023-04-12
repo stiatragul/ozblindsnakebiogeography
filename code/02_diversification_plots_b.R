@@ -42,7 +42,7 @@ plot_fit_env_new(fit_env_arid,
 # fit_env_df_make is a custom function 
 arid_sco_df <- fit_env_df_make(env_data = env_data_list$arid_sco, 
                                tot_time = tot_time,
-                              fit.env = fit_env_arid)
+                               fit.env = fit_env_arid)
 
 # Custom theme
 theme_1 <- function (base_size = 11, base_family = "", base_line_size = base_size/22, base_rect_size = base_size/22) {
@@ -78,7 +78,7 @@ p3 <- arid_sco_df %>%
   ggplot(data = ., aes(x = environment_data)) +
   geom_point(aes(y = speciation), size = 1.3) +
   # deeptime::coord_geo(xlim = c(26, 0), dat = c("epochs"), pos = 'bottom', expand = TRUE) +
-  labs(y = "Speciation (Event per Myrs)", x = "Aridity") +  
+  labs(y = "Speciation (Event per Myrs)", x = "Aridity index") +  
   theme_1()
 
 # Environment -------------------------------------------------------------
