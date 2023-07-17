@@ -52,7 +52,7 @@ Zenodo repository for "Data set: Australia's hidden radiation - phylogenomic ana
   *  *Anilios* phylogeny can be found at [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7155340.svg)](https://doi.org/10.5281/zenodo.7155340)
 
 Occurrence data
-  * Atlas of the Living Australia data - [![DOI](https://doi.org/10.26197/ala.d92678b1-ad2d-437b-9457-9f52737ba003)
+  * Atlas of the Living Australia data - [DOI](https://doi.org/10.26197/ala.d92678b1-ad2d-437b-9457-9f52737ba003)
 
 <!-- Github -->
 
