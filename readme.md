@@ -1,4 +1,4 @@
-# Data set for "Paleoenvironmental models for Australia and the impact of aridification on blind snake diversification"
+# Repository for "Paleoenvironmental models for Australia and the impact of aridification on blind snake diversification"
 
 ---
 
